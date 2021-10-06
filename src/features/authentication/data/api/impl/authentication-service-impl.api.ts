@@ -1,6 +1,8 @@
-import {AuthenticationService} from "../authentication-service.data";
-import {ApiClient} from "../../../../../core/data/api/api-client.data";
-import {apiClient} from "../../../../../core/data/api/impl/api-client-impl.data";
+import {AuthenticationService} from "../authentication-service.api";
+import {apiClient} from "../../../../../core/data/api/impl/network-service-impl.api";
+
+class ApiClient {
+}
 
 class AuthenticationServiceImpl implements AuthenticationService {
 	constructor(private apiClient: ApiClient) {}

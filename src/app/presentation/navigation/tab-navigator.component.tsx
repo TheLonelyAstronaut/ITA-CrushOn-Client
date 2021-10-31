@@ -11,6 +11,7 @@ import { DiscoverSVG } from "../../../assets/components/discover-icon.component"
 import { ChatsListSVG } from "../../../assets/components/chats-list-icon.component";
 import { ProfileSVG } from "../../../assets/components/profile-icon.component";
 import { Dimensions } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const tabs: TabsConfig<FlashyTabBarItemConfig> = {
     Cards: {
@@ -66,6 +67,8 @@ const tabs: TabsConfig<FlashyTabBarItemConfig> = {
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
 export const TabNaviagtor = () => {
+    const insets = useSafeAreaInsets();
+
     return (
         <Tab.Navigator
             tabBar={props => (
@@ -76,16 +79,13 @@ export const TabNaviagtor = () => {
                         backgroundColor:'#DFE6FA',
                         position: 'absolute',
                         borderRadius: 15,
-                        bottom: 25,
+                        bottom: insets.bottom ? insets.bottom : 5,
                         height: 65,
                         width: Dimensions.get('window').width*0.95,
                         left: Dimensions.get('window').width*0.025,
-                        shadowColor: '#000000',
-                        shadowRadius: 3,
                     }}
-                    iconSize={28}
                     itemInnerSpace={15}
-                    itemOuterSpace={5}
+                    itemOuterSpace={8}
                     {...props}
                 />    
             )}

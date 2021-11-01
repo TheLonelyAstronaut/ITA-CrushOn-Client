@@ -23,7 +23,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
             2 
         );
     }, [dimensions, insets]);
-
+    
     const edges: Edge[] = [];
     edges.push('top');
 
@@ -40,7 +40,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
                 keyExtractor={(item) => item.id.toString()}
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
-                ListFooterComponent={<View style={{height: 75}}/>}
+                ListFooterComponent={<View style={{height: 70 + insets.bottom}}/>}
                 renderItem={({ item }) => (
                     <View style={{
                         margin: 5,

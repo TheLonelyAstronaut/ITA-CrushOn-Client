@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import {TextStyle, TextStyled} from './styled/text.styled';
+import { TextStyle, TextStyled } from './styled/text.styled';
 
 type WhiteTextProps = PropsWithChildren<{
     scale: number;

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import {SeparatorVerticalType} from "../../themes/types";
+import { SeparatorVerticalType } from '../../themes/types';
 
 export const SeparatorVertical = styled.View<{ height: SeparatorVerticalType }>`
     height: ${(props) => {

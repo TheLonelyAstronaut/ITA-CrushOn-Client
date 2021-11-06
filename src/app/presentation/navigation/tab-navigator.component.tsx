@@ -12,7 +12,7 @@ import { ChatsListSVG } from '../../../assets/components/chats-list-icon.compone
 import { ProfileSVG } from '../../../assets/components/profile-icon.component';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DefaultTheme, useTheme } from 'styled-components';
-import {BottomTabBarProps} from "@react-navigation/bottom-tabs/src/types";
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 

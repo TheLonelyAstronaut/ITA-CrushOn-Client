@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {ColorValue} from "react-native";
+import { ColorValue } from 'react-native';
 
 export const PassionView = styled.View<{ backgroundColor: ColorValue }>`
     margin-vertical: ${(props) => props.theme.spacer / 2}px;

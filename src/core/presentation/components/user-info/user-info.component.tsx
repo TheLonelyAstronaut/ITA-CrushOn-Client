@@ -1,16 +1,16 @@
 import React from 'react';
-import {View} from 'react-native';
-import {LocationSVG} from '../../../../assets/components/location-icon.component';
-import {User} from '../../../model/user.model';
-import {Palette} from '../../themes/palette.themes';
-import {UserInfoWrapper} from './styled/user-info-wrapper.styled';
-import {useTheme} from 'styled-components';
-import {PassionsWrapper} from './styled/passins-wrapper.styled';
-import {PassionView} from './styled/passion-view.styled';
-import {PassionLabel} from './styled/passion-label.styled';
-import {SeparatorVertical} from "../container/separator-vertical.styled";
-import {SeparatorVerticalType, TextType} from "../../themes/types";
-import {TextThemedStyled} from "../text/text-themed.styled";
+import { View } from 'react-native';
+import { LocationSVG } from '../../../../assets/components/location-icon.component';
+import { User } from '../../../model/user.model';
+import { Palette } from '../../themes/palette.themes';
+import { UserInfoWrapper } from './styled/user-info-wrapper.styled';
+import { useTheme } from 'styled-components';
+import { PassionsWrapper } from './styled/passins-wrapper.styled';
+import { PassionView } from './styled/passion-view.styled';
+import { PassionLabel } from './styled/passion-label.styled';
+import { SeparatorVertical } from '../container/separator-vertical.styled';
+import { SeparatorVerticalType, TextType } from '../../themes/types';
+import { TextThemedStyled } from '../text/text-themed.styled';
 
 type UserInfoProps = {
     user: User;

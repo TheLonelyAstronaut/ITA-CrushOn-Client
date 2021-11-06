@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, StatusBar, StatusBarStyle, View} from 'react-native';
+import { Pressable, StatusBar, StatusBarStyle, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EditSVG } from '../../../assets/components/edit-icon.component';
 import { LogOutSVG } from '../../../assets/components/log-out-icon.component';
@@ -15,7 +15,7 @@ import { ButtonLabeled } from '../../../core/presentation/components/button/labe
 import { Label } from '../../../core/presentation/components/text/label.styled';
 import { SeparatorVertical } from '../../../core/presentation/components/container/separator-vertical.styled';
 import { ScrollFooter } from '../../../core/presentation/components/container/scroll-footer.styled';
-import { SeparatorVerticalType } from "../../../core/presentation/themes/types";
+import { SeparatorVerticalType } from '../../../core/presentation/themes/types';
 
 export type ProfileScreenProps = {
     navigation: ProfileScreenNavigationProp;

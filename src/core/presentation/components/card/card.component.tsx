@@ -1,12 +1,12 @@
 import React from 'react';
-import {LocationSVG} from '../../../../assets/components/location-icon.component';
-import {User} from '../../../model/user.model';
-import {FullyPressable} from './styled/fully-pressable.styled';
-import {ImageBackgroundStyled} from './styled/image-background.styled';
-import {LocationWrapper} from './styled/location-wrapper.styled';
-import {TextWrapper} from './text-wrapper.component';
-import {WhiteText} from './text.component';
-import {TextStyle} from "./styled/text.styled";
+import { LocationSVG } from '../../../../assets/components/location-icon.component';
+import { User } from '../../../model/user.model';
+import { FullyPressable } from './styled/fully-pressable.styled';
+import { ImageBackgroundStyled } from './styled/image-background.styled';
+import { LocationWrapper } from './styled/location-wrapper.styled';
+import { TextWrapper } from './text-wrapper.component';
+import { WhiteText } from './text.component';
+import { TextStyle } from './styled/text.styled';
 
 export type CardProps = {
     user: User;

@@ -10,7 +10,6 @@ export type ThemeState = {
     theme: ThemesEnum;
 };
 
-
 export const DEVICE_SIZE = Dimensions.get('window');
 
 export const defaultValues: DefaultTheme = {

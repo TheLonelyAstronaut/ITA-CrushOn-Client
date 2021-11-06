@@ -1,4 +1,4 @@
-import {EdgeInsets} from "react-native-safe-area-context/src/SafeArea.types";
+import { EdgeInsets } from 'react-native-safe-area-context/src/SafeArea.types';
 import styled from 'styled-components/native';
 
 export const ScrollFooter = styled.View<{ insets: EdgeInsets }>`

@@ -1,9 +1,11 @@
 import React, { useCallback } from "react";
-import { View, FlatList, useWindowDimensions} from "react-native";
-import { Edge, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { Card } from "../../../core/presentation/components/card.component";
-import { Swipeable } from "../../../core/presentation/components/swipeable.component";
+import { View, FlatList, StatusBar } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Card } from "../../../core/presentation/components/card/card.component";
+import { Swipeable } from "../../../core/presentation/components/swipes/swipeable.component";
+import { SafeAreaThemed } from "../../../core/presentation/themes/styled/safe-area-themed.styled";
 import { CardsData } from "../../../mocks/cards.data";
+import { CardsView } from "./components/cards-view.component";
 import { CardsScreenNavigationProp } from "./navigation/routing.types";
 
 export type CardsScreenProps = {
@@ -11,18 +13,7 @@ export type CardsScreenProps = {
 }
 
 export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps) => {
-    const dimensions = useWindowDimensions();
     const insets = useSafeAreaInsets();
-    const edges: Edge[] = ['top', 'bottom'];
-
-    const getCardHeight = useCallback((): number => {
-        return (
-            dimensions.height - 
-            insets.top -
-            insets.bottom -
-            65 // TAB BAR HEIGHT, MOVE TO THEME 
-        );
-    }, [dimensions, insets]);
 
     const expandCard = useCallback((id: number) => {
         props.navigation.navigate('ExpandedCard', {
@@ -31,7 +22,7 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
     }, [props]);
 
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}} edges={edges}>
+        <SafeAreaThemed>
             <FlatList
                 data={CardsData}
                 keyExtractor={(item) => item.id.toString()}
@@ -58,17 +49,13 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
                     )
                 }}
                 renderItem={({ item }) => (
-                    <View style={{
-                        padding: 10,
-                        height: getCardHeight(),
-                        width: dimensions.width,
-                    }}>
+                    <CardsView insets={insets}>
                         <Swipeable>
                             <Card user={item} expandCard={expandCard} scale={1.7}/>
                         </Swipeable>
-                    </View>
+                    </CardsView>
                 )}
             />    
-        </SafeAreaView>
+        </SafeAreaThemed>
     )
 };

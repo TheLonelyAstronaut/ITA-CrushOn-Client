@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { StyleProp } from 'react-native';
 import Animated from 'react-native-reanimated';
-import Svg, { Path, PathProps } from 'react-native-svg';
+import Svg, { Color, Path, PathProps } from 'react-native-svg';
 
 export interface SVGProps {
-    color: Animated.Node<string>;
+    color: Color;
     size: number;
 }
 

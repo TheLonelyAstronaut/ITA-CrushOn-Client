@@ -10,65 +10,64 @@ import { HomeSVG } from "../../../assets/components/cards-icon.component";
 import { DiscoverSVG } from "../../../assets/components/discover-icon.component";
 import { ChatsListSVG } from "../../../assets/components/chats-list-icon.component";
 import { ProfileSVG } from "../../../assets/components/profile-icon.component";
-import { Dimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-const tabs: TabsConfig<FlashyTabBarItemConfig> = {
-    Cards: {
-        icon: {
-            component: HomeSVG,
-            color: '#53377A'
-        },
-        labelStyle: {
-            color: '#A100F2'
-        },
-        indicator: {
-            visible: false
-        }
-    },
-    Discover: {
-        icon: {
-            component: DiscoverSVG,
-            color: '#53377A'
-        },
-        labelStyle: {
-            color: '#A100F2'
-        },
-        indicator: {
-            visible: false
-        }
-    },
-    ChatsList: {
-        icon: {
-            component: ChatsListSVG,
-            color: '#53377A'
-        },
-        labelStyle: {
-            color: '#A100F2'
-        },
-        indicator: {
-            visible: false
-        }
-    },
-    Profile: {
-        icon: {
-            component: ProfileSVG,
-            color: '#53377A'
-        },
-        labelStyle: {
-            color: '#A100F2'
-        },
-        indicator: {
-            visible: false
-        }
-    }
-}
+import { DefaultTheme, useTheme } from "styled-components";
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
 export const TabNaviagtor = () => {
     const insets = useSafeAreaInsets();
-
+    const currentTheme: DefaultTheme = useTheme();
+    const tabs: TabsConfig<FlashyTabBarItemConfig> = {
+        Cards: {
+            icon: {
+                component: HomeSVG,
+                color: currentTheme.colors.componentLabel
+            },
+            labelStyle: {
+                color: currentTheme.colors.contrast
+            },
+            indicator: {
+                visible: false
+            }
+        },
+        Discover: {
+            icon: {
+                component: DiscoverSVG,
+                color: currentTheme.colors.componentLabel
+            },
+            labelStyle: {
+                color: currentTheme.colors.contrast
+            },
+            indicator: {
+                visible: false
+            }
+        },
+        ChatsList: {
+            icon: {
+                component: ChatsListSVG,
+                color: currentTheme.colors.componentLabel
+            },
+            labelStyle: {
+                color: currentTheme.colors.contrast
+            },
+            indicator: {
+                visible: false
+            }
+        },
+        Profile: {
+            icon: {
+                component: ProfileSVG,
+                color: currentTheme.colors.componentLabel
+            },
+            labelStyle: {
+                color: currentTheme.colors.contrast
+            },
+            indicator: {
+                visible: false
+            }
+        }
+    }
     return (
         <Tab.Navigator
             tabBar={props => (
@@ -76,15 +75,15 @@ export const TabNaviagtor = () => {
                     preset='flashy'
                     tabs={tabs}
                     style={{
-                        backgroundColor:'#DFE6FA',
+                        backgroundColor:currentTheme.colors.component,
                         position: 'absolute',
-                        borderRadius: 15,
-                        bottom: insets.bottom ? insets.bottom : 5,
-                        height: 65,
-                        width: Dimensions.get('window').width*0.95,
-                        left: Dimensions.get('window').width*0.025,
+                        borderRadius: currentTheme.borderRadius.medium,
+                        bottom: insets.bottom ? insets.bottom : currentTheme.spacer,
+                        height: currentTheme.tabBarHeight,
+                        width: currentTheme.dimensions.width - 2 * currentTheme.spacer,
+                        left: currentTheme.spacer,
                     }}
-                    itemInnerSpace={15}
+                    itemInnerSpace={14}
                     itemOuterSpace={8}
                     {...props}
                 />    

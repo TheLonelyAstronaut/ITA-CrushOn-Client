@@ -1,9 +1,12 @@
 import React, { useCallback } from "react";
-import {Text, Button, useWindowDimensions, View, FlatList} from "react-native";
-import { Edge, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { Card } from "../../../core/presentation/components/card.component";
-import { Swipeable } from "../../../core/presentation/components/swipeable.component";
+import { FlatList} from "react-native";
+import { Edge, useSafeAreaInsets } from "react-native-safe-area-context";
+import { Card } from "../../../core/presentation/components/card/card.component";
+import { Swipeable } from "../../../core/presentation/components/swipes/swipeable.component";
+import { SafeAreaThemed } from "../../../core/presentation/themes/styled/safe-area-themed.styled";
 import { CardsData } from "../../../mocks/cards.data";
+import { DiscoverView } from "./components/discover-view.component";
+import { Footer } from "./components/footer-view.component";
 import { DiscoverScreenNavigationProp } from "./navigation/routing.types";
 
 export type DiscoverScreenProps = {
@@ -11,21 +14,7 @@ export type DiscoverScreenProps = {
 }
 
 export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScreenProps) => {
-    const dimensions = useWindowDimensions();
     const insets = useSafeAreaInsets();
-
-    const getCardHeight = useCallback((): number => {
-        return (
-            (dimensions.height - 
-            insets.top -
-            insets.bottom - 
-            65) / // TAB BAR HEIGHT, MOVE TO THEME 
-            2 
-        );
-    }, [dimensions, insets]);
-    
-    const edges: Edge[] = [];
-    edges.push('top');
 
     const expandCard = useCallback((id: number) => {
         props.navigation.navigate('ExpandedCard', {
@@ -34,25 +23,21 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
     }, [props]);
     
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}} edges={edges}>
+        <SafeAreaThemed edges={['top']}>
             <FlatList
                 data={CardsData}
                 keyExtractor={(item) => item.id.toString()}
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
-                ListFooterComponent={<View style={{height: 70 + insets.bottom}}/>}
+                ListFooterComponent={<Footer insets={insets}/>}
                 renderItem={({ item }) => (
-                    <View style={{
-                        margin: 5,
-                        height: getCardHeight(),
-                        width: dimensions.width/2-10,
-                    }}>
+                    <DiscoverView insets={insets}>
                         <Swipeable>
                             <Card user={item} expandCard={expandCard} scale={1}/>
                         </Swipeable>
-                    </View>
+                    </DiscoverView>
                 )}
             />
-        </SafeAreaView>
+        </SafeAreaThemed>
     )
 };

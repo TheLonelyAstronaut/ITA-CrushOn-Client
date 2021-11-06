@@ -3,8 +3,10 @@ export type User = {
     imgUrl: string;
     name: string;
     age: string;
-    location?: number;
+    lives: string;
+    location: number;
     bio: string;
+    passions: string[];
 } 
 
 /*const calculateSum = (a: number, b: number) => {

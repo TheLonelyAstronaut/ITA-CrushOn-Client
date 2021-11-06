@@ -1,6 +1,11 @@
-import React from "react";
-import {Text, Button} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useCallback } from "react";
+import { View, FlatList, StatusBar } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Card } from "../../../core/presentation/components/card/card.component";
+import { Swipeable } from "../../../core/presentation/components/swipes/swipeable.component";
+import { SafeAreaThemed } from "../../../core/presentation/themes/styled/safe-area-themed.styled";
+import { CardsData } from "../../../mocks/cards.data";
+import { CardsView } from "./components/cards-view.component";
 import { CardsScreenNavigationProp } from "./navigation/routing.types";
 
 export type CardsScreenProps = {
@@ -8,21 +13,49 @@ export type CardsScreenProps = {
 }
 
 export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps) => {
+    const insets = useSafeAreaInsets();
+
+    const expandCard = useCallback((id: number) => {
+        props.navigation.navigate('ExpandedCard', {
+            id
+        });
+    }, [props]);
+
     return (
-        <SafeAreaView style={{flex: 1}}>
-            <Text style={{
-                justifyContent:"center", alignItems:"center"
-            }}>
-                Cards
-            </Text>
-            <Button 
-                title="expand" 
-                onPress={()=>{
-                    props.navigation.navigate('ExpandedCard', {
-                        id: 123
-                    })
+        <SafeAreaThemed>
+            <FlatList
+                data={CardsData}
+                keyExtractor={(item) => item.id.toString()}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={false}
+                CellRendererComponent={({
+                    item,
+                    index,
+                    children,
+                    style,
+                    ...props
+                }) => {
+                    return (
+                        <View 
+                            style={{ 
+                                ...style, 
+                                zIndex: CardsData.length - index, 
+                                position: 'absolute' 
+                            }}
+                            {...props} 
+                        >
+                            {children}
+                        </View>
+                    )
                 }}
-            />
-        </SafeAreaView>
+                renderItem={({ item }) => (
+                    <CardsView insets={insets}>
+                        <Swipeable>
+                            <Card user={item} expandCard={expandCard} scale={1.7}/>
+                        </Swipeable>
+                    </CardsView>
+                )}
+            />    
+        </SafeAreaThemed>
     )
 };

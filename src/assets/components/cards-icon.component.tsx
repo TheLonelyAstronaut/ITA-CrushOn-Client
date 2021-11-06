@@ -8,7 +8,7 @@ export interface SVGProps {
     size: number;
 }
 
-const AnimatedPath = (Animated.createAnimatedComponent(Path) as unknown) as React.ComponentClass<
+const AnimatedPath = Animated.createAnimatedComponent(Path) as unknown as React.ComponentClass<
     // eslint-disable-next-line @typescript-eslint/ban-types
     Animated.AnimateProps<PathProps & { style?: StyleProp<{}> }>
 >;
@@ -29,7 +29,7 @@ export const HomeSVG: React.FC<SVGProps> = ({ color, size }: SVGProps) => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
             />
-			<AnimatedPath
+            <AnimatedPath
                 d="M23 11L13.3491 2.22977C13.0394 1.92514 12.3153 1.92168 12 2.22977L2 11"
                 stroke={color}
                 strokeWidth={3}

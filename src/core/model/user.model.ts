@@ -2,12 +2,12 @@ export type User = {
     id: number;
     imgUrl: string;
     name: string;
-    age: string;
+    age: number;
     lives: string;
     location: number;
     bio: string;
     passions: string[];
-} 
+};
 
 /*const calculateSum = (a: number, b: number) => {
     return a + b;

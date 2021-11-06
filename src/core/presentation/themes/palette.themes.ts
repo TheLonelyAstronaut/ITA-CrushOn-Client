@@ -1,49 +1,49 @@
-import { ColorValue } from "react-native";
+import { ColorValue } from 'react-native';
 
 export type PaletteColor = {
     color: ColorValue;
     labelColor: ColorValue;
-}
+};
 
 export const Palette: PaletteColor[] = [
     {
         color: '#757BC8',
-        labelColor: 'white'
+        labelColor: 'white',
     },
     {
         color: '#8187DC',
-        labelColor: 'white'
+        labelColor: 'white',
     },
     {
         color: '#8E94F2',
-        labelColor: 'white'
+        labelColor: 'white',
     },
     {
         color: '#9FA0FF',
-        labelColor: 'black'
+        labelColor: 'black',
     },
     {
         color: '#ADA7FF',
-        labelColor: 'black'
+        labelColor: 'black',
     },
     {
         color: '#BBADFF',
-        labelColor: 'black'
+        labelColor: 'black',
     },
     {
         color: '#CBB2FE',
-        labelColor: 'black'
+        labelColor: 'black',
     },
     {
         color: '#DAB6FC',
-        labelColor: 'black'
+        labelColor: 'black',
     },
     {
         color: '#DDBDFC',
-        labelColor: 'black'
+        labelColor: 'black',
     },
     {
         color: '#E0C3FC',
-        labelColor: 'black'
+        labelColor: 'black',
     },
 ];

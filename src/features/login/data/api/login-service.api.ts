@@ -1,3 +1,3 @@
 export interface LoginService {
-	login: (username: string, password: string) => void
+    login: (username: string, password: string) => void;
 }

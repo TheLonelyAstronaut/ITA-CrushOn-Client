@@ -1,10 +1,5 @@
-import React, { PropsWithChildren } from "react";
-import { TextStyled } from "./styled/text.styled";
-
-enum TextStyle {
-    Bold,
-    Normal,
-}
+import React, { PropsWithChildren } from 'react';
+import {TextStyle, TextStyled} from './styled/text.styled';
 
 type WhiteTextProps = PropsWithChildren<{
     scale: number;

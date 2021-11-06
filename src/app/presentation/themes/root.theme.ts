@@ -1,7 +1,15 @@
-import { Dimensions } from "react-native";
-import { DefaultTheme } from "styled-components";
+import { Dimensions } from 'react-native';
+import { DefaultTheme } from 'styled-components';
 
-import { ThemesEnum } from "./themes.types";
+export enum ThemesEnum {
+    LIGHT,
+    DARK,
+}
+
+export type ThemeState = {
+    theme: ThemesEnum;
+};
+
 
 export const DEVICE_SIZE = Dimensions.get('window');
 

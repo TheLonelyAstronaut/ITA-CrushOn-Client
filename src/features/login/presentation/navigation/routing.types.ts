@@ -4,6 +4,6 @@ import { AuthenticationParamList } from '../../../../core/presentation/navigatio
 import { RootNavigatorParamList } from '../../../../core/presentation/navigation/root/routing.types';
 
 export type LoginScreenNavigationProp = CompositeNavigationProp<
-    StackNavigationProp<RootNavigatorParamList, "Auth">,
-    StackNavigationProp<AuthenticationParamList, "Login">
+    StackNavigationProp<RootNavigatorParamList, 'Auth'>,
+    StackNavigationProp<AuthenticationParamList, 'Login'>
 >;

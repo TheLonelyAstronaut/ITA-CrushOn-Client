@@ -1,3 +1,3 @@
 export interface APIClient {
-	post: <T>(body: Object) => T
+    post: <R, T>(body: R) => T;
 }

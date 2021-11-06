@@ -1,3 +1,3 @@
 export interface RegistrationService {
-	register: (username: string, password: string) => void
+    register: (username: string, password: string) => void;
 }

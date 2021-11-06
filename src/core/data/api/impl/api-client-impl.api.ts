@@ -1,9 +1,9 @@
-import {APIClient} from '../api-client.api';
+import { APIClient } from '../api-client.api';
 
 class APIClientImpl implements APIClient {
-	post<T>(body: Object): T {
-		return body as T;
-	}
+    post<R, T>(body: R): T {
+        return body as unknown as T;
+    }
 }
 
-export const apiClient: APIClient = new APIClientImpl()
+export const apiClient: APIClient = new APIClientImpl();

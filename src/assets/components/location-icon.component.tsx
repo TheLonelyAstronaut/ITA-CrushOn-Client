@@ -9,7 +9,7 @@ export interface SVGProps {
     strokeWidth: number;
 }
 
-const AnimatedPath = (Animated.createAnimatedComponent(Path) as unknown) as React.ComponentClass<
+const AnimatedPath = Animated.createAnimatedComponent(Path) as unknown as React.ComponentClass<
     // eslint-disable-next-line @typescript-eslint/ban-types
     Animated.AnimateProps<PathProps & { style?: StyleProp<{}> }>
 >;

@@ -1,7 +1,7 @@
 import 'styled-components';
 
 declare module 'styled-components' {
-    export type DefaultTheme = {
+    export interface DefaultTheme {
         dimensions: {
             width: number;
             height: number;
@@ -10,7 +10,7 @@ declare module 'styled-components' {
             width: number;
             height: number;
             borderRadius: number;
-        }
+        };
         fontSize: {
             names: number;
             extralarge: number;

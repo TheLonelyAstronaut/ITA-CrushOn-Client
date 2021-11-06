@@ -7,10 +7,10 @@ import { RegistrationScreen } from '../../../features/registration/presentation/
 const Stack = createStackNavigator<AuthenticationParamList>();
 
 export const AuthenticationNavigator: React.FC = () => {
-	return (
-		<Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Login"> 
-			<Stack.Screen name={'Login'} component={LoginScreen}/>
-			<Stack.Screen name={'Registration'} component={RegistrationScreen}/>
-		</Stack.Navigator>		
-	);
-}
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Login">
+            <Stack.Screen name={'Login'} component={LoginScreen} />
+            <Stack.Screen name={'Registration'} component={RegistrationScreen} />
+        </Stack.Navigator>
+    );
+};

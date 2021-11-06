@@ -3,11 +3,11 @@ export enum TextType {
     geo,
     header,
     regular,
-};
+}
 
-export enum SeparatorVertType {
+export enum SeparatorVerticalType {
     large,
     medium,
     small,
     extrasmall,
-};
+}

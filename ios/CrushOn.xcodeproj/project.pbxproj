@@ -11,9 +11,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		3212BCFDDB90449297D14717 /* libPods-CrushOn-CrushOnTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41396DAECC1F91E448239C44 /* libPods-CrushOn-CrushOnTests.a */; };
-		3671E156D033A34C1DD8302D /* libPods-CrushOn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0A69C9D224F36868B85B52 /* libPods-CrushOn.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8D2D03D8748DCAAFC46EF9F6 /* libPods-CrushOn-CrushOnTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF6A49BBA903597F6E399C1 /* libPods-CrushOn-CrushOnTests.a */; };
+		EE73E08947ED162A0D0C1D01 /* libPods-CrushOn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAF99734B38083A4F6494EF /* libPods-CrushOn.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,20 +30,20 @@
 		00E356EE1AD99517003FC87E /* CrushOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrushOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* CrushOnTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrushOnTests.m; sourceTree = "<group>"; };
-		136A5CA017FE53A9710C6A53 /* Pods-CrushOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn.debug.xcconfig"; path = "Target Support Files/Pods-CrushOn/Pods-CrushOn.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* CrushOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CrushOn/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = CrushOn/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CrushOn/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CrushOn/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CrushOn/main.m; sourceTree = "<group>"; };
-		3C0A69C9D224F36868B85B52 /* libPods-CrushOn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CrushOn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		41396DAECC1F91E448239C44 /* libPods-CrushOn-CrushOnTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CrushOn-CrushOnTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DAF99734B38083A4F6494EF /* libPods-CrushOn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CrushOn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5103F6152E8CA95613FBF159 /* Pods-CrushOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn.debug.xcconfig"; path = "Target Support Files/Pods-CrushOn/Pods-CrushOn.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CrushOn/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E1FD7D596FAC5C5C6D379038 /* Pods-CrushOn-CrushOnTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn-CrushOnTests.release.xcconfig"; path = "Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests.release.xcconfig"; sourceTree = "<group>"; };
+		8327B7086649116A4BE93E12 /* Pods-CrushOn-CrushOnTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn-CrushOnTests.debug.xcconfig"; path = "Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8F09647B7893B3F2739C31C3 /* Pods-CrushOn-CrushOnTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn-CrushOnTests.release.xcconfig"; path = "Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests.release.xcconfig"; sourceTree = "<group>"; };
+		C6621A99E81D6BEFFFA5231A /* Pods-CrushOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn.release.xcconfig"; path = "Target Support Files/Pods-CrushOn/Pods-CrushOn.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F9EBDC1EBBE750F7E96C39E5 /* Pods-CrushOn-CrushOnTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn-CrushOnTests.debug.xcconfig"; path = "Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FEEAB99043D470281928584E /* Pods-CrushOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn.release.xcconfig"; path = "Target Support Files/Pods-CrushOn/Pods-CrushOn.release.xcconfig"; sourceTree = "<group>"; };
+		FCF6A49BBA903597F6E399C1 /* libPods-CrushOn-CrushOnTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CrushOn-CrushOnTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3212BCFDDB90449297D14717 /* libPods-CrushOn-CrushOnTests.a in Frameworks */,
+				8D2D03D8748DCAAFC46EF9F6 /* libPods-CrushOn-CrushOnTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3671E156D033A34C1DD8302D /* libPods-CrushOn.a in Frameworks */,
+				EE73E08947ED162A0D0C1D01 /* libPods-CrushOn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				3C0A69C9D224F36868B85B52 /* libPods-CrushOn.a */,
-				41396DAECC1F91E448239C44 /* libPods-CrushOn-CrushOnTests.a */,
+				1DAF99734B38083A4F6494EF /* libPods-CrushOn.a */,
+				FCF6A49BBA903597F6E399C1 /* libPods-CrushOn-CrushOnTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 		E4D2A3C870A36FD6864F8F69 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				136A5CA017FE53A9710C6A53 /* Pods-CrushOn.debug.xcconfig */,
-				FEEAB99043D470281928584E /* Pods-CrushOn.release.xcconfig */,
-				F9EBDC1EBBE750F7E96C39E5 /* Pods-CrushOn-CrushOnTests.debug.xcconfig */,
-				E1FD7D596FAC5C5C6D379038 /* Pods-CrushOn-CrushOnTests.release.xcconfig */,
+				5103F6152E8CA95613FBF159 /* Pods-CrushOn.debug.xcconfig */,
+				C6621A99E81D6BEFFFA5231A /* Pods-CrushOn.release.xcconfig */,
+				8327B7086649116A4BE93E12 /* Pods-CrushOn-CrushOnTests.debug.xcconfig */,
+				8F09647B7893B3F2739C31C3 /* Pods-CrushOn-CrushOnTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,12 +155,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CrushOnTests" */;
 			buildPhases = (
-				19F645EB5A3C320472F44426 /* [CP] Check Pods Manifest.lock */,
+				1DB5985D8A0AED60916EFEDB /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				26E515B1D60A4793D969A775 /* [CP] Embed Pods Frameworks */,
-				884BFF7024BEF106E69598E6 /* [CP] Copy Pods Resources */,
+				FDFA0203C67556C15E0029FE /* [CP] Embed Pods Frameworks */,
+				72ED707096FF7B8E169E050A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,14 +176,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CrushOn" */;
 			buildPhases = (
-				D6B6B5980BA84C061CE806FC /* [CP] Check Pods Manifest.lock */,
+				9C094B976B09A4B833FCE732 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				4C800516A80513E827361197 /* [CP] Embed Pods Frameworks */,
-				CA98203FC7EB3F8B6E5E973B /* [CP] Copy Pods Resources */,
+				31CD62F77C66292382B59BAA /* [CP] Embed Pods Frameworks */,
+				85172F4F18D2D0D58B563E73 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -264,7 +264,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		19F645EB5A3C320472F44426 /* [CP] Check Pods Manifest.lock */ = {
+		1DB5985D8A0AED60916EFEDB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -286,24 +286,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		26E515B1D60A4793D969A775 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4C800516A80513E827361197 /* [CP] Embed Pods Frameworks */ = {
+		31CD62F77C66292382B59BAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -320,7 +303,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CrushOn/Pods-CrushOn-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		884BFF7024BEF106E69598E6 /* [CP] Copy Pods Resources */ = {
+		72ED707096FF7B8E169E050A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -337,7 +320,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CA98203FC7EB3F8B6E5E973B /* [CP] Copy Pods Resources */ = {
+		85172F4F18D2D0D58B563E73 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -354,7 +337,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CrushOn/Pods-CrushOn-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D6B6B5980BA84C061CE806FC /* [CP] Check Pods Manifest.lock */ = {
+		9C094B976B09A4B833FCE732 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -395,6 +378,23 @@
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		FDFA0203C67556C15E0029FE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -428,7 +428,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9EBDC1EBBE750F7E96C39E5 /* Pods-CrushOn-CrushOnTests.debug.xcconfig */;
+			baseConfigurationReference = 8327B7086649116A4BE93E12 /* Pods-CrushOn-CrushOnTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -455,7 +455,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1FD7D596FAC5C5C6D379038 /* Pods-CrushOn-CrushOnTests.release.xcconfig */;
+			baseConfigurationReference = 8F09647B7893B3F2739C31C3 /* Pods-CrushOn-CrushOnTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -479,7 +479,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 136A5CA017FE53A9710C6A53 /* Pods-CrushOn.debug.xcconfig */;
+			baseConfigurationReference = 5103F6152E8CA95613FBF159 /* Pods-CrushOn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -506,7 +506,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FEEAB99043D470281928584E /* Pods-CrushOn.release.xcconfig */;
+			baseConfigurationReference = C6621A99E81D6BEFFFA5231A /* Pods-CrushOn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

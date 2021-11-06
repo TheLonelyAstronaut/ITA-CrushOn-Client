@@ -10,18 +10,21 @@ import { ProfileEditScreen } from '../../../features/profile-edit/presentation/p
 const RootStack = createStackNavigator<RootNavigatorParamList>();
 
 export const RootNavigator = () => {
-	return (
-		<RootStack.Navigator 
-			screenOptions={{ 
-				headerShown: false,
-				...TransitionPresets.ModalSlideFromBottomIOS,
-			}}
-		>
-			<RootStack.Screen name={'Auth'} component={AuthenticationNavigator}/>
-			<RootStack.Screen name={'Tabs'} component={TabNaviagtor}/>
-			<RootStack.Screen name={'ExpandedCard'} component={ExpandedCardScreen}/>
-			<RootStack.Screen name={'Chat'} component={ChatScreen}/>
-			<RootStack.Screen name={'ProfileEdit'} component={ProfileEditScreen}/>
-		</RootStack.Navigator>
-	)
-}
+    return (
+        <RootStack.Navigator
+            screenOptions={{
+                headerShown: false,
+                ...TransitionPresets.ModalSlideFromBottomIOS,
+            }}
+        >
+            <RootStack.Screen name={'Auth'} component={AuthenticationNavigator} />
+            {
+                // Fix typos
+            }
+            <RootStack.Screen name={'Tabs'} component={TabNaviagtor} />
+            <RootStack.Screen name={'ExpandedCard'} component={ExpandedCardScreen} />
+            <RootStack.Screen name={'Chat'} component={ChatScreen} />
+            <RootStack.Screen name={'ProfileEdit'} component={ProfileEditScreen} />
+        </RootStack.Navigator>
+    );
+};

@@ -17,13 +17,13 @@ Animated.addWhitelistedNativeProps({
     stroke: true,
 });
 
-export const DiscoverSVG: React.FC<SVGProps> = ({ color, size }: SVGProps) => {
+export const LogOutSVG: React.FC<SVGProps> = ({ color, size }: SVGProps) => {
     return (
-        <Svg width={size} height={size} viewBox="0 0 30 28">
+        <Svg width={size} height={size} viewBox="0 0 24 24">
             <AnimatedPath
-                d="M21.6997 2C17.2734 2 15.0916 6.36362 15.0916 6.36362C15.0916 6.36362 12.9097 2 8.4834 2C4.88614 2 2.03752 5.00953 2.0007 8.60066C1.9257 16.0549 7.91409 21.3561 14.4779 25.8111C14.6589 25.9342 14.8727 26 15.0916 26C15.3104 26 15.5242 25.9342 15.7052 25.8111C22.2684 21.3561 28.2567 16.0549 28.1824 8.60066C28.1456 5.00953 25.297 2 21.6997 2Z"
+                d="M13.5 14V18.5C13.5 19.163 13.2805 19.7989 12.8898 20.2678C12.4991 20.7366 11.9692 21 11.4167 21H3.08333C2.5308 21 2.00089 20.7366 1.61019 20.2678C1.21949 19.7989 1 19.163 1 18.5V3.5C1 2.83696 1.21949 2.20107 1.61019 1.73223C2.00089 1.26339 2.5308 1 3.08333 1H11C12.1505 1 13.5 2.11937 13.5 3.5V8M16.8333 16L21 11M21 11L16.8333 6M21 11H6.83333"
                 stroke={color}
-                strokeWidth={3}
+                strokeWidth={2}
                 fill="none"
                 fillRule="evenodd"
                 strokeLinecap="round"

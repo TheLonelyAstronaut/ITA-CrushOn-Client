@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
 import { EdgeInsets } from 'react-native-safe-area-context';
+import styled from 'styled-components/native';
 
 export const FooterView = styled.View<{ insets: EdgeInsets }>`
     height: ${(props) =>

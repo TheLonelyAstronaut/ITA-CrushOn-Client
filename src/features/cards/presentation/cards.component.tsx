@@ -1,14 +1,16 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React, { MutableRefObject, useCallback, useRef, useState } from 'react';
 import { View, FlatList, StatusBar } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { User } from '../../../core/model/user.model';
 import { Card } from '../../../core/presentation/components/card/card.component';
-import { Swipeable } from '../../../core/presentation/components/swipes/swipeable.component';
 import { SafeAreaThemed } from '../../../core/presentation/components/container/safe-area-themed.styled';
+import { Swipeable } from '../../../core/presentation/components/swipes/swipeable.component';
 import { CardsData } from '../../../mocks/cards.data';
+
 import { CardsView } from './components/styled/cards-view.styled';
 import { CardsScreenNavigationProp, CardsScreenRouteProp } from './navigation/routing.types';
-import { User } from '../../../core/model/user.model';
-import { useFocusEffect } from '@react-navigation/native';
 
 export type CardsScreenProps = {
     route: CardsScreenRouteProp;
@@ -26,11 +28,9 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
     );
 
     const setReaction = useCallback(() => {
-            list.shift();
-            setList([...list]);
-        },
-        [list]
-    );
+        list.shift();
+        setList([...list]);
+    }, [list]);
 
     return (
         <SafeAreaThemed>
@@ -39,7 +39,7 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
                 .map((user, index) => {
                     return (
                         <CardsView zIndex={9999 - user.id} key={user.id} insets={insets}>
-                            <Card user={user} scale={1.7} handleReaction={setReaction}/>
+                            <Card user={user} scale={1.7} handleReaction={setReaction} />
                         </CardsView>
                     );
                 })}

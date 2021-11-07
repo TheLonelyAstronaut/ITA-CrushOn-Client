@@ -1,12 +1,15 @@
-import React from 'react';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import React from 'react';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+
 import { RootNavigatorParamList } from '../../../core/presentation/navigation/root/routing.types';
+import { ChatScreen } from '../../../features/chat/presentation/chat.component';
 import { ExpandedCardScreen } from '../../../features/expanded-card/presentation/expanded-card.component';
+import { ProfileEditScreen } from '../../../features/profile-edit/presentation/profile-edit.component';
+
 import { AuthenticationNavigator } from './authentication-navigator.component';
 import { TabNaviagtor } from './tab-navigator.component';
-import { ChatScreen } from '../../../features/chat/presentation/chat.component';
-import { ProfileEditScreen } from '../../../features/profile-edit/presentation/profile-edit.component';
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+
 
 const RootStack = createSharedElementStackNavigator<RootNavigatorParamList>();
 

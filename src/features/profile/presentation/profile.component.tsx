@@ -1,21 +1,23 @@
 import React from 'react';
 import { Pressable, StatusBar, StatusBarStyle, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { EditSVG } from '../../../assets/components/edit-icon.component';
-import { LogOutSVG } from '../../../assets/components/log-out-icon.component';
-import { ProfileScreenNavigationProp } from './navigation/routing.types';
-import { UserInfo } from '../../../core/presentation/components/user-info/user-info.component';
-import { SafeAreaThemed } from '../../../core/presentation/components/container/safe-area-themed.styled';
 import { useTheme } from 'styled-components';
 import { DefaultTheme } from 'styled-components/native';
-import { Scroll } from '../../../core/presentation/components/container/scroll.styled';
+
+import { EditSVG } from '../../../assets/components/edit-icon.component';
+import { LogOutSVG } from '../../../assets/components/log-out-icon.component';
+import { ButtonLabeled } from '../../../core/presentation/components/button/labeled-button.styled';
 import { Center } from '../../../core/presentation/components/container/center.styled';
 import { Photo } from '../../../core/presentation/components/container/photo.styled';
-import { ButtonLabeled } from '../../../core/presentation/components/button/labeled-button.styled';
-import { Label } from '../../../core/presentation/components/text/label.styled';
-import { SeparatorVertical } from '../../../core/presentation/components/container/separator-vertical.styled';
+import { SafeAreaThemed } from '../../../core/presentation/components/container/safe-area-themed.styled';
 import { ScrollFooter } from '../../../core/presentation/components/container/scroll-footer.styled';
+import { Scroll } from '../../../core/presentation/components/container/scroll.styled';
+import { SeparatorVertical } from '../../../core/presentation/components/container/separator-vertical.styled';
+import { Label } from '../../../core/presentation/components/text/label.styled';
+import { UserInfo } from '../../../core/presentation/components/user-info/user-info.component';
 import { SeparatorVerticalType } from '../../../core/presentation/themes/types';
+
+import { ProfileScreenNavigationProp } from './navigation/routing.types';
 
 export type ProfileScreenProps = {
     navigation: ProfileScreenNavigationProp;

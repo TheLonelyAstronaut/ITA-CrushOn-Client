@@ -1,16 +1,19 @@
-import React, {useCallback, useRef} from 'react';
-import {LocationSVG} from '../../../../assets/components/location-icon.component';
-import {User} from '../../../model/user.model';
-import {FullyPressable} from './styled/fully-pressable.styled';
-import {LocationWrapper} from './styled/location-wrapper.styled';
-import {TextWrapper} from './text-wrapper.component';
-import {WhiteText} from './text.component';
-import {TextStyle} from './styled/text.styled';
-import {SharedElement} from 'react-navigation-shared-element';
-import {Image, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {Reaction} from '../../../util/reaction.util';
-import {CustomSwipeableRef, Swipeable} from '../swipes/swipeable.component';
+import { useNavigation } from '@react-navigation/native';
+import React, { useCallback, useRef } from 'react';
+import { Image, StyleSheet } from 'react-native';
+import { SharedElement } from 'react-navigation-shared-element';
+
+import { LocationSVG } from '../../../../assets/components/location-icon.component';
+import { User } from '../../../model/user.model';
+import { Reaction } from '../../../util/reaction.util';
+import { CustomSwipeableRef, Swipeable } from '../swipes/swipeable.component';
+
+import { FullyPressable } from './styled/fully-pressable.styled';
+import { LocationWrapper } from './styled/location-wrapper.styled';
+import { TextStyle } from './styled/text.styled';
+import { TextWrapper } from './text-wrapper.component';
+import { WhiteText } from './text.component';
+
 
 export type CardProps = {
     user: User;
@@ -22,17 +25,20 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
     const navigation = useNavigation();
     const swipeable = useRef<CustomSwipeableRef>();
 
-    const handleReaction = useCallback((reaction: Reaction) => {
-        props?.handleReaction && props.handleReaction();
-    }, [props]);
+    const handleReaction = useCallback(
+        (reaction: Reaction) => {
+            props?.handleReaction && props.handleReaction();
+        },
+        [props]
+    );
 
     const handleBackNavigation = useCallback((reaction: Reaction) => {
-        if(reaction == Reaction.LIKE) {
+        if (reaction == Reaction.LIKE) {
             swipeable.current?.swipeRight();
         } else {
             swipeable.current?.swipeLeft();
         }
-    }, [])
+    }, []);
 
     const expandCard = useCallback(() => {
         navigation.navigate('ExpandedCard', {

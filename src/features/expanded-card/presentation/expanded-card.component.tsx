@@ -1,12 +1,13 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {ExpandedCardScreenNavigationProp, ExpandedCardScreenRouteProp} from './navigation/routing.types';
-import {SharedElement} from 'react-navigation-shared-element';
-import {CustomSwipeableRef, Swipeable} from '../../../core/presentation/components/swipes/swipeable.component';
-import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 import BottomSheet from '@gorhom/bottom-sheet';
-import {PanGestureHandler} from 'react-native-gesture-handler';
-import {Reaction} from '../../../core/util/reaction.util';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { SharedElement } from 'react-navigation-shared-element';
+
+import { CustomSwipeableRef, Swipeable } from '../../../core/presentation/components/swipes/swipeable.component';
+import { Reaction } from '../../../core/util/reaction.util';
+
+import { ExpandedCardScreenNavigationProp, ExpandedCardScreenRouteProp } from './navigation/routing.types';
 
 export type ExpandedCardScreenProps = {
     route: ExpandedCardScreenRouteProp;
@@ -32,13 +33,16 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
 
     useFocusEffect(onFocus);
 
-    const handleSwipe = useCallback((reaction: Reaction) => {
-        props.navigation.goBack();
+    const handleSwipe = useCallback(
+        (reaction: Reaction) => {
+            props.navigation.goBack();
 
-        setTimeout(() => {
-            props.route.params.onGoBack(reaction);
-        }, 500);
-    }, [props.navigation, props.route.params]);
+            setTimeout(() => {
+                props.route.params.onGoBack(reaction);
+            }, 500);
+        },
+        [props.navigation, props.route.params]
+    );
 
     const handleSheetChanges = useCallback(
         (index: number) => {
@@ -57,7 +61,11 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
                     style={[StyleSheet.absoluteFill, { resizeMode: 'cover' }]}
                 />
             </SharedElement>
-            <Swipeable ref={panRef} onRightSwipe={() => handleSwipe(Reaction.LIKE)} onLeftSwipe={() => handleSwipe(Reaction.DISLIKE)}>
+            <Swipeable
+                ref={panRef}
+                onRightSwipe={() => handleSwipe(Reaction.LIKE)}
+                onLeftSwipe={() => handleSwipe(Reaction.DISLIKE)}
+            >
                 {focused && (
                     <BottomSheet
                         enablePanDownToClose

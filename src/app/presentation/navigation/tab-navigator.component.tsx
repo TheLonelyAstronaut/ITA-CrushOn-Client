@@ -1,19 +1,23 @@
-import React from 'react';
+import AnimatedTabBar, { FlashyTabBarItemConfig, TabsConfig } from '@gorhom/animated-tabbar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
+import React from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import { DefaultTheme, useTheme } from 'styled-components';
+
+import { HomeSVG } from '../../../assets/components/cards-icon.component';
+import { ChatsListSVG } from '../../../assets/components/chats-list-icon.component';
+import { DiscoverSVG } from '../../../assets/components/discover-icon.component';
+import { ProfileSVG } from '../../../assets/components/profile-icon.component';
 import { TabNavigatorParamList } from '../../../core/presentation/navigation/tab/routing.types';
-import { DiscoverScreen } from '../../../features/discover/presentation/discover.component';
 import { CardsScreen } from '../../../features/cards/presentation/cards.component';
+import { DiscoverScreen } from '../../../features/discover/presentation/discover.component';
 import { ChatsListScreen } from '../../../features/chats-list/presentation/chats-list.component';
 import { ProfileScreen } from '../../../features/profile/presentation/profile.component';
-import AnimatedTabBar, { FlashyTabBarItemConfig, TabsConfig } from '@gorhom/animated-tabbar';
-import { HomeSVG } from '../../../assets/components/cards-icon.component';
-import { DiscoverSVG } from '../../../assets/components/discover-icon.component';
-import { ChatsListSVG } from '../../../assets/components/chats-list-icon.component';
-import { ProfileSVG } from '../../../assets/components/profile-icon.component';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { DefaultTheme, useTheme } from 'styled-components';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+
+
+
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 const NestedSharedStack = createSharedElementStackNavigator();

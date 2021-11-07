@@ -5,14 +5,17 @@ import React, {
     PropsWithChildren,
     PropsWithoutRef,
     ReactNode,
-    RefAttributes, RefObject,
-    useCallback, useImperativeHandle,
+    RefAttributes,
+    RefObject,
+    useCallback,
+    useImperativeHandle,
     useRef,
 } from 'react';
 import { Dimensions, View } from 'react-native';
 import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, {
-    runOnJS, runOnUI,
+    runOnJS,
+    runOnUI,
     useAnimatedGestureHandler,
     useAnimatedStyle,
     useSharedValue,
@@ -58,118 +61,128 @@ export type SwipeableComponentType = ForwardRefExoticComponent<
 >;
 
 export type CustomSwipeableRef = {
-    raw: RefObject<PanGestureHandler>,
+    raw: RefObject<PanGestureHandler>;
     swipeRight: (ignoreCallbacks?: boolean) => void;
     swipeLeft: (ignoreCallbacks?: boolean) => void;
-}
+};
 
 export type SwipeableProps = PropsWithChildren<{
     onRightSwipe: () => void;
     onLeftSwipe: () => void;
 }>;
 
-export const Swipeable: SwipeableComponentType = forwardRef((props: SwipeableProps, ref: ForwardedRef<CustomSwipeableRef>) => {
-    const rotate = useSharedValue(0);
-    const translateX = useSharedValue(0);
-    const translateY = useSharedValue(0);
-    const reaction = useSharedValue(-1);
+export const Swipeable: SwipeableComponentType = forwardRef(
+    (props: SwipeableProps, ref: ForwardedRef<CustomSwipeableRef>) => {
+        const rotate = useSharedValue(0);
+        const translateX = useSharedValue(0);
+        const translateY = useSharedValue(0);
+        const reaction = useSharedValue(-1);
 
-    const panRef = useRef<PanGestureHandler>();
+        const panRef = useRef<PanGestureHandler>();
 
-    const onThresholdMet = useCallback(() => {
-        if (reaction.value == 1) {
-            props.onRightSwipe();
-        } else if (reaction.value == 0) {
-            props.onLeftSwipe();
-        }
-    }, [props, reaction.value]);
-
-    const setReaction = useCallback((value?: number, ignoreCallbacks?: boolean) => {
-        'worklet';
-        const countFrom = value ?? rotate.value;
-
-        const rotationValue = countFrom > 0 ? 90 : -90;
-        rotate.value = withTiming(rotationValue, undefined, () => {
-            if (rotate.value > 0) {
-                reaction.value = 1;
-            } else {
-                reaction.value = 0;
+        const onThresholdMet = useCallback(() => {
+            if (reaction.value == 1) {
+                props.onRightSwipe();
+            } else if (reaction.value == 0) {
+                props.onLeftSwipe();
             }
+        }, [props, reaction.value]);
 
-            if(!ignoreCallbacks) {
-                runOnJS(onThresholdMet)();
-            }
+        const setReaction = useCallback(
+            (value?: number, ignoreCallbacks?: boolean) => {
+                'worklet';
+                const countFrom = value ?? rotate.value;
+
+                const rotationValue = countFrom > 0 ? 90 : -90;
+                rotate.value = withTiming(rotationValue, undefined, () => {
+                    if (rotate.value > 0) {
+                        reaction.value = 1;
+                    } else {
+                        reaction.value = 0;
+                    }
+
+                    if (!ignoreCallbacks) {
+                        runOnJS(onThresholdMet)();
+                    }
+                });
+
+                translateX.value = withTiming(getTranslationX(rotationValue));
+                translateY.value = withTiming(getTranslationY(rotationValue));
+            },
+            [onThresholdMet, reaction, rotate, translateX, translateY]
+        );
+
+        const gestureHandler = useAnimatedGestureHandler<
+            PanGestureHandlerGestureEvent,
+            { posX: number; posY: number; delta: number }
+        >(
+            {
+                onStart: (event, ctx) => {
+                    ctx.posX = 0;
+                    ctx.posY = 0;
+                    ctx.delta = 70;
+                },
+                onActive: (event) => {
+                    rotate.value = getRotateAngle(event.translationX);
+                    translateX.value = getTranslationX(rotate.value);
+                    translateY.value = getTranslationY(rotate.value);
+                },
+                onFinish: () => {
+                    if (Math.abs(rotate.value) > ROTATION_MAX_DEGREE * 1.2) {
+                        setReaction();
+                    } else {
+                        rotate.value = withTiming(0);
+                        translateX.value = withTiming(0);
+                        translateY.value = withTiming(0);
+                    }
+                },
+            },
+            [onThresholdMet, setReaction]
+        );
+
+        const swipeLeft = useCallback(
+            (ignoreCallbacks?: boolean) => {
+                runOnUI(setReaction)(-1, ignoreCallbacks);
+            },
+            [setReaction]
+        );
+
+        const swipeRight = useCallback(
+            (ignoreCallbacks?: boolean) => {
+                runOnUI(setReaction)(1, ignoreCallbacks);
+            },
+            [setReaction]
+        );
+
+        const animatedStyle = useAnimatedStyle(() => {
+            return {
+                flex: 1,
+                transform: [
+                    {
+                        rotate: `${rotate.value}deg`,
+                    },
+                    {
+                        translateX: translateX.value,
+                    },
+                    {
+                        translateY: translateY.value,
+                    },
+                ],
+            };
         });
 
-        translateX.value = withTiming(getTranslationX(rotationValue));
-        translateY.value = withTiming(getTranslationY(rotationValue));
+        useImperativeHandle(ref, () => ({
+            raw: panRef as RefObject<PanGestureHandler>,
+            swipeRight: swipeRight,
+            swipeLeft: swipeLeft,
+        }));
 
-    }, [onThresholdMet, reaction, rotate, translateX, translateY]);
-
-    const gestureHandler = useAnimatedGestureHandler<
-        PanGestureHandlerGestureEvent,
-        { posX: number; posY: number; delta: number }
-    >(
-        {
-            onStart: (event, ctx) => {
-                ctx.posX = 0;
-                ctx.posY = 0;
-                ctx.delta = 70;
-            },
-            onActive: (event) => {
-                rotate.value = getRotateAngle(event.translationX);
-                translateX.value = getTranslationX(rotate.value);
-                translateY.value = getTranslationY(rotate.value);
-            },
-            onFinish: () => {
-                if (Math.abs(rotate.value) > ROTATION_MAX_DEGREE * 1.2) {
-                    setReaction();
-                } else {
-                    rotate.value = withTiming(0);
-                    translateX.value = withTiming(0);
-                    translateY.value = withTiming(0);
-                }
-            },
-        },
-        [onThresholdMet, setReaction]
-    );
-
-    const swipeLeft = useCallback((ignoreCallbacks?: boolean) => {
-        runOnUI(setReaction)(-1, ignoreCallbacks);
-    }, [setReaction]);
-
-    const swipeRight = useCallback((ignoreCallbacks?: boolean) => {
-        runOnUI(setReaction)(1, ignoreCallbacks);
-    }, [setReaction]);
-
-    const animatedStyle = useAnimatedStyle(() => {
-        return {
-            flex: 1,
-            transform: [
-                {
-                    rotate: `${rotate.value}deg`,
-                },
-                {
-                    translateX: translateX.value,
-                },
-                {
-                    translateY: translateY.value,
-                },
-            ],
-        };
-    });
-
-    useImperativeHandle(ref, () => ({
-        raw: panRef as RefObject<PanGestureHandler>,
-        swipeRight: swipeRight,
-        swipeLeft: swipeLeft
-    }));
-
-    return (
-        <View style={{ flex: 1 }}>
-            <PanGestureHandler ref={panRef} onGestureEvent={gestureHandler}>
-                <Animated.View style={animatedStyle}>{props.children}</Animated.View>
-            </PanGestureHandler>
-        </View>
-    );
-});
+        return (
+            <View style={{ flex: 1 }}>
+                <PanGestureHandler ref={panRef} onGestureEvent={gestureHandler}>
+                    <Animated.View style={animatedStyle}>{props.children}</Animated.View>
+                </PanGestureHandler>
+            </View>
+        );
+    }
+);

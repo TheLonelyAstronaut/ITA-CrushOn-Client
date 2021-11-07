@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { SafeAreaView, Text, Button } from 'react-native';
-import { LoginScreenNavigationProp } from './navigation/routing.types';
+import { LoginScreenNavigationProp } from '../navigation/routing.types';
 
 export type LoginScreenProps = {
     navigation: LoginScreenNavigationProp;

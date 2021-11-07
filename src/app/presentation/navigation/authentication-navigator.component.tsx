@@ -1,8 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { AuthenticationParamList } from '../../../core/presentation/navigation/authentication/routing.types';
-import { LoginScreen } from '../../../features/login/presentation/login.component';
-import { RegistrationScreen } from '../../../features/registration/presentation/registration.component';
+import { LoginScreen } from '../../../features/login/presentation/components/login.component';
+import { RegistrationScreen } from '../../../features/registration/presentation/components/registration.component';
 
 const Stack = createStackNavigator<AuthenticationParamList>();
 

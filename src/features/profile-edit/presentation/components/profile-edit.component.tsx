@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ProfileEditScreenNavigationProp } from './navigation/routing.types';
+import { ProfileEditScreenNavigationProp } from '../navigation/routing.types';
 
 export type ProfileEditScreenProps = {
     navigation: ProfileEditScreenNavigationProp;

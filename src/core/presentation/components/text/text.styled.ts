@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import { TextType } from '../../themes/types';
 
-export const TextThemedStyled = styled.Text<{ type: TextType }>`
+export const Text = styled.Text<{ type: TextType }>`
     color: ${(props) => props.theme.colors.text};
     font-weight: ${(props) => {
         switch (props.type) {

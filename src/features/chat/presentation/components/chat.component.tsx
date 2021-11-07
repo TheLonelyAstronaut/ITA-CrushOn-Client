@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ChatScreenNavigationProp, ChatScreenRouteProp } from './navigation/routing.types';
+import { ChatScreenNavigationProp, ChatScreenRouteProp } from '../navigation/routing.types';
 
 export type ChatScreenProps = {
     navigation: ChatScreenNavigationProp;

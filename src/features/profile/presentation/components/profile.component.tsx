@@ -1,32 +1,32 @@
-import React from 'react';
+import React, { Props, useCallback } from 'react';
 import { Pressable, StatusBar, StatusBarStyle, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { EditSVG } from '../../../assets/components/edit-icon.component';
-import { LogOutSVG } from '../../../assets/components/log-out-icon.component';
-import { ProfileScreenNavigationProp } from './navigation/routing.types';
-import { UserInfo } from '../../../core/presentation/components/user-info/user-info.component';
-import { SafeAreaThemed } from '../../../core/presentation/components/container/safe-area-themed.styled';
+import { EditSVG } from '../../../../assets/components/edit-icon.component';
+import { LogOutSVG } from '../../../../assets/components/log-out-icon.component';
+import { ProfileScreenNavigationProp } from '../navigation/routing.types';
+import { UserInfo } from '../../../../core/presentation/components/user-info/user-info.component';
+import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
 import { useTheme } from 'styled-components';
 import { DefaultTheme } from 'styled-components/native';
-import { Scroll } from '../../../core/presentation/components/container/scroll.styled';
-import { Center } from '../../../core/presentation/components/container/center.styled';
-import { Photo } from '../../../core/presentation/components/container/photo.styled';
-import { ButtonLabeled } from '../../../core/presentation/components/button/labeled-button.styled';
-import { Label } from '../../../core/presentation/components/text/label.styled';
-import { SeparatorVertical } from '../../../core/presentation/components/container/separator-vertical.styled';
-import { ScrollFooter } from '../../../core/presentation/components/container/scroll-footer.styled';
-import { SeparatorVerticalType } from '../../../core/presentation/themes/types';
+import { Scroll } from '../../../../core/presentation/components/container/scroll.styled';
+import { Center } from '../../../../core/presentation/components/container/center.styled';
+import { Photo } from '../../../../core/presentation/components/container/photo.styled';
+import { ButtonLabeled } from '../../../../core/presentation/components/button/labeled-button.styled';
+import { Label } from '../../../../core/presentation/components/text/label.styled';
+import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
+import { ScrollFooter } from '../../../../core/presentation/components/container/scroll-footer.styled';
+import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
+import { User } from '../../../../core/model/user.model';
+import { SettingsWrapper } from './styled/settings-button-container.styled';
 
 export type ProfileScreenProps = {
     navigation: ProfileScreenNavigationProp;
 };
 
-export const LogOut = () => {};
-
 export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreenProps) => {
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
-    const user = {
+    const user: User = {
         id: 48,
         name: 'Liu',
         age: 23,
@@ -37,17 +37,25 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
         bio: `Hi, I’m Liu. I'm looking for someone who will go to the cinema with me. Message me if you like Marvel.`,
     };
 
-    props.navigation.navigate('Cards');
+    const editProfile = useCallback(
+        () => {
+            props.navigation.navigate('ProfileEdit');
+        },
+        [props]
+    );
+
+    const logOut = () => {};
 
     return (
-        <SafeAreaThemed>
+        <SafeArea>
             <StatusBar barStyle={currentTheme.colors.statusBar as StatusBarStyle} />
             <Scroll showsVerticalScrollIndicator={false}>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Pressable style={{ marginTop: 10, marginRight: 20 }} onPress={LogOut}>
+                <SettingsWrapper>
+                    {/* here will be settings button */}
+                    <Pressable onPress={logOut}>
                         <LogOutSVG color={currentTheme.colors.componentLabel} size={24} />
                     </Pressable>
-                </View>
+                </SettingsWrapper>
                 <SeparatorVertical height={SeparatorVerticalType.medium} />
                 <Center>
                     <Photo
@@ -58,7 +66,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
                 </Center>
                 <SeparatorVertical height={SeparatorVerticalType.medium} />
                 <Center>
-                    <ButtonLabeled>
+                    <ButtonLabeled onPress={editProfile}>
                         <EditSVG color={currentTheme.colors.componentLabel} size={16} />
                         <Label>Edit profile</Label>
                     </ButtonLabeled>
@@ -67,6 +75,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
                 <UserInfo user={user} />
                 <ScrollFooter insets={insets} />
             </Scroll>
-        </SafeAreaThemed>
+        </SafeArea>
     );
 };

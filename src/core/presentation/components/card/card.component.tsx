@@ -1,12 +1,12 @@
 import React from 'react';
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
 import { User } from '../../../model/user.model';
+import { TextType } from '../../themes/types';
 import { FullyPressable } from './styled/fully-pressable.styled';
-import { ImageBackgroundStyled } from './styled/image-background.styled';
+import { ImageBackground } from './styled/image-background.styled';
 import { LocationWrapper } from './styled/location-wrapper.styled';
-import { TextWrapper } from './text-wrapper.component';
-import { WhiteText } from './text.component';
-import { TextStyle } from './styled/text.styled';
+import { CardTextWrapper } from './styled/text-wrapper.styled';
+import { CardText } from './styled/text.styled';
 
 export type CardProps = {
     user: User;
@@ -16,7 +16,7 @@ export type CardProps = {
 
 export const Card: React.FC<CardProps> = (props: CardProps) => {
     return (
-        <ImageBackgroundStyled
+        <ImageBackground
             source={{
                 uri: props.user.imgUrl,
             }}
@@ -24,18 +24,18 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
             resizeMode="cover"
         >
             <FullyPressable onPress={() => props.expandCard(props.user.id)}>
-                <TextWrapper scale={props.scale}>
-                    <WhiteText style={TextStyle.Bold} scale={props.scale}>
+                <CardTextWrapper scale={props.scale}>
+                    <CardText type={TextType.cardName} scale={props.scale}>
                         {props.user.name},{props.user.age}
-                    </WhiteText>
+                    </CardText>
                     <LocationWrapper>
                         <LocationSVG color="white" size={14 * props.scale} strokeWidth={props.scale} />
-                        <WhiteText style={TextStyle.Normal} scale={props.scale} marginLeftSpacer={1}>
+                        <CardText type={TextType.cardGeo} scale={props.scale}>
                             {props.user.location} km away
-                        </WhiteText>
+                        </CardText>
                     </LocationWrapper>
-                </TextWrapper>
+                </CardTextWrapper>
             </FullyPressable>
-        </ImageBackgroundStyled>
+        </ImageBackground>
     );
 };

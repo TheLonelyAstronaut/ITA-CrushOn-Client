@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
-import { View, FlatList, StatusBar } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Card } from '../../../core/presentation/components/card/card.component';
-import { Swipeable } from '../../../core/presentation/components/swipes/swipeable.component';
-import { SafeAreaThemed } from '../../../core/presentation/components/container/safe-area-themed.styled';
-import { CardsData } from '../../../mocks/cards.data';
-import { CardsView } from './components/cards-view.component';
-import { CardsScreenNavigationProp } from './navigation/routing.types';
+import { Card } from '../../../../core/presentation/components/card/card.component';
+import { Swipeable } from '../../../../core/presentation/components/swipes/swipeable.component';
+import { CardsData } from '../../../../mocks/cards.data';
+import { CardsScreenNavigationProp } from '../navigation/routing.types';
+import { CardsView } from './styled/cards-view.styled';
+import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
 
 export type CardsScreenProps = {
     navigation: CardsScreenNavigationProp;
@@ -25,7 +25,7 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
     );
 
     return (
-        <SafeAreaThemed>
+        <SafeArea>
             <FlatList
                 data={CardsData}
                 keyExtractor={(item) => item.id.toString()}
@@ -53,6 +53,6 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
                     </CardsView>
                 )}
             />
-        </SafeAreaThemed>
+        </SafeArea>
     );
 };

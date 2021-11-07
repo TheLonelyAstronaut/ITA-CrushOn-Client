@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabNavigatorParamList } from '../../../core/presentation/navigation/tab/routing.types';
-import { DiscoverScreen } from '../../../features/discover/presentation/discover.component';
-import { CardsScreen } from '../../../features/cards/presentation/cards.component';
-import { ChatsListScreen } from '../../../features/chats-list/presentation/chats-list.component';
-import { ProfileScreen } from '../../../features/profile/presentation/profile.component';
+import { DiscoverScreen } from '../../../features/discover/presentation/components/discover.component';
+import { CardsScreen } from '../../../features/cards/presentation/components/cards.component';
+import { ChatsListScreen } from '../../../features/chats-list/presentation/components/chats-list.component';
+import { ProfileScreen } from '../../../features/profile/presentation/components/profile.component';
 import AnimatedTabBar, { FlashyTabBarItemConfig, TabsConfig } from '@gorhom/animated-tabbar';
 import { HomeSVG } from '../../../assets/components/cards-icon.component';
 import { DiscoverSVG } from '../../../assets/components/discover-icon.component';

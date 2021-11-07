@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
-import { ColorValue } from 'react-native';
 
-export const PassionView = styled.View<{ backgroundColor: ColorValue }>`
+export const PassionView = styled.View<{ backgroundColor: string }>`
     margin-vertical: ${(props) => props.theme.spacer / 2}px;
     margin-right: ${(props) => props.theme.spacer * 1.25}px;
     align-items: center;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, Text, Button } from 'react-native';
-import { RegistrationScreenNavigationProp } from './navigation/routing.types';
+import { RegistrationScreenNavigationProp } from '../navigation/routing.types';
 
 export type RegistrationScreenProps = {
     navigation: RegistrationScreenNavigationProp;

@@ -2,14 +2,14 @@ import React, { useCallback } from 'react';
 import { FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Card } from '../../../core/presentation/components/card/card.component';
-import { SafeAreaThemed } from '../../../core/presentation/components/container/safe-area-themed.styled';
-import { Swipeable } from '../../../core/presentation/components/swipes/swipeable.component';
-import { CardsData } from '../../../mocks/cards.data';
+import { Card } from '../../../../core/presentation/components/card/card.component';
+import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
+import { Swipeable } from '../../../../core/presentation/components/swipes/swipeable.component';
+import { CardsData } from '../../../../mocks/cards.data';
 
-import { DiscoverView } from './components/discover-view.styled';
-import { FooterView } from './components/footer-view.styled';
-import { DiscoverScreenNavigationProp } from './navigation/routing.types';
+import { DiscoverView } from './discover-view.styled';
+import { FooterView } from './footer-view.styled';
+import { DiscoverScreenNavigationProp } from '../navigation/routing.types';
 
 export type DiscoverScreenProps = {
     navigation: DiscoverScreenNavigationProp;
@@ -20,13 +20,13 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
 
     const expandCard = useCallback(
         (id: number) => {
-            props.navigation.navigate('ExpandedCard', {});
+            props.navigation.navigate('ExpandedCard', {id});
         },
         [props]
     );
 
     return (
-        <SafeAreaThemed edges={['top']}>
+        <SafeArea edges={['top']}>
             <FlatList
                 data={CardsData}
                 keyExtractor={(item) => item.id.toString()}
@@ -41,6 +41,6 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
                     </DiscoverView>
                 )}
             />
-        </SafeAreaThemed>
+        </SafeArea>
     );
 };

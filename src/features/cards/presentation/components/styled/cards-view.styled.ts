@@ -1,6 +1,7 @@
+import { EdgeInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 
-export const CardsViewStyled = styled.View`
+export const CardsView = styled.View<{ insets: EdgeInsets}>`
     padding-horizontal: ${(props) => props.theme.spacer}px;
     height: ${(props) =>
         props.insets.bottom

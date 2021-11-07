@@ -13,10 +13,12 @@ import { ProfileSVG } from '../../../assets/components/profile-icon.component';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
+const NestedSharedStack = createSharedElementStackNavigator();
 
-export const TabNaviagtor = () => {
+export const TabNaviagtor: React.FC = () => {
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
     const tabs: TabsConfig<FlashyTabBarItemConfig> = {
@@ -90,10 +92,17 @@ export const TabNaviagtor = () => {
                 />
             )}
         >
-            <Tab.Screen name={'Cards'} component={CardsScreen} />
+            <Tab.Screen name={'Cards'} component={SharedCardsNavigator} />
             <Tab.Screen name={'Discover'} component={DiscoverScreen} />
             <Tab.Screen name={'ChatsList'} component={ChatsListScreen} />
             <Tab.Screen name={'Profile'} component={ProfileScreen} />
         </Tab.Navigator>
     );
 };
+
+// Workaround to not break shared animation on CardsScreen after unfocus
+const SharedCardsNavigator: React.FC = () => (
+    <NestedSharedStack.Navigator initialRouteName={'CardsNested'} headerMode={'none'}>
+        <NestedSharedStack.Screen name={'CardsNested'} component={CardsScreen} />
+    </NestedSharedStack.Navigator>
+);

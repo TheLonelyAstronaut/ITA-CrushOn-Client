@@ -1,58 +1,48 @@
-import React, { useCallback } from 'react';
+import React, { MutableRefObject, useCallback, useRef, useState } from 'react';
 import { View, FlatList, StatusBar } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Card } from '../../../core/presentation/components/card/card.component';
 import { Swipeable } from '../../../core/presentation/components/swipes/swipeable.component';
 import { SafeAreaThemed } from '../../../core/presentation/components/container/safe-area-themed.styled';
 import { CardsData } from '../../../mocks/cards.data';
-import { CardsView } from './components/cards-view.component';
-import { CardsScreenNavigationProp } from './navigation/routing.types';
+import { CardsView } from './components/styled/cards-view.styled';
+import { CardsScreenNavigationProp, CardsScreenRouteProp } from './navigation/routing.types';
+import { User } from '../../../core/model/user.model';
+import { useFocusEffect } from '@react-navigation/native';
 
 export type CardsScreenProps = {
+    route: CardsScreenRouteProp;
     navigation: CardsScreenNavigationProp;
 };
 
 export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps) => {
     const insets = useSafeAreaInsets();
+    const [list, setList] = useState(CardsData);
 
-    const expandCard = useCallback(
-        (id: number) => {
-            props.navigation.navigate('ExpandedCard', {
-                id,
-            });
+    useFocusEffect(
+        useCallback(() => {
+            console.log('HERE', props.route.params?.reaction);
+        }, [props.route])
+    );
+
+    const setReaction = useCallback(() => {
+            list.shift();
+            setList([...list]);
         },
-        [props]
+        [list]
     );
 
     return (
         <SafeAreaThemed>
-            <FlatList
-                data={CardsData}
-                keyExtractor={(item) => item.id.toString()}
-                showsVerticalScrollIndicator={false}
-                scrollEnabled={false}
-                CellRendererComponent={({ item, index, children, style, ...props }) => {
+            {list
+                .filter((_, index) => index < 2)
+                .map((user, index) => {
                     return (
-                        <View
-                            style={{
-                                ...style,
-                                zIndex: CardsData.length - index,
-                                position: 'absolute',
-                            }}
-                            {...props}
-                        >
-                            {children}
-                        </View>
+                        <CardsView zIndex={9999 - user.id} key={user.id} insets={insets}>
+                            <Card user={user} scale={1.7} handleReaction={setReaction}/>
+                        </CardsView>
                     );
-                }}
-                renderItem={({ item }) => (
-                    <CardsView insets={insets}>
-                        <Swipeable>
-                            <Card user={item} expandCard={expandCard} scale={1.7} />
-                        </Swipeable>
-                    </CardsView>
-                )}
-            />
+                })}
         </SafeAreaThemed>
     );
 };

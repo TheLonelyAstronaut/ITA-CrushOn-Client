@@ -6,15 +6,19 @@ import { AuthenticationNavigator } from './authentication-navigator.component';
 import { TabNaviagtor } from './tab-navigator.component';
 import { ChatScreen } from '../../../features/chat/presentation/chat.component';
 import { ProfileEditScreen } from '../../../features/profile-edit/presentation/profile-edit.component';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
-const RootStack = createStackNavigator<RootNavigatorParamList>();
+const RootStack = createSharedElementStackNavigator<RootNavigatorParamList>();
 
-export const RootNavigator = () => {
+export const RootNavigator: React.FC = () => {
     return (
         <RootStack.Navigator
             screenOptions={{
                 headerShown: false,
                 ...TransitionPresets.ModalSlideFromBottomIOS,
+                cardStyle: {
+                    backgroundColor: 'transparent',
+                },
             }}
         >
             <RootStack.Screen name={'Auth'} component={AuthenticationNavigator} />
@@ -22,7 +26,22 @@ export const RootNavigator = () => {
                 // Fix typos
             }
             <RootStack.Screen name={'Tabs'} component={TabNaviagtor} />
-            <RootStack.Screen name={'ExpandedCard'} component={ExpandedCardScreen} />
+            <RootStack.Screen
+                name={'ExpandedCard'}
+                component={ExpandedCardScreen}
+                options={{ gestureEnabled: false }}
+                sharedElements={(route, otherRoute, showing) => {
+                    const { user } = route.params;
+                    return [
+                        {
+                            id: `user_image.${user.id}`,
+                            //animation: 'fade',
+                            //resize: 'stretch'
+                            //animation: 'move'
+                        },
+                    ];
+                }}
+            />
             <RootStack.Screen name={'Chat'} component={ChatScreen} />
             <RootStack.Screen name={'ProfileEdit'} component={ProfileEditScreen} />
         </RootStack.Navigator>

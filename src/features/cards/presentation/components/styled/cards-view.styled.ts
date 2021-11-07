@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
+import { EdgeInsets } from 'react-native-safe-area-context';
 
-export const CardsViewStyled = styled.View`
+export const CardsView = styled.View<{ insets: EdgeInsets; zIndex: number }>`
     padding-horizontal: ${(props) => props.theme.spacer}px;
+    margin-top: ${(props) => props.insets.top}px;
     height: ${(props) =>
         props.insets.bottom
             ? props.theme.dimensions.height -
@@ -11,4 +13,6 @@ export const CardsViewStyled = styled.View`
               props.theme.spacer
             : props.theme.dimensions.height - props.insets.top - props.theme.tabBarHeight - props.theme.spacer * 2}px;
     width: ${(props) => props.theme.dimensions.width}px;
+    position: absolute;
+    ${props => 'zIndex: ' + props.zIndex}
 `;

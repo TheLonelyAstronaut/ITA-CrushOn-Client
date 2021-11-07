@@ -1,29 +1,60 @@
-import React from 'react';
-import { LocationSVG } from '../../../../assets/components/location-icon.component';
-import { User } from '../../../model/user.model';
-import { FullyPressable } from './styled/fully-pressable.styled';
-import { ImageBackgroundStyled } from './styled/image-background.styled';
-import { LocationWrapper } from './styled/location-wrapper.styled';
-import { TextWrapper } from './text-wrapper.component';
-import { WhiteText } from './text.component';
-import { TextStyle } from './styled/text.styled';
+import React, {useCallback, useRef} from 'react';
+import {LocationSVG} from '../../../../assets/components/location-icon.component';
+import {User} from '../../../model/user.model';
+import {FullyPressable} from './styled/fully-pressable.styled';
+import {LocationWrapper} from './styled/location-wrapper.styled';
+import {TextWrapper} from './text-wrapper.component';
+import {WhiteText} from './text.component';
+import {TextStyle} from './styled/text.styled';
+import {SharedElement} from 'react-navigation-shared-element';
+import {Image, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {Reaction} from '../../../util/reaction.util';
+import {CustomSwipeableRef, Swipeable} from '../swipes/swipeable.component';
 
 export type CardProps = {
     user: User;
-    expandCard: (id: number) => void;
     scale: number;
+    handleReaction: () => void;
 };
 
 export const Card: React.FC<CardProps> = (props: CardProps) => {
+    const navigation = useNavigation();
+    const swipeable = useRef<CustomSwipeableRef>();
+
+    const handleReaction = useCallback((reaction: Reaction) => {
+        props?.handleReaction && props.handleReaction();
+    }, [props]);
+
+    const handleBackNavigation = useCallback((reaction: Reaction) => {
+        if(reaction == Reaction.LIKE) {
+            swipeable.current?.swipeRight();
+        } else {
+            swipeable.current?.swipeLeft();
+        }
+    }, [])
+
+    const expandCard = useCallback(() => {
+        navigation.navigate('ExpandedCard', {
+            user: props.user,
+            onGoBack: handleBackNavigation,
+        });
+    }, [handleBackNavigation, navigation, props.user]);
+
     return (
-        <ImageBackgroundStyled
-            source={{
-                uri: props.user.imgUrl,
-            }}
-            imageStyle={{ borderRadius: 15 }}
-            resizeMode="cover"
+        <Swipeable
+            ref={swipeable}
+            onRightSwipe={() => handleReaction(Reaction.LIKE)}
+            onLeftSwipe={() => handleReaction(Reaction.DISLIKE)}
         >
-            <FullyPressable onPress={() => props.expandCard(props.user.id)}>
+            <FullyPressable onPress={expandCard}>
+                <SharedElement id={`user_image.${props.user.id}`} style={StyleSheet.absoluteFill}>
+                    <Image
+                        source={{ uri: props.user.imgUrl }}
+                        style={{ borderRadius: 15, backgroundColor: 'blue', flex: 1 }}
+                        resizeMode={'cover'}
+                    />
+                </SharedElement>
                 <TextWrapper scale={props.scale}>
                     <WhiteText style={TextStyle.Bold} scale={props.scale}>
                         {props.user.name},{props.user.age}
@@ -36,6 +67,6 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
                     </LocationWrapper>
                 </TextWrapper>
             </FullyPressable>
-        </ImageBackgroundStyled>
+        </Swipeable>
     );
 };

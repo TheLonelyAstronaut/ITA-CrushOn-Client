@@ -1,5 +1,9 @@
+import { Reaction } from '../../../util/reaction.util';
+
 export type TabNavigatorParamList = {
-    Cards: undefined;
+    Cards: {
+        reaction?: Reaction;
+    };
     Discover: undefined;
     ChatsList: undefined;
     Profile: undefined;

@@ -10,6 +10,7 @@ import { CardsData } from '../../../mocks/cards.data';
 import { DiscoverView } from './components/discover-view.styled';
 import { FooterView } from './components/footer-view.styled';
 import { DiscoverScreenNavigationProp } from './navigation/routing.types';
+import { User } from '../../../core/model/user.model';
 
 export type DiscoverScreenProps = {
     navigation: DiscoverScreenNavigationProp;
@@ -19,8 +20,10 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
     const insets = useSafeAreaInsets();
 
     const expandCard = useCallback(
-        (id: number) => {
-            props.navigation.navigate('ExpandedCard', {});
+        (user: User) => {
+            props.navigation.navigate('ExpandedCard', {
+                user: user,
+            });
         },
         [props]
     );
@@ -35,9 +38,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
                 ListFooterComponent={<FooterView insets={insets} />}
                 renderItem={({ item }) => (
                     <DiscoverView insets={insets}>
-                        <Swipeable>
-                            <Card user={item} expandCard={expandCard} scale={1} />
-                        </Swipeable>
+                        <Card user={item} expandCard={expandCard} scale={1} />
                     </DiscoverView>
                 )}
             />

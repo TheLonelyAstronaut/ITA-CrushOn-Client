@@ -8,4 +8,5 @@ export type RootNavigatorParamList = {
         id: number;
     };
     ProfileEdit: undefined;
+    Passions: undefined;
 };

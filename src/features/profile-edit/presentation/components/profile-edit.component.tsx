@@ -1,5 +1,12 @@
 import React, { useCallback } from 'react';
+import { Pressable } from 'react-native';
+
 import { useTheme } from 'styled-components';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
+import { ProfileEditScreenNavigationProp } from '../navigation/routing.types';
+
 import { User } from '../../../../core/model/user.model';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
 import { Photo } from '../../../../core/presentation/components/container/photo.styled';
@@ -7,17 +14,13 @@ import { SafeArea } from '../../../../core/presentation/components/container/saf
 import { Scroll } from '../../../../core/presentation/components/container/scroll.styled';
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { Text } from '../../../../core/presentation/components/text/text.styled';
-import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
-import { ProfileEditScreenNavigationProp } from '../navigation/routing.types';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { DoneButton } from './styled/button-done.styled';
-import { CancelButton } from './styled/button-cancel.styled';
-import { Pressable } from 'react-native';
+import { DoneButton } from '../../../../core/presentation/components/button/button-done.styled';
 import { Header } from './styled/header-container.styled';
 import { Colored } from './styled/colored-container.styled';
 import { Passions } from './styled/passions-container.styled';
 import { ArrowRightSVG } from '../../../../assets/components/arrow-right-icon.component';
 import { City } from './styled/city-container.styled';
+import { ColoredPressable } from './styled/colored-pressable-container.styled';
 
 export type ProfileEditScreenProps = {
     navigation: ProfileEditScreenNavigationProp;
@@ -45,7 +48,12 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = (props: Profi
         [props]
     );
     const setNewPhoto = () => {};
-    const editPassions = () => {};
+    const editPassions = useCallback(
+        () => {
+            props.navigation.navigate('Passions');
+        },
+        [props]
+    );
     const chooseCity = () => {};
 
     return (
@@ -85,7 +93,7 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = (props: Profi
                 <Header>
                     <Text type={TextType.header}>Passions</Text>
                 </Header>
-                <Colored>
+                <ColoredPressable onPress={editPassions}>
                     <Passions>
                         {user.passions.map(
                             (item, index, arr) => 
@@ -100,31 +108,23 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = (props: Profi
                                 }}
                         )}
                     </Passions>
-                    <Pressable onPress={editPassions}>
-                        <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
-                    </Pressable>
-                </Colored>
+                    <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
+                </ColoredPressable>
 
                 <SeparatorVertical height={SeparatorVerticalType.small} />
 
                 <Header>
                     <Text type={TextType.header}>Live in</Text>
                 </Header>
-                <Colored>
+                <ColoredPressable onPress={chooseCity}>
                     <City>
                         <Text type={TextType.regular}>{user.lives}</Text>
                     </City>
-                    <Pressable onPress={chooseCity}>
-                        <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
-                    </Pressable>
-                </Colored>
+                    <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
+                </ColoredPressable>
 
                 <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
             </Scroll>
-
-            <CancelButton insets={insets} onPress={cancel}>
-                <Text type={TextType.button}>Cancel</Text>
-            </CancelButton>
 
             <DoneButton insets={insets} onPress={done}>
                 <Text type={TextType.button}>Done</Text>

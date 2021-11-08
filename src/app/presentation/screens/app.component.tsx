@@ -7,7 +7,7 @@ import { darkTheme, lightTheme } from '../themes/root.theme';
 
 const App: React.FC = () => {
     return (
-        <ThemeProvider theme={lightTheme}>
+        <ThemeProvider theme={darkTheme}>
             <NavigationContainer>
                 <RootNavigator />
             </NavigationContainer>

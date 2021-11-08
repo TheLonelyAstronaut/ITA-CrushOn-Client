@@ -45,7 +45,7 @@ export const defaultValues: DefaultTheme = {
             large: 40,
             medium: 30,
             small: 20,
-            extrasmall: 15,
+            extrasmall: 10,
         },
     },
 } as DefaultTheme;

@@ -5,6 +5,8 @@ export enum TextType {
     regular,
     cardName,
     cardGeo,
+    label,
+    button,
 }
 
 export enum SeparatorVerticalType {

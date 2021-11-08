@@ -17,7 +17,7 @@ type UserInfoProps = {
 };
 
 export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
-    const CurrentTheme = useTheme();
+    const currentTheme = useTheme();
 
     return (
         <UserInfoWrapper>
@@ -25,13 +25,14 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
                 {props.user.name},{props.user.age}
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text type={TextType.geo} style={{ paddingRight: CurrentTheme.spacer }}>
+                <Text type={TextType.geo} style={{ paddingRight: currentTheme.spacer }}>
                     Live in {props.user.lives}
                 </Text>
-                <LocationSVG color={CurrentTheme.colors.componentLabel} size={14} strokeWidth={2} />
+                <LocationSVG color={currentTheme.colors.componentLabel} size={14} strokeWidth={2} />
             </View>
             <SeparatorVertical height={SeparatorVerticalType.small} />
-            <Text type={TextType.header}>Interested</Text>
+            <Text type={TextType.header}>Passions</Text>
+            <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
             <PassionsWrapper>
                 {props.user.passions.map((item, index) => {
                     const n = Math.floor(Math.random() * 10);
@@ -47,6 +48,7 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
             </PassionsWrapper>
             <SeparatorVertical height={SeparatorVerticalType.small} />
             <Text type={TextType.header}>About</Text>
+            <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
             <Text type={TextType.regular}>{props.user.bio}</Text>
         </UserInfoWrapper>
     );

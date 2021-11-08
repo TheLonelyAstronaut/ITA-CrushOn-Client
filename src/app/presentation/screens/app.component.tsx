@@ -3,11 +3,11 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { RootNavigator } from '../navigation/root-navigator.component';
-import { darkTheme } from '../themes/root.theme';
+import { darkTheme, lightTheme } from '../themes/root.theme';
 
 const App: React.FC = () => {
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={lightTheme}>
             <NavigationContainer>
                 <RootNavigator />
             </NavigationContainer>

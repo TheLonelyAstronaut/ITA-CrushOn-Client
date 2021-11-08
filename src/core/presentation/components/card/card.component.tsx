@@ -2,11 +2,11 @@ import React from 'react';
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
 import { User } from '../../../model/user.model';
 import { TextType } from '../../themes/types';
+import { Text } from '../text/text.styled';
 import { FullyPressable } from './styled/fully-pressable.styled';
 import { ImageBackground } from './styled/image-background.styled';
 import { LocationWrapper } from './styled/location-wrapper.styled';
 import { CardTextWrapper } from './styled/text-wrapper.styled';
-import { CardText } from './styled/text.styled';
 
 export type CardProps = {
     user: User;
@@ -25,14 +25,14 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
         >
             <FullyPressable onPress={() => props.expandCard(props.user.id)}>
                 <CardTextWrapper scale={props.scale}>
-                    <CardText type={TextType.cardName} scale={props.scale}>
+                    <Text type={TextType.cardName} scale={props.scale}>
                         {props.user.name},{props.user.age}
-                    </CardText>
+                    </Text>
                     <LocationWrapper>
                         <LocationSVG color="white" size={14 * props.scale} strokeWidth={props.scale} />
-                        <CardText type={TextType.cardGeo} scale={props.scale}>
+                        <Text type={TextType.cardGeo} scale={props.scale}>
                             {props.user.location} km away
-                        </CardText>
+                        </Text>
                     </LocationWrapper>
                 </CardTextWrapper>
             </FullyPressable>

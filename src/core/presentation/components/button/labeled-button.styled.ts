@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const ButtonLabeled = styled.Pressable`
+export const LabeledButton = styled.Pressable`
     flex-direction: row;
     align-items: center;
     background-color: ${(props) => props.theme.colors.component};

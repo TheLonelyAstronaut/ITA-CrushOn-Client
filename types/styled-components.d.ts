@@ -45,6 +45,8 @@ declare module 'styled-components' {
             componentLabel: string;
             contrast: string;
             statusBar: string;
+            auth: string;
+            logo: string;
         };
     }
 }

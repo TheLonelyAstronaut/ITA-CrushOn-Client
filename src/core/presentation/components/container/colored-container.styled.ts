@@ -8,5 +8,5 @@ export const Colored = styled.View`
     flex-direction: row;
     padding-bottom: ${(props) => props.theme.spacer}px;
     padding-top: ${(props) => props.theme.spacer * 6 / 8}px;
-    align-items: center;
+    justify-content: center;
 `;

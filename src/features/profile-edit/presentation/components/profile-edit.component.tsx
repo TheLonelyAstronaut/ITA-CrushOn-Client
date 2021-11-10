@@ -15,12 +15,13 @@ import { Scroll } from '../../../../core/presentation/components/container/scrol
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { Text } from '../../../../core/presentation/components/text/text.styled';
 import { DoneButton } from '../../../../core/presentation/components/button/button-done.styled';
-import { Header } from './styled/header-container.styled';
-import { Colored } from './styled/colored-container.styled';
+import { Header } from '../../../../core/presentation/components/container/header-container.styled';
+import { Colored } from '../../../../core/presentation/components/container/colored-container.styled';
 import { Passions } from './styled/passions-container.styled';
 import { ArrowRightSVG } from '../../../../assets/components/arrow-right-icon.component';
 import { City } from './styled/city-container.styled';
 import { ColoredPressable } from './styled/colored-pressable-container.styled';
+import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 
 export type ProfileEditScreenProps = {
     navigation: ProfileEditScreenNavigationProp;
@@ -85,7 +86,7 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = (props: Profi
                     <Text type={TextType.header}>About me</Text>
                 </Header>
                 <Colored>
-                    <Text type={TextType.regular}>{user.bio}</Text>
+                    <TextInput defaultValue={user.bio} multiline={true}/>
                 </Colored>
 
                 <SeparatorVertical height={SeparatorVerticalType.small} />

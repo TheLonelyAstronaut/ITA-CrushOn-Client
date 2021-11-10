@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DefaultTheme } from 'styled-components';
 
 export enum ThemesEnum {
@@ -60,6 +61,8 @@ export const lightTheme: DefaultTheme = {
         componentLabel: '#53377A',
         contrast: '#A100F2',
         statusBar: 'dark-content',
+        auth: '#BBADFF',
+        logo: '#53377A',
     },
 };
 
@@ -73,5 +76,7 @@ export const darkTheme: DefaultTheme = {
         componentLabel: '#8C65B6',
         contrast: '#DC6ACF',
         statusBar: 'light-content',
+        auth: '#301934',
+        logo: '#8C65B6',
     },
 };

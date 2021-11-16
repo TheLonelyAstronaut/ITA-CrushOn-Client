@@ -1,24 +1,25 @@
-import React from 'react';
-import { Platform, StatusBar, StatusBarStyle, Text } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { Platform, StatusBar, StatusBarStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
 
 import { LogoSVG } from '../../../../assets/components/logo.component';
+import { ActiveButton } from '../../../../core/presentation/components/auth/active-button.component';
 import { AuthBackground } from '../../../../core/presentation/components/container/auth-background.styled';
+import { AuthInputContainer } from '../../../../core/presentation/components/container/auth-input-container.styled';
+import { Button } from '../../../../core/presentation/components/container/button-container.styled';
+import { Buttons } from '../../../../core/presentation/components/container/buttons-container.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
-import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
-import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
-import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
 import { Colored } from '../../../../core/presentation/components/container/colored-container.styled';
 import { Header } from '../../../../core/presentation/components/container/header-container.styled';
-
+import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
+import { HeaderText } from '../../../../core/presentation/components/text/auth-header-text.styled';
+import { Label } from '../../../../core/presentation/components/text/label.styled';
+import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
+import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
 import { LoginScreenNavigationProp } from '../navigation/routing.types';
 
-import { Button } from './styled/button-container.styled';
-import { Buttons } from './styled/buttons-container.styled';
-import { HeaderText } from './styled/header-text.styled';
-import { Label } from './styled/label.styled';
-import { LoginContainer } from './styled/login-input-container.styled';
+import { AppsName } from './styled/app-name-text.styled';
 import { LogoView } from './styled/logo-container.styled';
 
 export type LoginScreenProps = {
@@ -28,26 +29,51 @@ export type LoginScreenProps = {
 export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
+
+    const [email, setEmail] = useState('');
+    const [password, setpassword] = useState('');
+
+    const login = useCallback(
+        () => {
+            props.navigation.navigate('Tabs');
+        },
+        [props]
+    );
+    const signUp = useCallback(
+        () => {
+            props.navigation.navigate('Registration');
+        },
+        [props]
+    );
     
     return (
         <AuthBackground>
-            <StatusBar barStyle={currentTheme.colors.statusBar as StatusBarStyle} />
+            <StatusBar barStyle={currentTheme.colors.statusBar as StatusBarStyle} backgroundColor={currentTheme.colors.auth}/>
             <LogoView>
                 <Center>
                     <LogoSVG color={currentTheme.colors.logo}/>
                 </Center>
                 
                 <Center>
-                    <Text style={{fontSize: 48, color: currentTheme.colors.logo}}>CRUSHON</Text>
+                    <AppsName>CRUSHON</AppsName>
                 </Center>
             </LogoView>
             
-            <LoginContainer behavior={Platform.OS === "ios" ? "padding" : "height"} >
+            <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined}>
                 <Header>
                     <HeaderText>Login</HeaderText>
                 </Header>
                 <Colored>
-                    <TextInput textContentType={'emailAddress'} placeholder={'type here'} placeholderTextColor={currentTheme.colors.componentLabel}/>
+                    <TextInput
+                        value={email}
+                        onChangeText={setEmail}
+                        autoCorrect={false}
+                        autoCompleteType={'email'}
+                        textContentType={'emailAddress'}
+                        keyboardType={'email-address'}
+                        placeholder={'type here'}
+                        placeholderTextColor={currentTheme.colors.componentLabel}
+                    />
                 </Colored>
 
                 <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
@@ -56,26 +82,29 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
                     <HeaderText>Password</HeaderText>
                 </Header>
                 <Colored>
-                    <TextInput textContentType={'password'} secureTextEntry={true} placeholder={'type here'} placeholderTextColor={currentTheme.colors.componentLabel}/>
+                    <TextInput
+                        value={password}
+                        onChangeText={setpassword}
+                        //onChange={({ nativeEvent: { text } }) => setpassword(text)}
+                        autoCompleteType={'password'}
+                        textContentType={'password'}
+                        secureTextEntry={true}
+                        placeholder={'type here'}
+                        placeholderTextColor={currentTheme.colors.componentLabel}
+                    />
                 </Colored>
 
                 <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
-            </LoginContainer>
+            </AuthInputContainer>
              
             
             <Buttons insets={insets}>
-                <Button onPress={() => {props.navigation.navigate('Tabs')}}>
-                    <Label>Login</Label>
-                </Button>
+                <ActiveButton onPress={login} active={(email && password) ? true : false} label={'Login'}/> 
 
-                <Button onPress={() => {props.navigation.navigate('Registration')}}>
+                <Button onPress={signUp}>
                     <Label>Sign up</Label>
                 </Button>
-
             </Buttons>
-
-
-            
         </AuthBackground>
     );
 };

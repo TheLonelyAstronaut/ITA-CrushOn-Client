@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { useTheme } from "styled-components";
 
-import { PassionOutline } from './styled/passion-item-container.styled';
 import { PassionLabel } from '../../../../core/presentation/components/user-info/styled/passion-label.styled';
+
+import { PassionOutline } from "./styled/passion-item-container.styled";
+
 
 export type PassionProps = {
     label: string;
@@ -20,9 +22,9 @@ export const Passion: React.FC<PassionProps> = (props: PassionProps) => {
                 setColor(activeColor);
             } else {
                 setColor(defaultColor);
-            };
+            }
         },
-        [color]
+        [color, defaultColor, activeColor]
     );
 
     return (

@@ -1,22 +1,26 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TabNavigatorParamList } from '../../../core/presentation/navigation/tab/routing.types';
-import { DiscoverScreen } from '../../../features/discover/presentation/components/discover.component';
-import { CardsScreen } from '../../../features/cards/presentation/components/cards.component';
-import { ChatsListScreen } from '../../../features/chats-list/presentation/components/chats-list.component';
-import { ProfileScreen } from '../../../features/profile/presentation/components/profile.component';
 import AnimatedTabBar, { FlashyTabBarItemConfig, TabsConfig } from '@gorhom/animated-tabbar';
-import { HomeSVG } from '../../../assets/components/cards-icon.component';
-import { DiscoverSVG } from '../../../assets/components/discover-icon.component';
-import { ChatsListSVG } from '../../../assets/components/chats-list-icon.component';
-import { ProfileSVG } from '../../../assets/components/profile-icon.component';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
+import React from 'react';
+// eslint-disable-next-line import/order
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DefaultTheme, useTheme } from 'styled-components';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
+
+import { HomeSVG } from '../../../assets/components/cards-icon.component';
+import { ChatsListSVG } from '../../../assets/components/chats-list-icon.component';
+import { DiscoverSVG } from '../../../assets/components/discover-icon.component';
+import { ProfileSVG } from '../../../assets/components/profile-icon.component';
+import { TabNavigatorParamList } from '../../../core/presentation/navigation/tab/routing.types';
+import { CardsScreen } from '../../../features/cards/presentation/components/cards.component';
+import { ChatsListScreen } from '../../../features/chats-list/presentation/components/chats-list.component';
+import { DiscoverScreen } from '../../../features/discover/presentation/components/discover.component';
+import { ProfileScreen } from '../../../features/profile/presentation/screens/profile.component';
+
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
-export const TabNaviagtor = () => {
+export const TabNaviagtor: React.FC = () => {
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
     const tabs: TabsConfig<FlashyTabBarItemConfig> = {
@@ -93,7 +97,7 @@ export const TabNaviagtor = () => {
             <Tab.Screen name={'Cards'} component={CardsScreen} />
             <Tab.Screen name={'Discover'} component={DiscoverScreen} />
             <Tab.Screen name={'ChatsList'} component={ChatsListScreen} />
-            <Tab.Screen name={'Profile'} component={ProfileScreen} />
+            <Tab.Screen name={'ProfileNavigator'} component={ProfileScreen} />
         </Tab.Navigator>
     );
 };

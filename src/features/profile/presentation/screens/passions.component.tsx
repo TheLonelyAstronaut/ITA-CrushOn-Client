@@ -1,7 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useCallback } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { DoneButton } from "../../../../core/presentation/components/button/button-done.styled";
+import { DoneButton } from "../../../../core/presentation/components/button/done-button.styled";
 import { Center } from "../../../../core/presentation/components/container/center.styled";
 import { SafeArea } from "../../../../core/presentation/components/container/safe-area-themed.styled";
 import { Scroll } from "../../../../core/presentation/components/container/scroll.styled";
@@ -9,10 +10,12 @@ import { SeparatorVertical } from "../../../../core/presentation/components/cont
 import { Text } from "../../../../core/presentation/components/text/text.styled";
 import { SeparatorVerticalType, TextType } from "../../../../core/presentation/themes/types";
 import { PassionsData } from "../../../../mocks/passions.data";
+import { Passion } from '../components/passion-item.component';
+import { Description } from "../components/styled/description-container.styled";
+import { PassionsContainer } from "../components/styled/passions-container.styled";
 import { PassionsScreenNavigationProp } from "../navigation/routing.types";
-import { Description } from "./styled/description-container.styled";
-import { Passion } from './passion-item.component';
-import { PassionsContainer } from "./styled/passions-container.styled";
+
+
 
 export type PassionsScreenProps = {
     navigation: PassionsScreenNavigationProp

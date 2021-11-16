@@ -5,7 +5,7 @@ import Svg, { Path, PathProps } from 'react-native-svg';
 
 export interface SVGProps {
     color: string;
-};
+}
 
 const AnimatedPath = Animated.createAnimatedComponent(Path) as unknown as React.ComponentClass<
     // eslint-disable-next-line @typescript-eslint/ban-types

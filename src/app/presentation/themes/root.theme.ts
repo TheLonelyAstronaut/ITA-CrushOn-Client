@@ -1,5 +1,4 @@
-import { Dimensions } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Dimensions, StatusBar } from 'react-native';
 import { DefaultTheme } from 'styled-components';
 
 export enum ThemesEnum {
@@ -16,7 +15,7 @@ export const DEVICE_SIZE = Dimensions.get('window');
 export const defaultValues: DefaultTheme = {
     dimensions: {
         width: DEVICE_SIZE.width,
-        height: DEVICE_SIZE.height,
+        height: DEVICE_SIZE.height - (StatusBar.currentHeight ?? 0),
     },
     photo: {
         width: 200,

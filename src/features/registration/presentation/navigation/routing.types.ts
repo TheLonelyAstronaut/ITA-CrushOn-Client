@@ -1,9 +1,26 @@
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { AuthenticationParamList } from '../../../../core/presentation/navigation/authentication/routing.types';
-import { RootNavigatorParamList } from '../../../../core/presentation/navigation/root/routing.types';
 
-export type RegistrationScreenNavigationProp = CompositeNavigationProp<
-    StackNavigationProp<RootNavigatorParamList, 'Auth'>,
-    StackNavigationProp<AuthenticationParamList, 'Registration'>
+import { AuthenticationParamList } from '../../../../core/presentation/navigation/authentication/routing.types';
+import { RegistationParamList } from '../../../../core/presentation/navigation/registration/routing.types';
+
+export type EmailScreenNavigationProp = CompositeNavigationProp<
+    StackNavigationProp<AuthenticationParamList, 'Registration'>,
+    StackNavigationProp<RegistationParamList, 'Email'>
 >;
+
+export type PasswordScreenNavigationProp = StackNavigationProp<RegistationParamList, 'Password'>;
+
+export type NameScreenNavigationProp = StackNavigationProp<RegistationParamList, 'Name'>;
+
+export type GenderScreenNavigationProp = StackNavigationProp<RegistationParamList, 'Gender'>;
+
+export type BirthdayScreenNavigationProp = StackNavigationProp<RegistationParamList, 'Birthday'>;
+
+export type CityScreenNavigationProp = StackNavigationProp<RegistationParamList, 'City'>;
+
+export type PhotoScreenNavigationProp = CompositeNavigationProp<
+    StackNavigationProp<AuthenticationParamList, 'Registration'>,
+    StackNavigationProp<RegistationParamList, 'Photo'>
+>;
+

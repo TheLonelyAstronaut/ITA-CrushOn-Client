@@ -1,33 +1,33 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Pressable } from 'react-native';
-
-import { useTheme } from 'styled-components';
+import ImageCropPicker from 'react-native-image-crop-picker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTheme } from 'styled-components';
 
-import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
-import { ProfileEditScreenNavigationProp } from '../navigation/routing.types';
-
+import { ArrowRightSVG } from '../../../../assets/components/arrow-right-icon.component';
 import { User } from '../../../../core/model/user.model';
+import { DoneButton } from '../../../../core/presentation/components/button/done-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
+import { Colored } from '../../../../core/presentation/components/container/colored-container.styled';
+import { Header } from '../../../../core/presentation/components/container/header-container.styled';
 import { Photo } from '../../../../core/presentation/components/container/photo.styled';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
-import { Scroll } from '../../../../core/presentation/components/container/scroll.styled';
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
-import { Text } from '../../../../core/presentation/components/text/text.styled';
-import { DoneButton } from '../../../../core/presentation/components/button/button-done.styled';
-import { Header } from '../../../../core/presentation/components/container/header-container.styled';
-import { Colored } from '../../../../core/presentation/components/container/colored-container.styled';
-import { Passions } from './styled/passions-container.styled';
-import { ArrowRightSVG } from '../../../../assets/components/arrow-right-icon.component';
-import { City } from './styled/city-container.styled';
-import { ColoredPressable } from './styled/colored-pressable-container.styled';
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
+import { Text } from '../../../../core/presentation/components/text/text.styled';
+import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
+import { ColoredPressable } from '../components/styled/colored-pressable-container.styled';
+import { Passions } from '../components/styled/passions-texted-container.styled';
+import { EditProfileScreenNavigationProp } from '../navigation/routing.types';
 
-export type ProfileEditScreenProps = {
-    navigation: ProfileEditScreenNavigationProp;
+
+
+export type EditProfileScreenProps = {
+    navigation: EditProfileScreenNavigationProp;
 };
 
-export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = (props: ProfileEditScreenProps) => {
+export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditProfileScreenProps) => {
     const currentTheme = useTheme();
     const user: User = {
         id: 48,
@@ -41,32 +41,56 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = (props: Profi
     };
     const insets = useSafeAreaInsets();
     
-    const cancel = () => {};
     const done = useCallback(
         () => {
             props.navigation.goBack();
         },
         [props]
     );
-    const setNewPhoto = () => {};
     const editPassions = useCallback(
         () => {
             props.navigation.navigate('Passions');
         },
         [props]
     );
-    const chooseCity = () => {};
+    
+    const [image, setImage] = useState({
+        uri: '',
+        width: 1,
+        height: 1,
+        mime: '',
+    });
+    const [imageIsChanged, setImageChanged] = useState(false);
+    const changePhoto = useCallback(
+        () => {
+            ImageCropPicker.openPicker({
+                mediaType: 'photo',
+                cropping: true
+            }).then(image => {
+                setImage({
+                    uri: image.path,
+                    width: image.width,
+                    height: image.height,
+                    mime: image.mime,
+                });
+                setImageChanged(true);
+            });
+        },
+        []
+    );
+
+    const [aboutMe, setAboutMe] = useState(user.bio);
+
 
     return (
         <SafeArea edges={['top']}>
-
-            <Scroll showsVerticalScrollIndicator={false}>
+            <KeyboardAwareScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
                 <SeparatorVertical height={SeparatorVerticalType.large} />
                 <SeparatorVertical height={SeparatorVerticalType.small} />
 
                 <Center>
                     <Photo
-                        source={{ uri: user.imgUrl }}
+                        source={ imageIsChanged ? image : { uri: user.imgUrl }}
                         resizeMode="cover"
                         imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
                     />
@@ -75,19 +99,23 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = (props: Profi
                 <SeparatorVertical height={SeparatorVerticalType.small} />
 
                 <Center>
-                    <Pressable onPress={setNewPhoto}>
-                        <Text type={TextType.button}>Set new photo</Text>
+                    <Pressable onPress={changePhoto}>
+                        <Text type={TextType.button}>Change photo</Text>
                     </Pressable>
                 </Center>
                 
                 <SeparatorVertical height={SeparatorVerticalType.medium} />
 
-                <Header>
-                    <Text type={TextType.header}>About me</Text>
-                </Header>
-                <Colored>
-                    <TextInput defaultValue={user.bio} multiline={true}/>
-                </Colored>
+                    <Header>
+                        <Text type={TextType.header}>About me</Text>
+                    </Header>
+                    <Colored>
+                        <TextInput
+                            value={aboutMe}
+                            onChangeText={setAboutMe}
+                            multiline={true}
+                        />
+                    </Colored>
 
                 <SeparatorVertical height={SeparatorVerticalType.small} />
 
@@ -112,25 +140,12 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = (props: Profi
                     <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
                 </ColoredPressable>
 
-                <SeparatorVertical height={SeparatorVerticalType.small} />
-
-                <Header>
-                    <Text type={TextType.header}>Live in</Text>
-                </Header>
-                <ColoredPressable onPress={chooseCity}>
-                    <City>
-                        <Text type={TextType.regular}>{user.lives}</Text>
-                    </City>
-                    <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
-                </ColoredPressable>
-
                 <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
-            </Scroll>
+            </KeyboardAwareScrollView>
 
             <DoneButton insets={insets} onPress={done}>
                 <Text type={TextType.button}>Done</Text>
             </DoneButton>
-
         </SafeArea>
     );
 };

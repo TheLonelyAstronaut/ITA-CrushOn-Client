@@ -1,5 +1,5 @@
 export type ProfileNavigatorParamList = {
-    Profile: undefined;
+    ProfileInfo: undefined;
     EditProfile: undefined;
     Passions: undefined;
 };

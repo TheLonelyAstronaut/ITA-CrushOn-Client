@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line import/order
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { RegistationParamList } from '../../../core/presentation/navigation/registration/routing.types';

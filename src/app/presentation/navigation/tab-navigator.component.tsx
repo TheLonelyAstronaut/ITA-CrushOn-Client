@@ -1,7 +1,7 @@
+/* eslint-disable import/order */
+import React from 'react';
 import AnimatedTabBar, { FlashyTabBarItemConfig, TabsConfig } from '@gorhom/animated-tabbar';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
-import React from 'react';
-// eslint-disable-next-line import/order
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -15,7 +15,8 @@ import { TabNavigatorParamList } from '../../../core/presentation/navigation/tab
 import { CardsScreen } from '../../../features/cards/presentation/components/cards.component';
 import { ChatsListScreen } from '../../../features/chats-list/presentation/components/chats-list.component';
 import { DiscoverScreen } from '../../../features/discover/presentation/components/discover.component';
-import { ProfileScreen } from '../../../features/profile/presentation/screens/profile.component';
+
+import { ProfileNavigator } from './profile-navigator.component';
 
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
@@ -97,7 +98,7 @@ export const TabNaviagtor: React.FC = () => {
             <Tab.Screen name={'Cards'} component={CardsScreen} />
             <Tab.Screen name={'Discover'} component={DiscoverScreen} />
             <Tab.Screen name={'ChatsList'} component={ChatsListScreen} />
-            <Tab.Screen name={'ProfileNavigator'} component={ProfileScreen} />
+            <Tab.Screen name={'Profile'} component={ProfileNavigator} />
         </Tab.Navigator>
     );
 };

@@ -8,6 +8,6 @@ export const GenderLabel = styled.Text<{ selected: boolean }>`
     };
     color: ${(props) => props.selected ?
         props.theme.colors.contrast :
-        props.theme.colors.componentLabel
+        props.theme.colors.text
     };
 `;

@@ -6,10 +6,12 @@ import { ProfileNavigatorParamList } from '../../../../core/presentation/navigat
 import { TabNavigatorParamList } from '../../../../core/presentation/navigation/tab/routing.types';
 
 export type ProfileScreenNavigationProp = CompositeNavigationProp<
-    BottomTabNavigationProp<TabNavigatorParamList, 'ProfileNavigator'>,
-    StackNavigationProp<ProfileNavigatorParamList, 'Profile'>
+    BottomTabNavigationProp<TabNavigatorParamList, 'Profile'>,
+    StackNavigationProp<ProfileNavigatorParamList, 'ProfileInfo'>
 >;
 
 export type EditProfileScreenNavigationProp = StackNavigationProp<ProfileNavigatorParamList, 'EditProfile'>;
 
 export type PassionsScreenNavigationProp = StackNavigationProp<ProfileNavigatorParamList, 'Passions'>;
+
+export type SettingsScreenNavigationProp = StackNavigationProp<ProfileNavigatorParamList, 'Settings'>;

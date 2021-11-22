@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { useCallback, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchableDropdown from 'react-native-searchable-dropdown';
@@ -27,6 +28,7 @@ export type CityScreenProps = {
 export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
+    const {t} = useTranslation();
     
     const [city, setCity] = useState('Minsk');
 
@@ -46,13 +48,12 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
     return (
         <AuthBackground>
             <AppealContainer insets={insets}>
-                <Appeal>SELECT</Appeal>
-                <Appeal>YOUR CITY</Appeal>
+                <Appeal>{t('appeals.selectCity')}</Appeal>
             </AppealContainer>
 
             <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined} >
                 <Header>
-                    <HeaderText>City</HeaderText>
+                    <HeaderText>{t('auth.city')}</HeaderText>
                 </Header>
                 <SearchableDropdown
                     onItemSelect={(item: cityItem) => {
@@ -67,7 +68,7 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
                         onChange: ({ nativeEvent: { text } }) => setCity(text),
                         clearButtonMode: 'always',
                         autoCorrect: false,
-                        placeholder: 'type here',
+                        placeholder: t('common.placeholder'),
                         placeholderTextColor: currentTheme.colors.componentLabel,
                         style: {
                             color: currentTheme.colors.text,
@@ -105,10 +106,10 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
             </AuthInputContainer>
 
             <Buttons insets={insets}>
-                <ActiveButton onPress={goNext} active={city ? true : false} label={'Continue'}/>
+                <ActiveButton onPress={goNext} active={city ? true : false} label={t('auth.continue')}/>
 
                 <Button onPress={goBack}>
-                    <Label>Return</Label>
+                    <Label>{t('auth.return')}</Label>
                 </Button>
             </Buttons>
         </AuthBackground>

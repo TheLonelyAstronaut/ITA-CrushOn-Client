@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { useCallback, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Platform, Pressable } from "react-native";
 import ImageCropPicker from "react-native-image-crop-picker";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -29,7 +30,8 @@ export type PhotoScreenProps = {
 export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
-    
+    const {t} = useTranslation();
+
     const goBack = useCallback(
         () => {
             props.navigation.goBack();
@@ -55,7 +57,9 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
         () => {
             ImageCropPicker.openPicker({
                 mediaType: 'photo',
-                cropping: true
+                cropping: true,
+                width: 1080,
+                height: 1920,
             }).then(image => {
                 setImage({
                     uri: image.path,
@@ -72,8 +76,7 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
     return (
         <AuthBackground>
             <AppealContainer insets={insets}>
-                <Appeal>UPLOAD</Appeal>
-                <Appeal>YOUR PHOTO</Appeal>
+                <Appeal>{t('appeals.uploadPhoto')}</Appeal>
             </AppealContainer>
             
             <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined} >
@@ -84,7 +87,7 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
                         <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
 
                         <PickerOutline onPress={choosePhoto}>
-                            <PickerLabel>Select another photo</PickerLabel>
+                            <PickerLabel>{t('auth.rechoosePhoto')}</PickerLabel>
                         </PickerOutline>
                         </>
                     ) : (
@@ -100,10 +103,10 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
             </AuthInputContainer>
 
             <Buttons insets={insets}>
-                <ActiveButton onPress={done} active={isSelected ? true : false} label={'Done'}/>
+                <ActiveButton onPress={done} active={isSelected ? true : false} label={t('common.done')}/>
 
                 <Button onPress={goBack}>
-                    <Label>Return</Label>
+                    <Label>{t('auth.return')}</Label>
                 </Button>
             </Buttons>
         </AuthBackground>

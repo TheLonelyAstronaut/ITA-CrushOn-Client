@@ -1,10 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useCallback } from "react";
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { DoneButton } from "../../../../core/presentation/components/button/done-button.styled";
 import { Center } from "../../../../core/presentation/components/container/center.styled";
 import { SafeArea } from "../../../../core/presentation/components/container/safe-area-themed.styled";
+import { ScrollFooter } from "../../../../core/presentation/components/container/scroll-footer.styled";
 import { Scroll } from "../../../../core/presentation/components/container/scroll.styled";
 import { SeparatorVertical } from "../../../../core/presentation/components/container/separator-vertical.styled";
 import { Text } from "../../../../core/presentation/components/text/text.styled";
@@ -23,6 +25,8 @@ export type PassionsScreenProps = {
 
 export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScreenProps) => {
     const insets = useSafeAreaInsets();
+    const {t} = useTranslation();
+
     const done = useCallback(
         () => {
             props.navigation.goBack();
@@ -35,13 +39,13 @@ export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScr
             <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
 
             <Center>
-                <Text type={TextType.header}>Passions</Text>
+                <Text type={TextType.header}>{t('profile.passions')}</Text>
             </Center>
 
             <SeparatorVertical height={SeparatorVerticalType.medium} />
 
             <Description>
-                <Text type={TextType.regular}>Select passions that you'd like to share. Choose at least 3 and maximum of 7.</Text>
+                <Text type={TextType.regular}>{t('profile.selectPassions')}</Text>
             </Description>
 
             <SeparatorVertical height={SeparatorVerticalType.medium} />
@@ -54,10 +58,11 @@ export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScr
                         );
                     })}
                 </PassionsContainer>
+                <ScrollFooter insets={insets}/>
             </Scroll>
 
             <DoneButton insets={insets} onPress={done}>
-                <Text type={TextType.button}>Done</Text>
+                <Text type={TextType.button}>{t('common.done')}</Text>
             </DoneButton>
         </SafeArea>
     );

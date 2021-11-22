@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
@@ -26,6 +27,7 @@ export type EmailScreenProps = {
 export const EmailScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
+    const {t} = useTranslation();
 
     const [email, setEmail] = useState('');
 
@@ -45,13 +47,12 @@ export const EmailScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps)
     return (
         <AuthBackground>
             <AppealContainer insets={insets}>
-                <Appeal>WRITE</Appeal>
-                <Appeal>YOUR EMAIL</Appeal>
+                <Appeal>{t('appeals.writeEmail')}</Appeal>
             </AppealContainer>
 
             <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined}>
                 <Header>
-                    <HeaderText>Email</HeaderText>
+                    <HeaderText>{t('auth.email')}</HeaderText>
                 </Header>
                 <Colored>
                     <TextInput
@@ -60,7 +61,7 @@ export const EmailScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps)
                         autoCompleteType={'email'}
                         textContentType={'emailAddress'}
                         keyboardType={'email-address'}
-                        placeholder={'type here'}
+                        placeholder={t('common.placeholder')}
                         placeholderTextColor={currentTheme.colors.componentLabel}
                     />
                 </Colored>
@@ -69,10 +70,10 @@ export const EmailScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps)
             </AuthInputContainer>
 
             <Buttons insets={insets}>
-                <ActiveButton onPress={goNext} active={email ? true : false} label={'Continue'}/>
+                <ActiveButton onPress={goNext} active={email ? true : false} label={t('auth.continue')}/>
 
                 <Button onPress={goBack}>
-                    <Label>Return</Label>
+                    <Label>{t('auth.return')}</Label>
                 </Button>
             </Buttons>
         </AuthBackground>

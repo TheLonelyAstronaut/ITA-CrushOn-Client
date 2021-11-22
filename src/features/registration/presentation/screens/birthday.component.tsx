@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Platform } from "react-native";
 import DatePicker from "react-native-date-picker";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -8,9 +9,7 @@ import { AuthBackground } from "../../../../core/presentation/components/contain
 import { AuthInputContainer } from "../../../../core/presentation/components/container/auth-input-container.styled";
 import { Button } from "../../../../core/presentation/components/container/button-container.styled";
 import { Buttons } from "../../../../core/presentation/components/container/buttons-container.styled";
-import { Header } from "../../../../core/presentation/components/container/header-container.styled";
 import { SeparatorVertical } from "../../../../core/presentation/components/container/separator-vertical.styled";
-import { HeaderText } from "../../../../core/presentation/components/text/auth-header-text.styled";
 import { Label } from "../../../../core/presentation/components/text/label.styled";
 import { SeparatorVerticalType } from "../../../../core/presentation/themes/types";
 import { AppealContainer } from "../components/styled/appeal-container.styled";
@@ -24,6 +23,7 @@ export type BirthdayScreenProps = {
 export const BirthdayScreen: React.FC<BirthdayScreenProps> = (props: BirthdayScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
+    const {t} = useTranslation();
 
     const currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - 18);
@@ -45,15 +45,10 @@ export const BirthdayScreen: React.FC<BirthdayScreenProps> = (props: BirthdayScr
     return (
         <AuthBackground>
             <AppealContainer insets={insets}>
-                <Appeal>SELECT</Appeal>
-                <Appeal>YOUR DATE OF BIRTH</Appeal>
+                <Appeal>{t('appeals.selectBirthday')}</Appeal>
             </AppealContainer>
             
             <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined} >
-                <Header>
-                    <HeaderText>Date</HeaderText>
-                </Header>
-                
                 <DatePicker mode={'date'} date={date} onDateChange={setDate} maximumDate={currentDate} textColor={currentTheme.colors.text} fadeToColor={'none'}/>
 
                 <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
@@ -61,11 +56,11 @@ export const BirthdayScreen: React.FC<BirthdayScreenProps> = (props: BirthdayScr
 
             <Buttons insets={insets}>
                 <Button onPress={goNext}>
-                    <Label>Continue</Label>
+                    <Label>{t('auth.continue')}</Label>
                 </Button>
 
                 <Button onPress={goBack}>
-                    <Label>Return</Label>
+                    <Label>{t('auth.return')}</Label>
                 </Button>
             </Buttons>
         </AuthBackground>

@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
@@ -26,6 +27,7 @@ export type PasswordScreenProps = {
 export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
+    const {t} = useTranslation();
 
     const [password, setPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
@@ -46,13 +48,12 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScr
     return (
         <AuthBackground>
             <AppealContainer insets={insets}>
-                <Appeal>CREATE</Appeal>
-                <Appeal>A PASSWORD</Appeal>
+                <Appeal>{t('appeals.createPassword')}</Appeal>
             </AppealContainer>
 
             <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined} >
                 <Header>
-                    <HeaderText>Password</HeaderText>
+                    <HeaderText>{t('auth.password')}</HeaderText>
                 </Header>
                 <Colored>
                     <TextInput
@@ -62,7 +63,7 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScr
                         textContentType={'newPassword'}
                         secureTextEntry={true}
                         autoCorrect={false}
-                        placeholder={'type here'}
+                        placeholder={t('common.placeholder')}
                         placeholderTextColor={currentTheme.colors.componentLabel}
                     />
                 </Colored>
@@ -70,7 +71,7 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScr
                 <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
 
                 <Header>
-                    <HeaderText>Repeat password</HeaderText>
+                    <HeaderText>{t('auth.repeatPassword')}</HeaderText>
                 </Header>
                 <Colored>
                     <TextInput
@@ -80,7 +81,7 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScr
                         textContentType={'newPassword'}
                         secureTextEntry={true}
                         autoCorrect={false}
-                        placeholder={'type here'}
+                        placeholder={t('common.placeholder')}
                         placeholderTextColor={currentTheme.colors.componentLabel}
                     />
                 </Colored>
@@ -89,12 +90,11 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScr
             </AuthInputContainer>
 
             <Buttons insets={insets}>
-                <ActiveButton onPress={goNext} active={(password && repeatedPassword && password === repeatedPassword) ? true : false} label={'Continue'}/>
+                <ActiveButton onPress={goNext} active={(password && repeatedPassword && password === repeatedPassword) ? true : false} label={t('auth.continue')}/>
 
                 <Button onPress={goBack}>
-                    <Label>Return</Label>
+                    <Label>{t('auth.return')}</Label>
                 </Button>
-
             </Buttons>
         </AuthBackground>
     );

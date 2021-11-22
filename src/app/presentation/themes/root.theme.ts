@@ -1,4 +1,4 @@
-import { Dimensions, StatusBar } from 'react-native';
+import { Dimensions, Platform, StatusBar } from 'react-native';
 import { DefaultTheme } from 'styled-components';
 
 export enum ThemesEnum {
@@ -13,6 +13,7 @@ export type ThemeState = {
 export const DEVICE_SIZE = Dimensions.get('window');
 
 export const defaultValues: DefaultTheme = {
+    platform: Platform.OS,
     dimensions: {
         width: DEVICE_SIZE.width,
         height: DEVICE_SIZE.height - (StatusBar.currentHeight ?? 0),

@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
 import { User } from '../../../model/user.model';
 import { TextType } from '../../themes/types';
 import { Text } from '../text/text.styled';
+
 import { FullyPressable } from './styled/fully-pressable.styled';
 import { ImageBackground } from './styled/image-background.styled';
 import { LocationWrapper } from './styled/location-wrapper.styled';
@@ -15,6 +18,8 @@ export type CardProps = {
 };
 
 export const Card: React.FC<CardProps> = (props: CardProps) => {
+    const {t} = useTranslation();
+
     return (
         <ImageBackground
             source={{
@@ -31,7 +36,7 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
                     <LocationWrapper>
                         <LocationSVG color="white" size={14 * props.scale} strokeWidth={props.scale} />
                         <Text type={TextType.cardGeo} scale={props.scale}>
-                            {props.user.location} km away
+                            {props.user.location} {t('card.kmAway')}
                         </Text>
                     </LocationWrapper>
                 </CardTextWrapper>

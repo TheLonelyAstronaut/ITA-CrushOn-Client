@@ -1,16 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { useTheme } from 'styled-components';
+
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
 import { User } from '../../../model/user.model';
 import { Palette } from '../../themes/palette.themes';
-import { UserInfoWrapper } from './styled/user-info-wrapper.styled';
-import { useTheme } from 'styled-components';
-import { PassionsWrapper } from './styled/passins-wrapper.styled';
-import { PassionView } from './styled/passion-view.styled';
-import { PassionLabel } from './styled/passion-label.styled';
-import { SeparatorVertical } from '../container/separator-vertical.styled';
 import { SeparatorVerticalType, TextType } from '../../themes/types';
+import { SeparatorVertical } from '../container/separator-vertical.styled';
 import { Text } from '../text/text.styled';
+
+import { PassionsWrapper } from './styled/passins-wrapper.styled';
+import { PassionLabel } from './styled/passion-label.styled';
+import { PassionView } from './styled/passion-view.styled';
+import { UserInfoWrapper } from './styled/user-info-wrapper.styled';
 
 type UserInfoProps = {
     user: User;
@@ -18,6 +21,7 @@ type UserInfoProps = {
 
 export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
     const currentTheme = useTheme();
+    const {t} = useTranslation();
 
     return (
         <UserInfoWrapper>
@@ -26,12 +30,14 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text type={TextType.geo} style={{ paddingRight: currentTheme.spacer }}>
-                    Live in {props.user.lives}
+                    {t('profile.livesIn')}{props.user.lives}
                 </Text>
                 <LocationSVG color={currentTheme.colors.componentLabel} size={14} strokeWidth={2} />
             </View>
+
             <SeparatorVertical height={SeparatorVerticalType.small} />
-            <Text type={TextType.header}>Passions</Text>
+
+            <Text type={TextType.header}>{t('profile.passions')}</Text>
             <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
             <PassionsWrapper>
                 {props.user.passions.map((item, index) => {
@@ -46,8 +52,10 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
                     );
                 })}
             </PassionsWrapper>
+
             <SeparatorVertical height={SeparatorVerticalType.small} />
-            <Text type={TextType.header}>About</Text>
+
+            <Text type={TextType.header}>{t('profile.about')}</Text>
             <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
             <Text type={TextType.regular}>{props.user.bio}</Text>
         </UserInfoWrapper>

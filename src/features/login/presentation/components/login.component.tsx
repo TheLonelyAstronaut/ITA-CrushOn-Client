@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform, StatusBar, StatusBarStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
@@ -29,6 +30,7 @@ export type LoginScreenProps = {
 export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
+    const {t} = useTranslation();
 
     const [email, setEmail] = useState('');
     const [password, setpassword] = useState('');
@@ -61,7 +63,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
             
             <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined}>
                 <Header>
-                    <HeaderText>Login</HeaderText>
+                    <HeaderText>{t('auth.login')}</HeaderText>
                 </Header>
                 <Colored>
                     <TextInput
@@ -71,7 +73,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
                         autoCompleteType={'email'}
                         textContentType={'emailAddress'}
                         keyboardType={'email-address'}
-                        placeholder={'type here'}
+                        placeholder={t('common.placeholder')}
                         placeholderTextColor={currentTheme.colors.componentLabel}
                     />
                 </Colored>
@@ -79,17 +81,16 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
                 <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
 
                 <Header>
-                    <HeaderText>Password</HeaderText>
+                    <HeaderText>{t('auth.password')}</HeaderText>
                 </Header>
                 <Colored>
                     <TextInput
                         value={password}
                         onChangeText={setpassword}
-                        //onChange={({ nativeEvent: { text } }) => setpassword(text)}
                         autoCompleteType={'password'}
                         textContentType={'password'}
                         secureTextEntry={true}
-                        placeholder={'type here'}
+                        placeholder={t('common.placeholder')}
                         placeholderTextColor={currentTheme.colors.componentLabel}
                     />
                 </Colored>
@@ -99,10 +100,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
              
             
             <Buttons insets={insets}>
-                <ActiveButton onPress={login} active={(email && password) ? true : false} label={'Login'}/> 
+                <ActiveButton onPress={login} active={(email && password) ? true : false} label={t('auth.signIn')}/> 
 
                 <Button onPress={signUp}>
-                    <Label>Sign up</Label>
+                    <Label>{t('auth.signUp')}</Label>
                 </Button>
             </Buttons>
         </AuthBackground>

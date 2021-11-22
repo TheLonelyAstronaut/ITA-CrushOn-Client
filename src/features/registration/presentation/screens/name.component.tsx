@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
@@ -26,7 +27,8 @@ export type NameScreenProps = {
 export const NameScreen: React.FC<NameScreenProps> = (props: NameScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
-    
+    const {t} = useTranslation();
+   
     const [name, setName] = useState('');
 
     const goBack = useCallback(
@@ -45,13 +47,12 @@ export const NameScreen: React.FC<NameScreenProps> = (props: NameScreenProps) =>
     return (
         <AuthBackground>
             <AppealContainer insets={insets}>
-                <Appeal>WRITE</Appeal>
-                <Appeal>YOUR NAME</Appeal>
+                <Appeal>{t('appeals.writeName')}</Appeal>
             </AppealContainer>
 
             <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined} >
                 <Header>
-                    <HeaderText>Name</HeaderText>
+                    <HeaderText>{t('auth.name')}</HeaderText>
                 </Header>
                 <Colored>
                     <TextInput
@@ -59,7 +60,7 @@ export const NameScreen: React.FC<NameScreenProps> = (props: NameScreenProps) =>
                         onChangeText={setName}
                         autoCorrect={false}
                         autoCompleteType={'name'}
-                        placeholder={'type here'}
+                        placeholder={t('common.placeholder')}
                         placeholderTextColor={currentTheme.colors.componentLabel}
                     />
                 </Colored>
@@ -68,10 +69,10 @@ export const NameScreen: React.FC<NameScreenProps> = (props: NameScreenProps) =>
             </AuthInputContainer>
 
             <Buttons insets={insets}>
-                <ActiveButton onPress={goNext} active={name ? true : false} label={'Continue'}/>
+                <ActiveButton onPress={goNext} active={name ? true : false} label={t('auth.continue')}/>
 
                 <Button onPress={goBack}>
-                    <Label>Return</Label>
+                    <Label>{t('auth.return')}</Label>
                 </Button>
             </Buttons>
         </AuthBackground>

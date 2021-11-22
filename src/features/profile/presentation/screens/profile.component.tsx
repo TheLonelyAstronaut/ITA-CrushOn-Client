@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components';
 import { DefaultTheme } from 'styled-components/native';
 
 import { EditSVG } from '../../../../assets/components/edit-icon.component';
-import { LogOutSVG } from '../../../../assets/components/log-out-icon.component';
+import { MoreSVG } from '../../../../assets/components/more-icon.component';
 import { User } from '../../../../core/model/user.model';
 import { LabeledButton } from '../../../../core/presentation/components/button/labeled-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
@@ -28,6 +29,7 @@ export type ProfileScreenProps = {
 export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreenProps) => {
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
+    const {t} = useTranslation();
     const user: User = {
         id: 48,
         name: 'Liu',
@@ -46,17 +48,23 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
         [props]
     );
 
+    const toSettings = useCallback(
+        () => {
+            props.navigation.navigate('Settings');
+        },
+        [props]
+    );
+
     return (
         <SafeArea>
             <Scroll showsVerticalScrollIndicator={false}>
                 <SettingsWrapper>
-                    {/* here will be settings button */}
-                    <Pressable>
-                        <LogOutSVG color={currentTheme.colors.componentLabel} size={24} />
+                    <Pressable onPress={toSettings}>
+                        <MoreSVG color={currentTheme.colors.componentLabel} />
                     </Pressable>
                 </SettingsWrapper>
 
-                <SeparatorVertical height={SeparatorVerticalType.medium} />
+                <SeparatorVertical height={SeparatorVerticalType.small} />
 
                 <Center>
                     <Photo
@@ -71,7 +79,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
                 <Center>
                     <LabeledButton onPress={editProfile}>
                         <EditSVG color={currentTheme.colors.componentLabel} size={16} />
-                        <Text type={TextType.label}>Edit profile</Text>
+                        <Text type={TextType.label}>{t('profile.editProfile')}</Text>
                     </LabeledButton>
                 </Center>
 

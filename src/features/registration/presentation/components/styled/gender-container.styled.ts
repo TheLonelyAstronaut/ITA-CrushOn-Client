@@ -4,7 +4,7 @@ export const GenderOutline = styled.Pressable<{ selected: boolean }>`
     border-width: ${(props) => props.selected ? 2 : 1}px;
     border-color: ${(props) => props.selected ?
         props.theme.colors.contrast :
-        props.theme.colors.componentLabel
+        props.theme.colors.text
     };
     align-items: center;
     border-radius: ${(props) => props.theme.borderRadius.small}px;

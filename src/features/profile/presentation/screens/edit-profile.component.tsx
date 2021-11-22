@@ -1,4 +1,6 @@
+/* eslint-disable react-native/no-color-literals */
 import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -13,6 +15,7 @@ import { Colored } from '../../../../core/presentation/components/container/colo
 import { Header } from '../../../../core/presentation/components/container/header-container.styled';
 import { Photo } from '../../../../core/presentation/components/container/photo.styled';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
+import { ScrollFooter } from '../../../../core/presentation/components/container/scroll-footer.styled';
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { Text } from '../../../../core/presentation/components/text/text.styled';
@@ -29,6 +32,7 @@ export type EditProfileScreenProps = {
 
 export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditProfileScreenProps) => {
     const currentTheme = useTheme();
+    const {t} = useTranslation();
     const user: User = {
         id: 48,
         name: 'Liu',
@@ -100,27 +104,27 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
 
                 <Center>
                     <Pressable onPress={changePhoto}>
-                        <Text type={TextType.button}>Change photo</Text>
+                        <Text type={TextType.button}>{t('profile.changePhoto')}</Text>
                     </Pressable>
                 </Center>
                 
                 <SeparatorVertical height={SeparatorVerticalType.medium} />
 
-                    <Header>
-                        <Text type={TextType.header}>About me</Text>
-                    </Header>
-                    <Colored>
-                        <TextInput
-                            value={aboutMe}
-                            onChangeText={setAboutMe}
-                            multiline={true}
-                        />
-                    </Colored>
+                <Header>
+                    <Text type={TextType.header}>{t('profile.about')}</Text>
+                </Header>
+                <Colored>
+                    <TextInput
+                        value={aboutMe}
+                        onChangeText={setAboutMe}
+                        multiline={true}
+                    />
+                </Colored>
 
                 <SeparatorVertical height={SeparatorVerticalType.small} />
 
                 <Header>
-                    <Text type={TextType.header}>Passions</Text>
+                    <Text type={TextType.header}>{t('profile.passions')}</Text>
                 </Header>
                 <ColoredPressable onPress={editPassions}>
                     <Passions>
@@ -140,11 +144,11 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
                     <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
                 </ColoredPressable>
 
-                <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
+                <ScrollFooter insets={insets}/>
             </KeyboardAwareScrollView>
 
             <DoneButton insets={insets} onPress={done}>
-                <Text type={TextType.button}>Done</Text>
+                <Text type={TextType.button}>{t('common.done')}</Text>
             </DoneButton>
         </SafeArea>
     );

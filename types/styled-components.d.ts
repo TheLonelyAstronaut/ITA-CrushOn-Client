@@ -1,7 +1,9 @@
+import { PlatformOSType } from 'react-native';
 import 'styled-components';
 
 declare module 'styled-components' {
     export interface DefaultTheme {
+        platform: PlatformOSType;
         dimensions: {
             width: number;
             height: number;

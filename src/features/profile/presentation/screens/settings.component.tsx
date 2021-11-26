@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ThemeConsumer, useTheme } from "styled-components/native";
+import { useTheme } from "styled-components/native";
 
 import { DoneButton } from "../../../../core/presentation/components/button/done-button.styled";
 import { Center } from "../../../../core/presentation/components/container/center.styled";

@@ -3,13 +3,13 @@ import { FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Card } from '../../../../core/presentation/components/card/card.component';
+import { FooterView } from '../../../../core/presentation/components/container/footer-view.styled';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
 import { Swipeable } from '../../../../core/presentation/components/swipes/swipeable.component';
 import { CardsData } from '../../../../mocks/cards.data';
+import { DiscoverScreenNavigationProp } from '../navigation/routing.types';
 
 import { DiscoverView } from './discover-view.styled';
-import { FooterView } from './footer-view.styled';
-import { DiscoverScreenNavigationProp } from '../navigation/routing.types';
 
 export type DiscoverScreenProps = {
     navigation: DiscoverScreenNavigationProp;

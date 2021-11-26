@@ -51,7 +51,7 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
                 <Appeal>{t('appeals.selectCity')}</Appeal>
             </AppealContainer>
 
-            <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined} >
+            <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : 'padding'} >
                 <Header>
                     <HeaderText>{t('auth.city')}</HeaderText>
                 </Header>

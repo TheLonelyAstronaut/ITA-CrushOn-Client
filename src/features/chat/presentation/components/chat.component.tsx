@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Children, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text } from 'react-native';
-import { GiftedChat, Bubble, BubbleProps, Time, TimeProps, InputToolbar, InputToolbarProps, Composer, ComposerProps } from 'react-native-gifted-chat';
+import { GiftedChat, Bubble, BubbleProps, Time, TimeProps, InputToolbar, InputToolbarProps, Composer, ComposerProps, Message, MessageText, MessageTextProps } from 'react-native-gifted-chat';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components';
 
@@ -68,7 +68,8 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
         return (
             <Time 
                 {...props}
-                timeTextStyle={{
+                position='right'
+                timeTextStyle={{                    
                     right: {
                         color: theme.colors.componentLabel,
                         fontSize: theme.fontSize.extraSmall,
@@ -106,20 +107,30 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                         borderColor: theme.colors.componentLabel,
                     },
                 }}
-                textStyle={{
-                    right: {
-                        color: theme.colors.text,
-                        fontSize: theme.fontSize.medium,
-                    },
-                    left: {
-                        color: theme.colors.text,
-                        fontSize: theme.fontSize.medium,
-                    }
+                render={() => {
+                    return(
+                        Children
+                    )
                 }}
             />
         );
     };
 
+    const renderMessageText = (props: MessageTextProps) => (
+        <MessageText
+            {...props}
+            textStyle={{
+                right: {
+                    color: theme.colors.text,
+                    fontSize: theme.fontSize.medium,
+                },
+                left: {
+                    color: theme.colors.text,
+                    fontSize: theme.fontSize.medium,
+                }
+            }}
+        />
+    );
     const renderComposer = (props: ComposerProps) => (
         <Composer
             {...props}
@@ -176,6 +187,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 renderComposer={renderComposer}
                 renderInputToolbar={renderInputToolbar}
                 renderBubble={renderBubble}
+                renderMessageText={renderMessageText}
                 renderTime={renderTime}
             />
         </SafeArea>

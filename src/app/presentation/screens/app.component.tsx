@@ -11,7 +11,7 @@ LogBox.ignoreLogs(["VirtualizedLists should never be nested"])
 
 const App: React.FC = () => {
     return (
-        <ThemeProvider theme={lightTheme}>
+        <ThemeProvider theme={darkTheme}>
             <NavigationContainer>
                 <RootNavigator />
             </NavigationContainer>

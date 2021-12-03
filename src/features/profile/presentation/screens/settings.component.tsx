@@ -13,7 +13,9 @@ import { SeparatorVertical } from "../../../../core/presentation/components/cont
 import { Text } from "../../../../core/presentation/components/text/text.styled";
 import { SeparatorVerticalType, TextType } from "../../../../core/presentation/themes/types";
 import { SelectableTextedButton } from "../components/selectable-texted-button.component";
+import { ColoredPressable } from "../components/styled/colored-pressable-container.styled";
 import { Separator } from "../components/styled/separator-view.styled";
+import { TextedButton } from "../components/texted-button.component";
 import { SettingsScreenNavigationProp } from "../navigation/routing.types";
 
 
@@ -65,6 +67,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = (props: SettingsScr
         []
     );
 
+    const logOut = useCallback(
+        () => {
+            console.log('logged out');
+        },
+        []
+    );
+
 
     const done = useCallback(
         () => {
@@ -105,6 +114,12 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = (props: SettingsScr
                 <SelectableTextedButton onPress={selectLightTheme} selected={false} text={t('settings.light')}/>
                 <Separator/>
                 <SelectableTextedButton onPress={selectDarkTheme} selected={false} text={t('settings.dark')}/>
+            </Colored>
+
+            <SeparatorVertical height={SeparatorVerticalType.large}/>
+
+            <Colored>
+                <TextedButton onPress={logOut} text={t('settings.logOut')}/>
             </Colored>
 
             <DoneButton insets={insets} onPress={done}>

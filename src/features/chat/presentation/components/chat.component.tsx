@@ -1,15 +1,19 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { Children, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text } from 'react-native';
-import { GiftedChat, Bubble, BubbleProps, Time, TimeProps, InputToolbar, InputToolbarProps, Composer, ComposerProps, Message, MessageText, MessageTextProps } from 'react-native-gifted-chat';
+import { View } from 'react-native';
+import { GiftedChat, Bubble, BubbleProps, Time, TimeProps, InputToolbar, InputToolbarProps, Composer, ComposerProps, Message, MessageText, MessageTextProps, SendProps, Send, AvatarProps } from 'react-native-gifted-chat';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components';
 
+import { SendSVG } from '../../../../assets/components/send-icon.component';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
 import { CardsData } from '../../../../mocks/cards.data';
 import { Messages } from '../../../../mocks/messages.data';
 import { ChatScreenNavigationProp, ChatScreenRouteProp } from '../navigation/routing.types';
+
+import { ChatHeader } from './chat-header.component';
+import { Avatar } from './styled/avatar-image.styled';
 
 export type ChatScreenProps = {
     navigation: ChatScreenNavigationProp;
@@ -93,6 +97,12 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
         );
     };
 
+    const renderAvatar = () => {
+        return (
+            <Avatar source={{uri: user?.imgUrl}}/>
+        );
+    };
+
     const renderBubble = (props: BubbleProps) => {
         return (
             <Bubble
@@ -106,11 +116,6 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                         borderWidth: 1,
                         borderColor: theme.colors.componentLabel,
                     },
-                }}
-                render={() => {
-                    return(
-                        Children
-                    )
                 }}
             />
         );
@@ -134,30 +139,46 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     const renderComposer = (props: ComposerProps) => (
         <Composer
             {...props}
+            
             placeholderTextColor={theme.colors.componentLabel}
             placeholder={t('common.placeholder')}
             textInputStyle={{
+                marginRight: theme.spacer,
+                marginLeft: 0,
+                marginTop: 0,
+                marginBottom: 0,
                 paddingTop: 3,
                 paddingBottom: 4,
                 paddingHorizontal: theme.spacer,
-                color: '#222B45',
+                color: theme.colors.text,
                 backgroundColor: theme.colors.background,
-                borderRadius: theme.spacer,
+                borderRadius: theme.borderRadius.small,
             }}
         />
     );
 
+    const renderSend = (props: SendProps) => (
+        <Send
+            {...props}
+            disabled={!props.text}
+            containerStyle={{alignItems: 'center', justifyContent: 'center'}}
+        >
+            <SendSVG color={theme.colors.componentLabel} />
+        </Send>
+    );
+
     const renderInputToolbar = (props: InputToolbarProps) => (
         <InputToolbar
-          {...props}
-          containerStyle={{
-            backgroundColor: theme.colors.component,
-            borderRadius: theme.borderRadius.small,
-            marginHorizontal: theme.spacer,
-            marginBottom: insets.bottom ? 0 : theme.spacer,
-            
-          }}
-          primaryStyle={{ alignItems: 'center', justifyContent: 'center'}}
+            {...props}
+            containerStyle={{
+                height: theme.composerHeight + theme.spacer * 2,
+                borderTopWidth: 0,
+                backgroundColor: theme.colors.component,
+                paddingHorizontal: theme.spacer,
+                paddingVertical: theme.spacer / 2,
+                justifyContent: 'center'          
+            }}
+            primaryStyle={{ alignItems: 'center', justifyContent: 'center' }}
         />
     );
 
@@ -167,29 +188,31 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     }, [])
 
     return (
-        <SafeArea>
-            <Pressable onPress={ () => props.navigation.goBack() } >
-                <Text
-                    style={{
-                        fontSize: theme.fontSize.medium,
-                        color: theme.colors.componentLabel,
-                        paddingLeft: theme.spacer,
-                    }}
-                >Back</Text>
-            </Pressable>
+        <SafeArea edges={['top']}>
+            <ChatHeader
+                goBack={ () => props.navigation.goBack() }
+                name={user?.name}
+                photoUrl={user?.imgUrl}
+            />
             <GiftedChat 
                 messages={messages}
                 alwaysShowSend={true}
                 onSend={messages => onSend(messages)}
+                bottomOffset={insets.bottom ? insets.bottom : -theme.spacer}
                 user={{
-                  _id: 1010,
+                _id: 1010,
                 }}
+                minComposerHeight={theme.composerHeight}
+                minInputToolbarHeight={theme.composerHeight + theme.spacer * 2}
                 renderComposer={renderComposer}
                 renderInputToolbar={renderInputToolbar}
+                renderSend={renderSend}
+                renderAvatar={renderAvatar}
                 renderBubble={renderBubble}
                 renderMessageText={renderMessageText}
                 renderTime={renderTime}
             />
+            <View style={{backgroundColor: theme.colors.component, height: insets.bottom}} />
         </SafeArea>
     );
 };

@@ -1,6 +1,5 @@
-import React from 'react';
-// eslint-disable-next-line import/order
 import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
 
 import { AuthenticationParamList } from '../../../core/presentation/navigation/authentication/routing.types';
 import { LoginScreen } from '../../../features/login/presentation/components/login.component';

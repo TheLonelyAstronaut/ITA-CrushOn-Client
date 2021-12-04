@@ -1,32 +1,39 @@
-import React, { useCallback } from 'react';
-import { View, FlatList, StatusBar, StatusBarStyle } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
+import { StatusBar, StatusBarStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DefaultTheme, useTheme } from 'styled-components/native';
 
 import { Card } from '../../../../core/presentation/components/card/card.component';
-import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
-import { Swipeable } from '../../../../core/presentation/components/swipes/swipeable.component';
 import { CardsData } from '../../../../mocks/cards.data';
-import { CardsScreenNavigationProp } from '../navigation/routing.types';
+import {CardsScreenNavigationProp, CardsScreenRouteProp} from '../navigation/routing.types';
 
 import { CardsView } from './styled/cards-view.styled';
 
+import {User} from "../../../../core/model/user.model";
+
+import { SafeArea} from "../../../../core/presentation/components/container/safe-area-themed.styled";
+
 export type CardsScreenProps = {
+    route: CardsScreenRouteProp;
     navigation: CardsScreenNavigationProp;
 };
 
 export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps) => {
     const insets = useSafeAreaInsets();
+    const [list, setList] = useState<User[]>(CardsData);
     const currentTheme: DefaultTheme = useTheme();
 
-    const expandCard = useCallback(
-        (id: number) => {
-            props.navigation.navigate('ExpandedCard', {
-                id,
-            });
-        },
-        [props]
+    useFocusEffect(
+        useCallback(() => {
+            console.log('HERE', props.route.params?.reaction);
+        }, [props.route])
     );
+
+    const setReaction = useCallback(() => {
+        list.shift();
+        setList([...list]);
+    }, [list]);
 
     return (
         <SafeArea>
@@ -34,34 +41,15 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
                 barStyle={currentTheme.colors.statusBar as StatusBarStyle}
                 backgroundColor={currentTheme.colors.background}
             />
-            <FlatList
-                data={CardsData}
-                keyExtractor={(item) => item.id.toString()}
-                scrollEnabled={false}
-                contentContainerStyle={{ flexGrow: 1 }}
-                removeClippedSubviews={false} //added to fix android view trouble
-                CellRendererComponent={({ item, index, children, style, ...props }) => {
+            {list
+                .filter((_, index) => index < 2)
+                .map((user, index) => {
                     return (
-                        <View
-                            style={{
-                                ...style,
-                                zIndex: CardsData.length - index + 1, //+1 added to fix android view trouble
-                                position: 'absolute',
-                            }}
-                            {...props}
-                        >
-                            {children}
-                        </View>
+                        <CardsView zIndex={9999 - user.id} key={user.id} insets={insets}>
+                            <Card user={user} scale={1.7} handleReaction={setReaction} />
+                        </CardsView>
                     );
-                }}
-                renderItem={({ item }) => (
-                    <CardsView insets={insets}>
-                        <Swipeable>
-                            <Card user={item} expandCard={expandCard} scale={1.7} />
-                        </Swipeable>
-                    </CardsView>
-                )}
-            />
+                })}
         </SafeArea>
     );
 };

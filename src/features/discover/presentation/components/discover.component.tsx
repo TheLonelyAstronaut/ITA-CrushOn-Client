@@ -18,13 +18,6 @@ export type DiscoverScreenProps = {
 export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScreenProps) => {
     const insets = useSafeAreaInsets();
 
-    const expandCard = useCallback(
-        (id: number) => {
-            props.navigation.navigate('ExpandedCard', { id });
-        },
-        [props]
-    );
-
     return (
         <SafeArea edges={['top']}>
             <FlatList
@@ -35,9 +28,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
                 ListFooterComponent={<FooterView insets={insets} />}
                 renderItem={({ item }) => (
                     <DiscoverView insets={insets}>
-                        <Swipeable>
-                            <Card user={item} expandCard={expandCard} scale={1} />
-                        </Swipeable>
+                        <Card user={item} scale={1}/>
                     </DiscoverView>
                 )}
             />

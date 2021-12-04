@@ -15,7 +15,7 @@ const RegistrationStack = createStackNavigator<RegistationParamList>();
 
 export const RegistrationNavigator: React.FC = () => {
     return (
-        <RegistrationStack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Email'>
+        <RegistrationStack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Email">
             <RegistrationStack.Screen name={'Email'} component={EmailScreen} />
             <RegistrationStack.Screen name={'Password'} component={PasswordScreen} />
             <RegistrationStack.Screen name={'Name'} component={NameScreen} />

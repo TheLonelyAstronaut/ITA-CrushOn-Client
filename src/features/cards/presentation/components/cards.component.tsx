@@ -30,7 +30,10 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
 
     return (
         <SafeArea>
-            <StatusBar barStyle={currentTheme.colors.statusBar as StatusBarStyle} backgroundColor={currentTheme.colors.background}/>
+            <StatusBar
+                barStyle={currentTheme.colors.statusBar as StatusBarStyle}
+                backgroundColor={currentTheme.colors.background}
+            />
             <FlatList
                 data={CardsData}
                 keyExtractor={(item) => item.id.toString()}

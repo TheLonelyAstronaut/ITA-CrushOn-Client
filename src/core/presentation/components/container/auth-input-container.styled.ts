@@ -1,5 +1,5 @@
-import { KeyboardAvoidingView } from "react-native";
-import styled from "styled-components/native";
+import { KeyboardAvoidingView } from 'react-native';
+import styled from 'styled-components/native';
 
 export const AuthInputContainer = styled(KeyboardAvoidingView)`
     background-color: ${(props) => props.theme.colors.background};

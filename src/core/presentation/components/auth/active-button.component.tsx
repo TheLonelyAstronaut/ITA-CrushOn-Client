@@ -1,8 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { Outline } from "./styled/active-button-container.styled";
-import { Label } from "./styled/active-button-label.styles";
-
+import { Outline } from './styled/active-button-container.styled';
+import { Label } from './styled/active-button-label.styles';
 
 export type ActiveButtonProps = {
     active: boolean;

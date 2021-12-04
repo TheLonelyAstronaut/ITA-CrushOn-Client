@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Avatar = styled.Image`
     width: ${(props) => props.theme.spacer * 8}px;

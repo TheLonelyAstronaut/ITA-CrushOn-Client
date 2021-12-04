@@ -12,11 +12,11 @@ const ProfileStack = createStackNavigator<ProfileNavigatorParamList>();
 
 export const ProfileNavigator: React.FC = () => {
     return (
-        <ProfileStack.Navigator screenOptions={{ headerShown: false }} initialRouteName='ProfileInfo'>
-            <ProfileStack.Screen name='ProfileInfo' component={ProfileScreen}/>
-            <ProfileStack.Screen name='EditProfile' component={EditProfileScreen}/>
-            <ProfileStack.Screen name='Passions' component={PassionsScreen}/>
-            <ProfileStack.Screen name='Settings' component={SettingsScreen}/>
+        <ProfileStack.Navigator screenOptions={{ headerShown: false }} initialRouteName="ProfileInfo">
+            <ProfileStack.Screen name="ProfileInfo" component={ProfileScreen} />
+            <ProfileStack.Screen name="EditProfile" component={EditProfileScreen} />
+            <ProfileStack.Screen name="Passions" component={PassionsScreen} />
+            <ProfileStack.Screen name="Settings" component={SettingsScreen} />
         </ProfileStack.Navigator>
-    )
-}
+    );
+};

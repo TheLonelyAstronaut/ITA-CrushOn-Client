@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import { TextType } from '../../themes/types';
 
-export const Text = styled.Text<{ type: TextType, scale?: number }>`
+export const Text = styled.Text<{ type: TextType; scale?: number }>`
     color: ${(props) => {
         switch (props.type) {
             case TextType.name:
@@ -72,7 +72,7 @@ export const Text = styled.Text<{ type: TextType, scale?: number }>`
     margin-left: ${(props) => {
         switch (props.type) {
             case TextType.cardGeo:
-                return props.theme.spacer / 2 * (props?.scale ?? 1);
+                return (props.theme.spacer / 2) * (props?.scale ?? 1);
             case TextType.label:
                 return props.theme.spacer / 4;
             case TextType.button:

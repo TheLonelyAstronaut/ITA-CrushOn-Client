@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Name = styled.Text`
     padding-horizontal: ${(props) => props.theme.spacer * 2}px;

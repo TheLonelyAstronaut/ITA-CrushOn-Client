@@ -1,8 +1,23 @@
-/* eslint-disable react-native/no-color-literals */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import { GiftedChat, Bubble, BubbleProps, Time, TimeProps, InputToolbar, InputToolbarProps, Composer, ComposerProps, Message, MessageText, MessageTextProps, SendProps, Send, AvatarProps } from 'react-native-gifted-chat';
+import {
+    GiftedChat,
+    Bubble,
+    BubbleProps,
+    Time,
+    TimeProps,
+    InputToolbar,
+    InputToolbarProps,
+    Composer,
+    ComposerProps,
+    Message,
+    MessageText,
+    MessageTextProps,
+    SendProps,
+    Send,
+    AvatarProps,
+} from 'react-native-gifted-chat';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components';
 
@@ -21,7 +36,9 @@ export type ChatScreenProps = {
 };
 
 export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) => {
-    const user = CardsData.find(user => { if (user.id === props.route.params.id) return true});
+    const user = CardsData.find((user) => {
+        if (user.id === props.route.params.id) return true;
+    });
     const { t } = useTranslation();
     const theme = useTheme();
     const insets = useSafeAreaInsets();
@@ -64,16 +81,16 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 text: 'This is a system message',
                 createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
                 system: true,
-            }
-        ])
-    }, [])
+            },
+        ]);
+    }, []);
 
     const renderTime = (props: TimeProps) => {
         return (
-            <Time 
+            <Time
                 {...props}
-                position='right'
-                timeTextStyle={{                    
+                position="right"
+                timeTextStyle={{
                     right: {
                         color: theme.colors.componentLabel,
                         fontSize: theme.fontSize.extraSmall,
@@ -81,26 +98,24 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                     left: {
                         color: theme.colors.componentLabel,
                         fontSize: theme.fontSize.extraSmall,
-                    }
+                    },
                 }}
                 containerStyle={{
                     right: {
                         flex: 1,
-                        alignItems: 'flex-end'
+                        alignItems: 'flex-end',
                     },
                     left: {
                         flex: 1,
-                        alignItems: 'flex-end'
-                    }
+                        alignItems: 'flex-end',
+                    },
                 }}
             />
         );
     };
 
     const renderAvatar = () => {
-        return (
-            <Avatar source={{uri: user?.imgUrl}}/>
-        );
+        return <Avatar source={{ uri: user?.imgUrl }} />;
     };
 
     const renderBubble = (props: BubbleProps) => {
@@ -132,14 +147,13 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 left: {
                     color: theme.colors.text,
                     fontSize: theme.fontSize.medium,
-                }
+                },
             }}
         />
     );
     const renderComposer = (props: ComposerProps) => (
         <Composer
             {...props}
-            
             placeholderTextColor={theme.colors.componentLabel}
             placeholder={t('common.placeholder')}
             textInputStyle={{
@@ -158,11 +172,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     );
 
     const renderSend = (props: SendProps) => (
-        <Send
-            {...props}
-            disabled={!props.text}
-            containerStyle={{alignItems: 'center', justifyContent: 'center'}}
-        >
+        <Send {...props} disabled={!props.text} containerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
             <SendSVG color={theme.colors.componentLabel} />
         </Send>
     );
@@ -176,31 +186,27 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 backgroundColor: theme.colors.component,
                 paddingHorizontal: theme.spacer,
                 paddingVertical: theme.spacer / 2,
-                justifyContent: 'center'          
+                justifyContent: 'center',
             }}
             primaryStyle={{ alignItems: 'center', justifyContent: 'center' }}
         />
     );
 
     const onSend = useCallback((messages = []) => {
-        setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
+        setMessages((previousMessages) => GiftedChat.append(previousMessages, messages));
         console.log(messages);
-    }, [])
+    }, []);
 
     return (
         <SafeArea edges={['top']}>
-            <ChatHeader
-                goBack={ () => props.navigation.goBack() }
-                name={user?.name}
-                photoUrl={user?.imgUrl}
-            />
-            <GiftedChat 
+            <ChatHeader goBack={() => props.navigation.goBack()} name={user?.name} photoUrl={user?.imgUrl} />
+            <GiftedChat
                 messages={messages}
                 alwaysShowSend={true}
-                onSend={messages => onSend(messages)}
+                onSend={(messages) => onSend(messages)}
                 bottomOffset={insets.bottom ? insets.bottom : -theme.spacer}
                 user={{
-                _id: 1010,
+                    _id: 1010,
                 }}
                 minComposerHeight={theme.composerHeight}
                 minInputToolbarHeight={theme.composerHeight + theme.spacer * 2}
@@ -212,7 +218,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 renderMessageText={renderMessageText}
                 renderTime={renderTime}
             />
-            <View style={{backgroundColor: theme.colors.component, height: insets.bottom}} />
+            <View style={{ backgroundColor: theme.colors.component, height: insets.bottom }} />
         </SafeArea>
     );
 };

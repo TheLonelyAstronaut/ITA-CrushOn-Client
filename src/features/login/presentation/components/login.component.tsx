@@ -30,38 +30,35 @@ export type LoginScreenProps = {
 export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     const [email, setEmail] = useState('');
     const [password, setpassword] = useState('');
 
-    const login = useCallback(
-        () => {
-            props.navigation.navigate('Tabs');
-        },
-        [props]
-    );
-    const signUp = useCallback(
-        () => {
-            props.navigation.navigate('Registration');
-        },
-        [props]
-    );
-    
+    const login = useCallback(() => {
+        props.navigation.navigate('Tabs');
+    }, [props]);
+    const signUp = useCallback(() => {
+        props.navigation.navigate('Registration');
+    }, [props]);
+
     return (
         <AuthBackground>
-            <StatusBar barStyle={currentTheme.colors.statusBar as StatusBarStyle} backgroundColor={currentTheme.colors.auth}/>
+            <StatusBar
+                barStyle={currentTheme.colors.statusBar as StatusBarStyle}
+                backgroundColor={currentTheme.colors.auth}
+            />
             <LogoView>
                 <Center>
-                    <LogoSVG color={currentTheme.colors.logo}/>
+                    <LogoSVG color={currentTheme.colors.logo} />
                 </Center>
-                
+
                 <Center>
                     <AppsName>CRUSHON</AppsName>
                 </Center>
             </LogoView>
-            
-            <AuthInputContainer behavior={Platform.OS === "ios" ? "padding" : undefined}>
+
+            <AuthInputContainer behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
                 <Header>
                     <HeaderText>{t('auth.login')}</HeaderText>
                 </Header>
@@ -97,10 +94,9 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
 
                 <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
             </AuthInputContainer>
-             
-            
+
             <Buttons insets={insets}>
-                <ActiveButton onPress={login} active={(email && password) ? true : false} label={t('auth.signIn')}/> 
+                <ActiveButton onPress={login} active={email && password ? true : false} label={t('auth.signIn')} />
 
                 <Button onPress={signUp}>
                     <Label>{t('auth.signUp')}</Label>

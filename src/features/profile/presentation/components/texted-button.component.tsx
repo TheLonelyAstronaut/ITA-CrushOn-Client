@@ -1,6 +1,6 @@
-import React from "react";
-import { Pressable, Text } from "react-native";
-import { useTheme } from "styled-components/native";
+import React from 'react';
+import { Pressable, Text } from 'react-native';
+import { useTheme } from 'styled-components/native';
 
 export type textedButtonProps = {
     onPress: () => void;
@@ -24,7 +24,9 @@ export const TextedButton: React.FC<textedButtonProps> = (props: textedButtonPro
                     color: theme.colors.contrast,
                     fontSize: theme.fontSize.large,
                 }}
-            >{props.text}</Text>
+            >
+                {props.text}
+            </Text>
         </Pressable>
     );
 };

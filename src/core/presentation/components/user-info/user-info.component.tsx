@@ -21,7 +21,7 @@ type UserInfoProps = {
 
 export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
     const currentTheme = useTheme();
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <UserInfoWrapper>
@@ -30,7 +30,8 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text type={TextType.geo} style={{ paddingRight: currentTheme.spacer }}>
-                    {t('profile.livesIn')}{props.user.lives}
+                    {t('profile.livesIn')}
+                    {props.user.lives}
                 </Text>
                 <LocationSVG color={currentTheme.colors.componentLabel} size={14} strokeWidth={2} />
             </View>

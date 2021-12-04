@@ -23,4 +23,3 @@ export type PhotoScreenNavigationProp = CompositeNavigationProp<
     StackNavigationProp<AuthenticationParamList, 'Registration'>,
     StackNavigationProp<RegistationParamList, 'Photo'>
 >;
-

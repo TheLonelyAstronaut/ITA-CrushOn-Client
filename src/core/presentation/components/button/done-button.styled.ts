@@ -1,5 +1,5 @@
-import { EdgeInsets } from "react-native-safe-area-context/src/SafeArea.types";
-import styled from "styled-components/native";
+import { EdgeInsets } from 'react-native-safe-area-context/src/SafeArea.types';
+import styled from 'styled-components/native';
 
 export const DoneButton = styled.Pressable<{ insets: EdgeInsets }>`
     position: absolute;

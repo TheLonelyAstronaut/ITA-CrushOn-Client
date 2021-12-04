@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const ChatsItemView = styled.Pressable`
     padding-vertical: ${(props) => props.theme.spacer * 1.5}px;

@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Header = styled.View`
     padding-left: ${(props) => props.theme.spacer * 2.5}px;

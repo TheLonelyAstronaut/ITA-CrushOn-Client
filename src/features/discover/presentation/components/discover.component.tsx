@@ -20,7 +20,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
 
     const expandCard = useCallback(
         (id: number) => {
-            props.navigation.navigate('ExpandedCard', {id});
+            props.navigation.navigate('ExpandedCard', { id });
         },
         [props]
     );

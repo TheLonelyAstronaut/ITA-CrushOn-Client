@@ -17,9 +17,9 @@ Animated.addWhitelistedNativeProps({
     stroke: true,
 });
 
-export const AddPhotoSVG: React.FC<SVGProps> = ({color}: SVGProps) => {
+export const AddPhotoSVG: React.FC<SVGProps> = ({ color }: SVGProps) => {
     return (
-        <Svg width={200} height={200} viewBox="-16.5 -16.5 150 150"> 
+        <Svg width={200} height={200} viewBox="-16.5 -16.5 150 150">
             <AnimatedPath
                 d="M115 58.5C115 27.3073 89.6927 2 58.5 2C27.3073 2 2 27.3073 2 58.5C2 89.6927 27.3073 115 58.5 115C89.6927 115 115 89.6927 115 58.5Z"
                 stroke={color}

@@ -1,4 +1,4 @@
-import { DefaultLocale } from "./default-locale";
+import { DefaultLocale } from './default-locale';
 
 export const en: DefaultLocale = {
     translation: {

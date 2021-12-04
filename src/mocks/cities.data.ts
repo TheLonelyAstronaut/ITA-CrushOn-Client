@@ -28,4 +28,4 @@ export const CitiesData: cityItem[] = [
         id: 6,
         name: 'Mogilev',
     },
-]
+];

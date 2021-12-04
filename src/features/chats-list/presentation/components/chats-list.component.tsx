@@ -1,31 +1,29 @@
 import React from 'react';
-import { Button, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { FooterView } from '../../../../core/presentation/components/container/footer-view.styled';
+import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
+import { CardsData } from '../../../../mocks/cards.data';
 import { ChatsListScreenNavigationProp } from '../navigation/routing.types';
+
+import { ChatsItem } from './chats-item.component';
 
 export type ChatsListScreenProps = {
     navigation: ChatsListScreenNavigationProp;
 };
 
 export const ChatsListScreen: React.FC<ChatsListScreenProps> = (props: ChatsListScreenProps) => {
+    const insets = useSafeAreaInsets();
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <Text
-                style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
-                Chats here
-            </Text>
-            <Button
-                title="go to specific chat"
-                onPress={() => {
-                    props.navigation.navigate('Chat', {
-                        id: 123,
-                    });
-                }}
+        <SafeArea edges={['top']}>
+            <FlatList
+                data={CardsData}
+                keyExtractor={(item) => item.id.toString()}
+                showsVerticalScrollIndicator={false}
+                ListFooterComponent={<FooterView insets={insets} />}
+                renderItem={({ item }) => <ChatsItem navigation={props.navigation} userId={item.id} />}
             />
-        </SafeAreaView>
+        </SafeArea>
     );
 };

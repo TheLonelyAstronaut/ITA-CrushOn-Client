@@ -22,6 +22,7 @@ declare module 'styled-components' {
             extraSmall: number;
         };
         tabBarHeight: number;
+        composerHeight: number;
         fontWeight: {
             bold: string;
             normal: string;

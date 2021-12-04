@@ -32,6 +32,7 @@ export const defaultValues: DefaultTheme = {
         extraSmall: 12,
     },
     tabBarHeight: 65,
+    composerHeight: 28,
     fontWeight: {
         bold: 'bold',
         normal: 'normal',

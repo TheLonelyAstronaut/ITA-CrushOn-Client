@@ -7,7 +7,7 @@ import { RootNavigator } from '../navigation/root-navigator.component';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { darkTheme, lightTheme } from '../themes/root.theme';
 
-LogBox.ignoreLogs(["VirtualizedLists should never be nested"])
+LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 const App: React.FC = () => {
     return (

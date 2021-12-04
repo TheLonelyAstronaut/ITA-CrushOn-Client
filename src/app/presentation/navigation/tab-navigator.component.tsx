@@ -1,9 +1,8 @@
-/* eslint-disable import/order */
-import React from 'react';
 import AnimatedTabBar, { FlashyTabBarItemConfig, TabsConfig } from '@gorhom/animated-tabbar';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DefaultTheme, useTheme } from 'styled-components';
 
@@ -18,12 +17,13 @@ import { DiscoverScreen } from '../../../features/discover/presentation/componen
 
 import { ProfileNavigator } from './profile-navigator.component';
 
-
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
-export const TabNaviagtor: React.FC = () => {
+export const TabNavigator: React.FC = () => {
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
+    const { t } = useTranslation();
+
     const tabs: TabsConfig<FlashyTabBarItemConfig> = {
         Cards: {
             icon: {
@@ -95,10 +95,10 @@ export const TabNaviagtor: React.FC = () => {
                 />
             )}
         >
-            <Tab.Screen name={'Cards'} component={CardsScreen} />
-            <Tab.Screen name={'Discover'} component={DiscoverScreen} />
-            <Tab.Screen name={'ChatsList'} component={ChatsListScreen} />
-            <Tab.Screen name={'Profile'} component={ProfileNavigator} />
+            <Tab.Screen name={'Cards'} component={CardsScreen} options={{ tabBarLabel: t('tabbar.cards') }} />
+            <Tab.Screen name={'Discover'} component={DiscoverScreen} options={{ tabBarLabel: t('tabbar.discover') }} />
+            <Tab.Screen name={'ChatsList'} component={ChatsListScreen} options={{ tabBarLabel: t('tabbar.chats') }} />
+            <Tab.Screen name={'Profile'} component={ProfileNavigator} options={{ tabBarLabel: t('tabbar.profile') }} />
         </Tab.Navigator>
     );
 };

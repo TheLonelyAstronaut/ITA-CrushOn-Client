@@ -18,7 +18,7 @@ export type CardProps = {
 };
 
 export const Card: React.FC<CardProps> = (props: CardProps) => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <ImageBackground

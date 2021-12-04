@@ -1,7 +1,7 @@
-import React from "react";
-import { Pressable } from "react-native";
+import React from 'react';
+import { Pressable } from 'react-native';
 
-import { SelectableText } from "./styled/selectable-text.styled";
+import { SelectableText } from './styled/selectable-text.styled';
 
 export type selectableTextedButtonProps = {
     selected: boolean;
@@ -12,9 +12,7 @@ export type selectableTextedButtonProps = {
 export const SelectableTextedButton: React.FC<selectableTextedButtonProps> = (props: selectableTextedButtonProps) => {
     return (
         <Pressable onPress={props.onPress} disabled={props.selected ? true : false}>
-            <SelectableText selected={props.selected}>
-                {props.text}
-            </SelectableText>
+            <SelectableText selected={props.selected}>{props.text}</SelectableText>
         </Pressable>
     );
 };

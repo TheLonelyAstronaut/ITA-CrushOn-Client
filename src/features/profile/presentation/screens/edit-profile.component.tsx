@@ -24,15 +24,13 @@ import { ColoredPressable } from '../components/styled/colored-pressable-contain
 import { Passions } from '../components/styled/passions-texted-container.styled';
 import { EditProfileScreenNavigationProp } from '../navigation/routing.types';
 
-
-
 export type EditProfileScreenProps = {
     navigation: EditProfileScreenNavigationProp;
 };
 
 export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditProfileScreenProps) => {
     const currentTheme = useTheme();
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const user: User = {
         id: 48,
         name: 'Liu',
@@ -40,24 +38,24 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
         imgUrl: 'https://yt3.ggpht.com/YXesX1-BuQmClDrybWgDnTthrtdD5BjkniOC83HXZZgNBNMNbv1jF50su3DIHrNaLTWWxPBxag=s900-c-k-c0x00ffffff-no-rj',
         lives: 'London',
         location: 4,
-        passions: ['Singing with my granny', 'Cybersport', 'Music (but only Kizaru\'s songs)', 'Spirituality', 'Moviemaking like a pro'],
+        passions: [
+            'Singing with my granny',
+            'Cybersport',
+            "Music (but only Kizaru's songs)",
+            'Spirituality',
+            'Moviemaking like a pro',
+        ],
         bio: `Hi, I’m Liu. I'm looking for someone who will go to the cinema with me. Message me if you like Marvel.`,
     };
     const insets = useSafeAreaInsets();
-    
-    const done = useCallback(
-        () => {
-            props.navigation.goBack();
-        },
-        [props]
-    );
-    const editPassions = useCallback(
-        () => {
-            props.navigation.navigate('Passions');
-        },
-        [props]
-    );
-    
+
+    const done = useCallback(() => {
+        props.navigation.goBack();
+    }, [props]);
+    const editPassions = useCallback(() => {
+        props.navigation.navigate('Passions');
+    }, [props]);
+
     const [image, setImage] = useState({
         uri: '',
         width: 1,
@@ -65,36 +63,32 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
         mime: '',
     });
     const [imageIsChanged, setImageChanged] = useState(false);
-    const changePhoto = useCallback(
-        () => {
-            ImageCropPicker.openPicker({
-                mediaType: 'photo',
-                cropping: true
-            }).then(image => {
-                setImage({
-                    uri: image.path,
-                    width: image.width,
-                    height: image.height,
-                    mime: image.mime,
-                });
-                setImageChanged(true);
+    const changePhoto = useCallback(() => {
+        ImageCropPicker.openPicker({
+            mediaType: 'photo',
+            cropping: true,
+        }).then((image) => {
+            setImage({
+                uri: image.path,
+                width: image.width,
+                height: image.height,
+                mime: image.mime,
             });
-        },
-        []
-    );
+            setImageChanged(true);
+        });
+    }, []);
 
     const [aboutMe, setAboutMe] = useState(user.bio);
 
-
     return (
         <SafeArea edges={['top']}>
-            <KeyboardAwareScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+            <KeyboardAwareScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
                 <SeparatorVertical height={SeparatorVerticalType.large} />
                 <SeparatorVertical height={SeparatorVerticalType.small} />
 
                 <Center>
                     <Photo
-                        source={ imageIsChanged ? image : { uri: user.imgUrl }}
+                        source={imageIsChanged ? image : { uri: user.imgUrl }}
                         resizeMode="cover"
                         imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
                     />
@@ -107,18 +101,14 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
                         <Text type={TextType.button}>{t('profile.changePhoto')}</Text>
                     </Pressable>
                 </Center>
-                
+
                 <SeparatorVertical height={SeparatorVerticalType.medium} />
 
                 <Header>
                     <Text type={TextType.header}>{t('profile.about')}</Text>
                 </Header>
                 <Colored>
-                    <TextInput
-                        value={aboutMe}
-                        onChangeText={setAboutMe}
-                        multiline={true}
-                    />
+                    <TextInput value={aboutMe} onChangeText={setAboutMe} multiline={true} />
                 </Colored>
 
                 <SeparatorVertical height={SeparatorVerticalType.small} />
@@ -128,23 +118,26 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
                 </Header>
                 <ColoredPressable onPress={editPassions}>
                     <Passions>
-                        {user.passions.map(
-                            (item, index, arr) => 
-                                { if (index !== arr.length - 1) {
-                                    return (
-                                        <Text type={TextType.regular} key={index}>{item}, </Text>
-                                    );
-                                } else {
-                                    return (
-                                        <Text type={TextType.regular} key={index}>{item}</Text>
-                                    );
-                                }}
-                        )}
+                        {user.passions.map((item, index, arr) => {
+                            if (index !== arr.length - 1) {
+                                return (
+                                    <Text type={TextType.regular} key={index}>
+                                        {item},{' '}
+                                    </Text>
+                                );
+                            } else {
+                                return (
+                                    <Text type={TextType.regular} key={index}>
+                                        {item}
+                                    </Text>
+                                );
+                            }
+                        })}
                     </Passions>
                     <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
                 </ColoredPressable>
 
-                <ScrollFooter insets={insets}/>
+                <ScrollFooter insets={insets} />
             </KeyboardAwareScrollView>
 
             <DoneButton insets={insets} onPress={done}>

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { GenderOutline } from "./styled/gender-container.styled";
-import { GenderLabel } from "./styled/gender-label-text.styled";
+import { GenderOutline } from './styled/gender-container.styled';
+import { GenderLabel } from './styled/gender-label-text.styled';
 
 export type GenderProps = {
     selected: boolean;
@@ -10,15 +10,13 @@ export type GenderProps = {
 };
 
 export const Gender: React.FC<GenderProps> = (props: GenderProps) => {
-    return (
-        props.selected ? (
-                <GenderOutline disabled={props.selected ? true : false} selected={props.selected} onPress={props.toggle}>
-                    <GenderLabel selected={props.selected}>{props.gender}</GenderLabel>
-                </GenderOutline>
-        ) : (
-                <GenderOutline disabled={props.selected ? true : false} selected={props.selected} onPress={props.toggle}>
-                    <GenderLabel selected={props.selected}>{props.gender}</GenderLabel>
-                </GenderOutline>
-        )
+    return props.selected ? (
+        <GenderOutline disabled={props.selected ? true : false} selected={props.selected} onPress={props.toggle}>
+            <GenderLabel selected={props.selected}>{props.gender}</GenderLabel>
+        </GenderOutline>
+    ) : (
+        <GenderOutline disabled={props.selected ? true : false} selected={props.selected} onPress={props.toggle}>
+            <GenderLabel selected={props.selected}>{props.gender}</GenderLabel>
+        </GenderOutline>
     );
 };

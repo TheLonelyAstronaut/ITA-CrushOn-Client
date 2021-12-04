@@ -3,7 +3,6 @@ export type DefaultLocale = {
         common: {
             done: string;
             placeholder: string;
-            
         };
         auth: {
             login: string;

@@ -21,7 +21,6 @@ import { SeparatorVerticalType, TextType } from '../../../../core/presentation/t
 import { SettingsWrapper } from '../components/styled/settings-button-container.styled';
 import { ProfileScreenNavigationProp } from '../navigation/routing.types';
 
-
 export type ProfileScreenProps = {
     navigation: ProfileScreenNavigationProp;
 };
@@ -29,7 +28,7 @@ export type ProfileScreenProps = {
 export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreenProps) => {
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const user: User = {
         id: 48,
         name: 'Liu',
@@ -37,23 +36,23 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
         imgUrl: 'https://yt3.ggpht.com/YXesX1-BuQmClDrybWgDnTthrtdD5BjkniOC83HXZZgNBNMNbv1jF50su3DIHrNaLTWWxPBxag=s900-c-k-c0x00ffffff-no-rj',
         lives: 'London',
         location: 4,
-        passions: ['Singing with my granny', 'Cybersport', 'Music (but only Kizaru\'s songs)', 'Spirituality', 'Moviemaking like a pro'],
+        passions: [
+            'Singing with my granny',
+            'Cybersport',
+            "Music (but only Kizaru's songs)",
+            'Spirituality',
+            'Moviemaking like a pro',
+        ],
         bio: `Hi, I’m Liu. I'm looking for someone who will go to the cinema with me. Message me if you like Marvel.`,
     };
 
-    const editProfile = useCallback(
-        () => {
-            props.navigation.navigate('EditProfile');
-        },
-        [props]
-    );
+    const editProfile = useCallback(() => {
+        props.navigation.navigate('EditProfile');
+    }, [props]);
 
-    const toSettings = useCallback(
-        () => {
-            props.navigation.navigate('Settings');
-        },
-        [props]
-    );
+    const toSettings = useCallback(() => {
+        props.navigation.navigate('Settings');
+    }, [props]);
 
     return (
         <SafeArea>
@@ -73,7 +72,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
                         imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
                     />
                 </Center>
-                
+
                 <SeparatorVertical height={SeparatorVerticalType.medium} />
 
                 <Center>

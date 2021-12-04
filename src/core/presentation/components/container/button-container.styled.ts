@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Button = styled.Pressable`
     margin-vertical: ${(props) => props.theme.spacer}px;

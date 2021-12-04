@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const UploadedImage = styled.Image`
     width: ${(props) => props.theme.dimensions.width - props.theme.spacer * 12}px;

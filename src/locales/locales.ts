@@ -1,4 +1,4 @@
-import { DefaultLocale } from "./default-locale";
+import { DefaultLocale } from './default-locale';
 
 export const en: DefaultLocale = {
     translation: {
@@ -145,7 +145,7 @@ export const be: DefaultLocale = {
             writeName: `УКАЖИТЕ\nВАШЕ ИМЯ`,
             pointGender: `УКАЖИТЕ\nВАШ ПОЛ`,
             selectBirthday: `УКАЖИТЕ\nДАТУ ВАШЕГО РОЖДЕНИЯ`,
-            selectCity: `АБЯРЫЦЕ\nВАШ ГОРОД`,
+            selectCity: `АБЯРЫЦЕ\nВАШ ГОРАД`,
             uploadPhoto: `ЗАГРУЗИТЕ\nВАШЕ ФОТО`,
         },
         tabbar: {

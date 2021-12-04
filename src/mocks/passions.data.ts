@@ -1,7 +1,7 @@
 export const PassionsData: string[] = [
     'Singing with my granny',
     'Cybersport',
-    'Music (but only Kizaru\'s songs)',
+    "Music (but only Kizaru's songs)",
     'Spirituality',
     'Moviemaking like a pro',
     'Walking',

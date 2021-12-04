@@ -19,7 +19,7 @@ Animated.addWhitelistedNativeProps({
 
 export const ArrowRightSVG: React.FC<SVGProps> = ({ color, size }: SVGProps) => {
     return (
-        <Svg width={size} height={size*2} viewBox="-4 -7 14 28" > 
+        <Svg width={size} height={size * 2} viewBox="-4 -7 14 28">
             <AnimatedPath
                 d="M1 1L8 8L1 15"
                 stroke={color}

@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const HeaderText = styled.Text`
     font-size: ${(props) => props.theme.fontSize.large}px;

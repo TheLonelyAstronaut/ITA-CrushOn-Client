@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Label = styled.Text`
-    padding-left: ${(props) => props.theme.spacer / 4}px;
-    font-size: ${(props) => props.theme.fontSize.medium}px;
+    font-size: ${(props) => props.theme.fontSize.large}px;
+    font-weight: ${(props) => props.theme.fontWeight.bold};
     color: ${(props) => props.theme.colors.componentLabel};
 `;

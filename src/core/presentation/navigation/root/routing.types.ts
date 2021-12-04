@@ -11,5 +11,4 @@ export type RootNavigatorParamList = {
     Chat: {
         id: number;
     };
-    ProfileEdit: undefined;
 };

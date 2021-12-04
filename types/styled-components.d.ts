@@ -1,7 +1,9 @@
+import { PlatformOSType } from 'react-native';
 import 'styled-components';
 
 declare module 'styled-components' {
     export interface DefaultTheme {
+        platform: PlatformOSType;
         dimensions: {
             width: number;
             height: number;
@@ -20,6 +22,7 @@ declare module 'styled-components' {
             extraSmall: number;
         };
         tabBarHeight: number;
+        composerHeight: number;
         fontWeight: {
             bold: string;
             normal: string;
@@ -45,6 +48,8 @@ declare module 'styled-components' {
             componentLabel: string;
             contrast: string;
             statusBar: string;
+            auth: string;
+            logo: string;
         };
     }
 }

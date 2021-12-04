@@ -1,28 +1,27 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useRef } from 'react';
-import { Image, StyleSheet } from 'react-native';
-import { SharedElement } from 'react-navigation-shared-element';
+import {useTranslation} from "react-i18next";
 
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
 import { User } from '../../../model/user.model';
 import { Reaction } from '../../../util/reaction.util';
+import { TextType } from '../../themes/types';
 import { CustomSwipeableRef, Swipeable } from '../swipes/swipeable.component';
+import { Text } from '../text/text.styled';
 
 import { FullyPressable } from './styled/fully-pressable.styled';
 import { LocationWrapper } from './styled/location-wrapper.styled';
-import { TextStyle } from './styled/text.styled';
-import { TextWrapper } from './text-wrapper.component';
-import { WhiteText } from './text.component';
-
+import { CardTextWrapper } from './styled/text-wrapper.styled';
 
 export type CardProps = {
     user: User;
     scale: number;
-    handleReaction: () => void;
+    handleReaction?: () => void;
 };
 
 export const Card: React.FC<CardProps> = (props: CardProps) => {
     const navigation = useNavigation();
+    const { t } = useTranslation();
     const swipeable = useRef<CustomSwipeableRef>();
 
     const handleReaction = useCallback(
@@ -50,28 +49,22 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
     return (
         <Swipeable
             ref={swipeable}
+            disabled={!props.handleReaction}
             onRightSwipe={() => handleReaction(Reaction.LIKE)}
             onLeftSwipe={() => handleReaction(Reaction.DISLIKE)}
         >
             <FullyPressable onPress={expandCard}>
-                <SharedElement id={`user_image.${props.user.id}`} style={StyleSheet.absoluteFill}>
-                    <Image
-                        source={{ uri: props.user.imgUrl }}
-                        style={{ borderRadius: 15, backgroundColor: 'blue', flex: 1 }}
-                        resizeMode={'cover'}
-                    />
-                </SharedElement>
-                <TextWrapper scale={props.scale}>
-                    <WhiteText style={TextStyle.Bold} scale={props.scale}>
+                <CardTextWrapper scale={props.scale}>
+                    <Text type={TextType.cardName} scale={props.scale}>
                         {props.user.name},{props.user.age}
-                    </WhiteText>
+                    </Text>
                     <LocationWrapper>
                         <LocationSVG color="white" size={14 * props.scale} strokeWidth={props.scale} />
-                        <WhiteText style={TextStyle.Normal} scale={props.scale} marginLeftSpacer={1}>
-                            {props.user.location} km away
-                        </WhiteText>
+                        <Text type={TextType.cardGeo} scale={props.scale}>
+                            {props.user.location} {t('card.kmAway')}
+                        </Text>
                     </LocationWrapper>
-                </TextWrapper>
+                </CardTextWrapper>
             </FullyPressable>
         </Swipeable>
     );

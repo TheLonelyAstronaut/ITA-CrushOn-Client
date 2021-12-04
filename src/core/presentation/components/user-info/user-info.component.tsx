@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useTheme } from 'styled-components';
 
@@ -7,7 +8,7 @@ import { User } from '../../../model/user.model';
 import { Palette } from '../../themes/palette.themes';
 import { SeparatorVerticalType, TextType } from '../../themes/types';
 import { SeparatorVertical } from '../container/separator-vertical.styled';
-import { TextThemedStyled } from '../text/text-themed.styled';
+import { Text } from '../text/text.styled';
 
 import { PassionsWrapper } from './styled/passins-wrapper.styled';
 import { PassionLabel } from './styled/passion-label.styled';
@@ -19,21 +20,26 @@ type UserInfoProps = {
 };
 
 export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
-    const CurrentTheme = useTheme();
+    const currentTheme = useTheme();
+    const { t } = useTranslation();
 
     return (
         <UserInfoWrapper>
-            <TextThemedStyled type={TextType.name}>
+            <Text type={TextType.name}>
                 {props.user.name},{props.user.age}
-            </TextThemedStyled>
+            </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <TextThemedStyled type={TextType.geo} style={{ paddingRight: CurrentTheme.spacer }}>
-                    Live in {props.user.lives}
-                </TextThemedStyled>
-                <LocationSVG color={CurrentTheme.colors.componentLabel} size={14} strokeWidth={2} />
+                <Text type={TextType.geo} style={{ paddingRight: currentTheme.spacer }}>
+                    {t('profile.livesIn')}
+                    {props.user.lives}
+                </Text>
+                <LocationSVG color={currentTheme.colors.componentLabel} size={14} strokeWidth={2} />
             </View>
+
             <SeparatorVertical height={SeparatorVerticalType.small} />
-            <TextThemedStyled type={TextType.header}>Interested</TextThemedStyled>
+
+            <Text type={TextType.header}>{t('profile.passions')}</Text>
+            <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
             <PassionsWrapper>
                 {props.user.passions.map((item, index) => {
                     const n = Math.floor(Math.random() * 10);
@@ -47,9 +53,12 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
                     );
                 })}
             </PassionsWrapper>
+
             <SeparatorVertical height={SeparatorVerticalType.small} />
-            <TextThemedStyled type={TextType.header}>About</TextThemedStyled>
-            <TextThemedStyled type={TextType.regular}>{props.user.bio}</TextThemedStyled>
+
+            <Text type={TextType.header}>{t('profile.about')}</Text>
+            <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
+            <Text type={TextType.regular}>{props.user.bio}</Text>
         </UserInfoWrapper>
     );
 };

@@ -2,6 +2,7 @@ import AnimatedTabBar, { FlashyTabBarItemConfig, TabsConfig } from '@gorhom/anim
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { DefaultTheme, useTheme } from 'styled-components';
@@ -11,20 +12,20 @@ import { ChatsListSVG } from '../../../assets/components/chats-list-icon.compone
 import { DiscoverSVG } from '../../../assets/components/discover-icon.component';
 import { ProfileSVG } from '../../../assets/components/profile-icon.component';
 import { TabNavigatorParamList } from '../../../core/presentation/navigation/tab/routing.types';
-import { CardsScreen } from '../../../features/cards/presentation/cards.component';
-import { DiscoverScreen } from '../../../features/discover/presentation/discover.component';
-import { ChatsListScreen } from '../../../features/chats-list/presentation/chats-list.component';
-import { ProfileScreen } from '../../../features/profile/presentation/profile.component';
+import { CardsScreen } from '../../../features/cards/presentation/components/cards.component';
+import { ChatsListScreen } from '../../../features/chats-list/presentation/components/chats-list.component';
+import { DiscoverScreen } from '../../../features/discover/presentation/components/discover.component';
 
-
-
+import { ProfileNavigator } from './profile-navigator.component';
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 const NestedSharedStack = createSharedElementStackNavigator();
 
-export const TabNaviagtor: React.FC = () => {
+export const TabNavigator: React.FC = () => {
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
+    const { t } = useTranslation();
+
     const tabs: TabsConfig<FlashyTabBarItemConfig> = {
         Cards: {
             icon: {
@@ -96,10 +97,10 @@ export const TabNaviagtor: React.FC = () => {
                 />
             )}
         >
-            <Tab.Screen name={'Cards'} component={SharedCardsNavigator} />
-            <Tab.Screen name={'Discover'} component={DiscoverScreen} />
-            <Tab.Screen name={'ChatsList'} component={ChatsListScreen} />
-            <Tab.Screen name={'Profile'} component={ProfileScreen} />
+            <Tab.Screen name={'Cards'} component={CardsScreen} options={{ tabBarLabel: t('tabbar.cards') }} />
+            <Tab.Screen name={'Discover'} component={DiscoverScreen} options={{ tabBarLabel: t('tabbar.discover') }} />
+            <Tab.Screen name={'ChatsList'} component={ChatsListScreen} options={{ tabBarLabel: t('tabbar.chats') }} />
+            <Tab.Screen name={'Profile'} component={ProfileNavigator} options={{ tabBarLabel: t('tabbar.profile') }} />
         </Tab.Navigator>
     );
 };

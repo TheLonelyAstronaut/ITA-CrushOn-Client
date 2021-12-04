@@ -1,8 +1,6 @@
-import { ColorValue } from 'react-native';
-
 export type PaletteColor = {
-    color: ColorValue;
-    labelColor: ColorValue;
+    color: string;
+    labelColor: string;
 };
 
 export const Palette: PaletteColor[] = [

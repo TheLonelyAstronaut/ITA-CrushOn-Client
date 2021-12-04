@@ -1,5 +1,5 @@
-import { PlatformOSType } from 'react-native';
 import 'styled-components';
+import { PlatformOSType } from 'react-native';
 
 declare module 'styled-components' {
     export interface DefaultTheme {

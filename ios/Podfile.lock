@@ -73,6 +73,15 @@ PODS:
   - fmt (6.2.1)
   - glog (0.3.5)
   - libevent (2.1.12)
+  - libwebp (1.2.1):
+    - libwebp/demux (= 1.2.1)
+    - libwebp/mux (= 1.2.1)
+    - libwebp/webp (= 1.2.1)
+  - libwebp/demux (1.2.1):
+    - libwebp/webp
+  - libwebp/mux (1.2.1):
+    - libwebp/demux
+  - libwebp/webp (1.2.1)
   - OpenSSL-Universal (1.1.180)
   - RCT-Folly (2021.04.26.00):
     - boost-for-react-native
@@ -339,6 +348,10 @@ PODS:
     - React-perflogger (= 0.65.2)
   - RNCMaskedView (0.1.11):
     - React
+  - RNFastImage (8.5.11):
+    - React-Core
+    - SDWebImage (~> 5.11.1)
+    - SDWebImageWebPCoder (~> 0.8.4)
   - RNGestureHandler (1.10.3):
     - React-Core
   - RNImageCropPicker (0.37.2):
@@ -388,6 +401,12 @@ PODS:
     - React-Core
   - RNSVG (12.1.1):
     - React
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SDWebImageWebPCoder (0.8.4):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.10)
   - TOCropViewController (2.6.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -447,6 +466,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
+  - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNLocalize (from `../node_modules/react-native-localize`)
@@ -471,7 +491,10 @@ SPEC REPOS:
     - FlipperKit
     - fmt
     - libevent
+    - libwebp
     - OpenSSL-Universal
+    - SDWebImage
+    - SDWebImageWebPCoder
     - TOCropViewController
     - YogaKit
 
@@ -536,6 +559,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
+  RNFastImage:
+    :path: "../node_modules/react-native-fast-image"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageCropPicker:
@@ -571,6 +596,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 5337263514dd6f09803962437687240c5dc39aa4
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   RCT-Folly: 0dd9e1eb86348ecab5ba76f910b56f4b5fef3c46
   RCTRequired: 1b65ab453de585b0f939824780bd26cdf6fb07f8
@@ -598,6 +624,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 5bedf6e704373fe9f0cc54aa35a112e5b0051b94
   ReactCommon: bf5dc45e9ec73a75f00de565f2519d6f8594ddf5
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
+  RNFastImage: 1f2cab428712a4baaf78d6169eaec7f622556dd7
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageCropPicker: 448d3c6e923fde3466b49caf3c2457c2a0ba02dd
   RNLocalize: 74b82db20cc3895ccc25af992c644879bcec2815
@@ -605,6 +632,8 @@ SPEC CHECKSUMS:
   RNScreens: 03ba504f8c98607ad1f07808e71040e0afa335ec
   RNSharedElement: 381b5e33366513cc3f449f2dc3a42c5df0f54021
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
   Yoga: e6db7a0be0e80eeb70c04663605e4f6a050ab013
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

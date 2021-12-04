@@ -62,8 +62,7 @@ export type SwipeableProps = PropsWithChildren<{
 }>;
 
 export type SwipeableComponentType = ForwardRefExoticComponent<
-    PropsWithoutRef<SwipeableProps & { children?: ReactNode | undefined }> &
-        RefAttributes<unknown>
+    PropsWithoutRef<SwipeableProps & { children?: ReactNode | undefined }> & RefAttributes<unknown>
 >;
 
 export type CustomSwipeableRef = {

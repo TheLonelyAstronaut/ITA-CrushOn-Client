@@ -4,15 +4,13 @@ import { StatusBar, StatusBarStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DefaultTheme, useTheme } from 'styled-components/native';
 
+import { User } from '../../../../core/model/user.model';
 import { Card } from '../../../../core/presentation/components/card/card.component';
+import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
 import { CardsData } from '../../../../mocks/cards.data';
-import {CardsScreenNavigationProp, CardsScreenRouteProp} from '../navigation/routing.types';
+import { CardsScreenNavigationProp, CardsScreenRouteProp } from '../navigation/routing.types';
 
 import { CardsView } from './styled/cards-view.styled';
-
-import {User} from "../../../../core/model/user.model";
-
-import { SafeArea} from "../../../../core/presentation/components/container/safe-area-themed.styled";
 
 export type CardsScreenProps = {
     route: CardsScreenRouteProp;

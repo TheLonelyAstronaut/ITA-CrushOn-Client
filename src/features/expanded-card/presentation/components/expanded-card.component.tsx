@@ -4,9 +4,9 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 
-import {CustomSwipeableRef, Swipeable} from "../../../../core/presentation/components/swipes/swipeable.component";
-import {Reaction} from "../../../../core/util/reaction.util";
-import {ExpandedCardScreenNavigationProp, ExpandedCardScreenRouteProp} from "../navigation/routing.types";
+import { CustomSwipeableRef, Swipeable } from '../../../../core/presentation/components/swipes/swipeable.component';
+import { Reaction } from '../../../../core/util/reaction.util';
+import { ExpandedCardScreenNavigationProp, ExpandedCardScreenRouteProp } from '../navigation/routing.types';
 
 export type ExpandedCardScreenProps = {
     route: ExpandedCardScreenRouteProp;

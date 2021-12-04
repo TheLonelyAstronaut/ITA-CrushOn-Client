@@ -3,8 +3,8 @@ import React from 'react';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 import { RootNavigatorParamList } from '../../../core/presentation/navigation/root/routing.types';
-import {ChatScreen} from "../../../features/chat/presentation/components/chat.component";
-import {ExpandedCardScreen} from "../../../features/expanded-card/presentation/components/expanded-card.component";
+import { ChatScreen } from '../../../features/chat/presentation/components/chat.component';
+import { ExpandedCardScreen } from '../../../features/expanded-card/presentation/components/expanded-card.component';
 
 import { AuthenticationNavigator } from './authentication-navigator.component';
 import { TabNavigator } from './tab-navigator.component';
@@ -44,5 +44,3 @@ export const RootNavigator: React.FC = () => {
         </RootStack.Navigator>
     );
 };
-
-

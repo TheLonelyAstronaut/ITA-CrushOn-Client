@@ -1,7 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useRef } from 'react';
-import { StyleSheet, Image } from "react-native";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from 'react-i18next';
+import { StyleSheet } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import { SharedElement } from 'react-navigation-shared-element';
 
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
 import { User } from '../../../model/user.model';
@@ -13,7 +15,6 @@ import { Text } from '../text/text.styled';
 import { FullyPressable } from './styled/fully-pressable.styled';
 import { LocationWrapper } from './styled/location-wrapper.styled';
 import { CardTextWrapper } from './styled/text-wrapper.styled';
-import {SharedElement} from "react-navigation-shared-element";
 
 export type CardProps = {
     user: User;
@@ -56,7 +57,7 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
             onLeftSwipe={() => handleReaction(Reaction.DISLIKE)}
         >
             <SharedElement id={`user_image.${props.user.id}`} style={StyleSheet.absoluteFill}>
-                <Image
+                <FastImage
                     source={{ uri: props.user.imgUrl }}
                     style={{ borderRadius: 15, backgroundColor: 'blue', flex: 1 }}
                     resizeMode={'cover'}

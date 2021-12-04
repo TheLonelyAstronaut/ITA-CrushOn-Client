@@ -1,22 +1,22 @@
-import AnimatedTabBar, {FlashyTabBarItemConfig, TabsConfig} from '@gorhom/animated-tabbar';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {BottomTabBarProps} from '@react-navigation/bottom-tabs/src/types';
+import AnimatedTabBar, { FlashyTabBarItemConfig, TabsConfig } from '@gorhom/animated-tabbar';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
-import {DefaultTheme, useTheme} from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import { DefaultTheme, useTheme } from 'styled-components';
 
-import {HomeSVG} from '../../../assets/components/cards-icon.component';
-import {ChatsListSVG} from '../../../assets/components/chats-list-icon.component';
-import {DiscoverSVG} from '../../../assets/components/discover-icon.component';
-import {ProfileSVG} from '../../../assets/components/profile-icon.component';
-import {TabNavigatorParamList} from '../../../core/presentation/navigation/tab/routing.types';
-import {CardsScreen} from '../../../features/cards/presentation/components/cards.component';
-import {ChatsListScreen} from '../../../features/chats-list/presentation/components/chats-list.component';
-import {DiscoverScreen} from '../../../features/discover/presentation/components/discover.component';
+import { HomeSVG } from '../../../assets/components/cards-icon.component';
+import { ChatsListSVG } from '../../../assets/components/chats-list-icon.component';
+import { DiscoverSVG } from '../../../assets/components/discover-icon.component';
+import { ProfileSVG } from '../../../assets/components/profile-icon.component';
+import { TabNavigatorParamList } from '../../../core/presentation/navigation/tab/routing.types';
+import { CardsScreen } from '../../../features/cards/presentation/components/cards.component';
+import { ChatsListScreen } from '../../../features/chats-list/presentation/components/chats-list.component';
+import { DiscoverScreen } from '../../../features/discover/presentation/components/discover.component';
 
-import {ProfileNavigator} from './profile-navigator.component';
+import { ProfileNavigator } from './profile-navigator.component';
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
@@ -26,10 +26,10 @@ const createNestedSharedStack = (routeName: string, component: React.FC<any>): R
     // eslint-disable-next-line react/display-name
     return () => (
         <NestedSharedStack.Navigator headerMode={'none'}>
-            <NestedSharedStack.Screen name={routeName} component={component}/>
+            <NestedSharedStack.Screen name={routeName} component={component} />
         </NestedSharedStack.Navigator>
     );
-}
+};
 
 const Cards = createNestedSharedStack('CardsNested', CardsScreen);
 const Discover = createNestedSharedStack('DiscoverNested', DiscoverScreen);
@@ -117,4 +117,3 @@ export const TabNavigator: React.FC = () => {
         </Tab.Navigator>
     );
 };
-

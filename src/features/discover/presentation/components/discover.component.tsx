@@ -1,11 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Card } from '../../../../core/presentation/components/card/card.component';
 import { FooterView } from '../../../../core/presentation/components/container/footer-view.styled';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
-import { Swipeable } from '../../../../core/presentation/components/swipes/swipeable.component';
 import { CardsData } from '../../../../mocks/cards.data';
 import { DiscoverScreenNavigationProp } from '../navigation/routing.types';
 
@@ -28,7 +27,7 @@ export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScr
                 ListFooterComponent={<FooterView insets={insets} />}
                 renderItem={({ item }) => (
                     <DiscoverView insets={insets}>
-                        <Card user={item} scale={1}/>
+                        <Card user={item} scale={1} />
                     </DiscoverView>
                 )}
             />

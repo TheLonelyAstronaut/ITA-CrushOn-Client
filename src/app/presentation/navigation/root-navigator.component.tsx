@@ -3,11 +3,11 @@ import React from 'react';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 import { RootNavigatorParamList } from '../../../core/presentation/navigation/root/routing.types';
-import { ChatScreen } from '../../../features/chat/presentation/chat.component';
+import {ChatScreen} from "../../../features/chat/presentation/components/chat.component";
 import {ExpandedCardScreen} from "../../../features/expanded-card/presentation/components/expanded-card.component";
 
 import { AuthenticationNavigator } from './authentication-navigator.component';
-import { TabNaviagtor } from './tab-navigator.component';
+import { TabNavigator } from './tab-navigator.component';
 
 const RootStack = createSharedElementStackNavigator<RootNavigatorParamList>();
 
@@ -23,7 +23,7 @@ export const RootNavigator: React.FC = () => {
             }}
         >
             <RootStack.Screen name={'Auth'} component={AuthenticationNavigator} />
-            <RootStack.Screen name={'Tabs'} component={TabNaviagtor} />
+            <RootStack.Screen name={'Tabs'} component={TabNavigator} />
             <RootStack.Screen
                 name={'ExpandedCard'}
                 component={ExpandedCardScreen}
@@ -44,3 +44,5 @@ export const RootNavigator: React.FC = () => {
         </RootStack.Navigator>
     );
 };
+
+

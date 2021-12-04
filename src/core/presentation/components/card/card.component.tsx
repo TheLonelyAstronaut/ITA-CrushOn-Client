@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useRef } from 'react';
+import { StyleSheet, Image } from "react-native";
 import {useTranslation} from "react-i18next";
 
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
@@ -12,6 +13,7 @@ import { Text } from '../text/text.styled';
 import { FullyPressable } from './styled/fully-pressable.styled';
 import { LocationWrapper } from './styled/location-wrapper.styled';
 import { CardTextWrapper } from './styled/text-wrapper.styled';
+import {SharedElement} from "react-navigation-shared-element";
 
 export type CardProps = {
     user: User;
@@ -53,6 +55,13 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
             onRightSwipe={() => handleReaction(Reaction.LIKE)}
             onLeftSwipe={() => handleReaction(Reaction.DISLIKE)}
         >
+            <SharedElement id={`user_image.${props.user.id}`} style={StyleSheet.absoluteFill}>
+                <Image
+                    source={{ uri: props.user.imgUrl }}
+                    style={{ borderRadius: 15, backgroundColor: 'blue', flex: 1 }}
+                    resizeMode={'cover'}
+                />
+            </SharedElement>
             <FullyPressable onPress={expandCard}>
                 <CardTextWrapper scale={props.scale}>
                     <Text type={TextType.cardName} scale={props.scale}>

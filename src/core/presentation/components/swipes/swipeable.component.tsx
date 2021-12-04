@@ -55,8 +55,14 @@ export const getTranslationY = (angle: number): number => {
     return Math.abs(multiplier) * MAX_AVAILABLE_SHEET_HIDING_DELTA;
 };
 
+export type SwipeableProps = PropsWithChildren<{
+    onRightSwipe: () => void;
+    onLeftSwipe: () => void;
+    disabled?: boolean;
+}>;
+
 export type SwipeableComponentType = ForwardRefExoticComponent<
-    PropsWithoutRef<{ onRightSwipe: () => void; onLeftSwipe: () => void } & { children?: ReactNode | undefined }> &
+    PropsWithoutRef<SwipeableProps & { children?: ReactNode | undefined }> &
         RefAttributes<unknown>
 >;
 
@@ -65,11 +71,6 @@ export type CustomSwipeableRef = {
     swipeRight: (ignoreCallbacks?: boolean) => void;
     swipeLeft: (ignoreCallbacks?: boolean) => void;
 };
-
-export type SwipeableProps = PropsWithChildren<{
-    onRightSwipe: () => void;
-    onLeftSwipe: () => void;
-}>;
 
 export const Swipeable: SwipeableComponentType = forwardRef(
     (props: SwipeableProps, ref: ForwardedRef<CustomSwipeableRef>) => {
@@ -179,7 +180,7 @@ export const Swipeable: SwipeableComponentType = forwardRef(
 
         return (
             <View style={{ flex: 1 }}>
-                <PanGestureHandler ref={panRef} onGestureEvent={gestureHandler}>
+                <PanGestureHandler ref={panRef} onGestureEvent={gestureHandler} enabled={!props.disabled}>
                     <Animated.View style={animatedStyle}>{props.children}</Animated.View>
                 </PanGestureHandler>
             </View>

@@ -3,6 +3,10 @@ export enum TextType {
     geo,
     header,
     regular,
+    cardName,
+    cardGeo,
+    label,
+    button,
 }
 
 export enum SeparatorVerticalType {

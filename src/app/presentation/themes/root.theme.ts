@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform, StatusBar } from 'react-native';
 import { DefaultTheme } from 'styled-components';
 
 export enum ThemesEnum {
@@ -13,9 +13,10 @@ export type ThemeState = {
 export const DEVICE_SIZE = Dimensions.get('window');
 
 export const defaultValues: DefaultTheme = {
+    platform: Platform.OS,
     dimensions: {
         width: DEVICE_SIZE.width,
-        height: DEVICE_SIZE.height,
+        height: DEVICE_SIZE.height - (StatusBar.currentHeight ?? 0),
     },
     photo: {
         width: 200,
@@ -31,6 +32,7 @@ export const defaultValues: DefaultTheme = {
         extraSmall: 12,
     },
     tabBarHeight: 65,
+    composerHeight: 28,
     fontWeight: {
         bold: 'bold',
         normal: 'normal',
@@ -45,7 +47,7 @@ export const defaultValues: DefaultTheme = {
             large: 40,
             medium: 30,
             small: 20,
-            extrasmall: 15,
+            extrasmall: 10,
         },
     },
 } as DefaultTheme;
@@ -60,6 +62,8 @@ export const lightTheme: DefaultTheme = {
         componentLabel: '#53377A',
         contrast: '#A100F2',
         statusBar: 'dark-content',
+        auth: '#BBADFF',
+        logo: '#53377A',
     },
 };
 
@@ -73,5 +77,7 @@ export const darkTheme: DefaultTheme = {
         componentLabel: '#8C65B6',
         contrast: '#DC6ACF',
         statusBar: 'light-content',
+        auth: '#301934',
+        logo: '#8C65B6',
     },
 };

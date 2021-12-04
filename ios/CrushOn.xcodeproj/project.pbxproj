@@ -496,7 +496,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = by.itechart.CrushOn;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.itechart.Crush-On";
 				PRODUCT_NAME = CrushOn;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -522,7 +522,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = by.itechart.CrushOn;
+				PRODUCT_BUNDLE_IDENTIFIER = "by.itechart.Crush-On";
 				PRODUCT_NAME = CrushOn;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

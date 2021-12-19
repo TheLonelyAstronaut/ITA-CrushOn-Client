@@ -25,10 +25,10 @@ export type CardProps = {
 export const Card: React.FC<CardProps> = (props: CardProps) => {
     const navigation = useNavigation();
     const { t } = useTranslation();
-    const swipeable = useRef<CustomSwipeableRef>();
+    const swipeable = useRef<CustomSwipeableRef>(null);
 
     const handleReaction = useCallback(
-        (reaction: Reaction) => {
+        (reaction: Reaction) => {// why to give it reaction??? to send like/dislike to server?---------------------------------------------------------
             props?.handleReaction && props.handleReaction();
         },
         [props]
@@ -45,21 +45,21 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
     const expandCard = useCallback(() => {
         navigation.navigate('ExpandedCard', {
             user: props.user,
-            onGoBack: handleBackNavigation,
+            onGoBack: props?.handleReaction ? handleBackNavigation : undefined, //is this norma???????---------------------
         });
-    }, [handleBackNavigation, navigation, props.user]);
+    }, [handleBackNavigation, navigation, props.user, props?.handleReaction]);
 
     return (
         <Swipeable
             ref={swipeable}
             disabled={!props.handleReaction}
-            onRightSwipe={() => handleReaction(Reaction.LIKE)}
+            onRightSwipe={() => handleReaction(Reaction.LIKE)}// why to give it reaction???--------------------------------
             onLeftSwipe={() => handleReaction(Reaction.DISLIKE)}
         >
             <SharedElement id={`user_image.${props.user.id}`} style={StyleSheet.absoluteFill}>
                 <FastImage
                     source={{ uri: props.user.imgUrl }}
-                    style={{ borderRadius: 15, backgroundColor: 'blue', flex: 1 }}
+                    style={{ borderRadius: 15, flex: 1 }}
                     resizeMode={'cover'}
                 />
             </SharedElement>

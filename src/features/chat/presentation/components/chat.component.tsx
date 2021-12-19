@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/core';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import {
@@ -11,19 +12,18 @@ import {
     InputToolbarProps,
     Composer,
     ComposerProps,
-    Message,
     MessageText,
     MessageTextProps,
     SendProps,
     Send,
-    AvatarProps,
 } from 'react-native-gifted-chat';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components';
 
 import { SendSVG } from '../../../../assets/components/send-icon.component';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
-import { CardsData } from '../../../../mocks/cards.data';
+import { CustomSwipeableRef } from '../../../../core/presentation/components/swipes/swipeable.component';
+import { Reaction } from '../../../../core/util/reaction.util';
 import { Messages } from '../../../../mocks/messages.data';
 import { ChatScreenNavigationProp, ChatScreenRouteProp } from '../navigation/routing.types';
 
@@ -36,13 +36,12 @@ export type ChatScreenProps = {
 };
 
 export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) => {
-    const user = CardsData.find((user) => {
-        if (user.id === props.route.params.id) return true;
-    });
+    const navigation = useNavigation();
     const { t } = useTranslation();
     const theme = useTheme();
     const insets = useSafeAreaInsets();
     const [messages, setMessages] = useState(Messages);
+    const swipeable = useRef<CustomSwipeableRef>(null);
 
     useEffect(() => {
         setMessages([
@@ -51,7 +50,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 text: 'Have fun',
                 createdAt: new Date(),
                 user: {
-                    _id: props.route.params.id,
+                    _id: props.route.params.user.id,
                     name: 'React Native',
                     avatar: 'https://placeimg.com/140/140/any',
                 },
@@ -61,7 +60,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 text: 'Good luck',
                 createdAt: new Date(),
                 user: {
-                    _id: props.route.params.id,
+                    _id: props.route.params.user.id,
                     name: 'React Native',
                     avatar: 'https://placeimg.com/140/140/any',
                 },
@@ -71,7 +70,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 text: 'Hello developer',
                 createdAt: new Date(),
                 user: {
-                    _id: props.route.params.id,
+                    _id: props.route.params.user.id,
                     name: 'React Native',
                     avatar: 'https://placeimg.com/140/140/any',
                 },
@@ -115,8 +114,15 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     };
 
     const renderAvatar = () => {
-        return <Avatar source={{ uri: user?.imgUrl }} />;
+        return <Avatar source={{ uri: props.route.params.user.imgUrl }} />;
     };
+
+    const expandCard = useCallback(() => {
+        navigation.navigate('ExpandedCard', {
+            user: props.route.params.user,
+        })},
+        [navigation, props.route.params]
+    );
 
     const renderBubble = (props: BubbleProps) => {
         return (
@@ -199,7 +205,11 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
 
     return (
         <SafeArea edges={['top']}>
-            <ChatHeader goBack={() => props.navigation.goBack()} name={user?.name} photoUrl={user?.imgUrl} />
+            <ChatHeader
+                goBack={() => props.navigation.goBack()}
+                user={props.route.params.user}
+                expandCard={expandCard}
+            />
             <GiftedChat
                 messages={messages}
                 alwaysShowSend={true}

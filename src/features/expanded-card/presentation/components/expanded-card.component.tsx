@@ -1,10 +1,12 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
+import { useTheme } from 'styled-components';
 
 import { CustomSwipeableRef, Swipeable } from '../../../../core/presentation/components/swipes/swipeable.component';
+import { UserInfo } from '../../../../core/presentation/components/user-info/user-info.component';
 import { Reaction } from '../../../../core/util/reaction.util';
 import { ExpandedCardScreenNavigationProp, ExpandedCardScreenRouteProp } from '../navigation/routing.types';
 
@@ -14,6 +16,7 @@ export type ExpandedCardScreenProps = {
 };
 
 export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: ExpandedCardScreenProps) => {
+    const theme = useTheme();
     const [focused, setFocused] = useState(false);
     const snapPoints = useMemo(() => ['25%', '50%', '100%'], []);
     const bottomSheetRef = useRef<BottomSheet>(null);
@@ -37,7 +40,7 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
             props.navigation.goBack();
 
             setTimeout(() => {
-                props.route.params.onGoBack(reaction);
+                props.route.params?.onGoBack && props.route.params.onGoBack(reaction);
             }, 500);
         },
         [props.navigation, props.route.params]
@@ -62,6 +65,7 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
             </SharedElement>
             <Swipeable
                 ref={panRef}
+                disabled={!props.route.params.onGoBack}
                 onRightSwipe={() => handleSwipe(Reaction.LIKE)}
                 onLeftSwipe={() => handleSwipe(Reaction.DISLIKE)}
             >
@@ -73,9 +77,18 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
                         index={-1}
                         snapPoints={snapPoints}
                         onChange={handleSheetChanges}
+                        handleStyle={{
+                            backgroundColor: theme.colors.background, 
+                            borderTopLeftRadius: theme.borderRadius.medium,
+                            borderTopRightRadius: theme.borderRadius.medium, 
+                        }}
+                        handleIndicatorStyle={{
+                            backgroundColor: theme.colors.componentLabel, 
+                            width: theme.dimensions.width * 0.2,
+                        }}
                     >
-                        <View style={{ flex: 1, alignItems: 'center' }}>
-                            <Text>Awesome 🎉</Text>
+                        <View style={{ flex: 1, alignItems: 'center', backgroundColor: theme.colors.background }}>
+                            <UserInfo user={props.route.params.user}/>
                         </View>
                     </BottomSheet>
                 )}

@@ -2,8 +2,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import { User } from '../../../../core/model/user.model';
 import { Avatar } from '../../../../core/presentation/components/container/avatar.styled';
-import { CardsData } from '../../../../mocks/cards.data';
 import { Messages } from '../../../../mocks/messages.data';
 import { ChatsListScreenNavigationProp } from '../navigation/routing.types';
 
@@ -14,18 +14,15 @@ import { ChatsItemView } from './styled/chats-item-view.styled';
 
 export type ChatsItemProps = {
     navigation: ChatsListScreenNavigationProp;
-    userId: number;
+    user: User;
 };
 
 export const ChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) => {
-    const user = CardsData.find((user) => {
-        if (user.id === props.userId) return true;
-    });
     return (
-        <ChatsItemView onPress={() => props.navigation.navigate('Chat', { id: props.userId })}>
-            <Avatar source={{ uri: user?.imgUrl }} />
+        <ChatsItemView onPress={() => props.navigation.navigate('Chat', { user: props.user })}>
+            <Avatar source={{ uri: props.user.imgUrl }} />
             <View style={{ flex: 1, flexDirection: 'column' }}>
-                <Name>{user?.name}</Name>
+                <Name>{props.user.name}</Name>
                 <LastMessage numberOfLines={2} ellipsizeMode={'tail'}>
                     {Messages[0].text}
                 </LastMessage>

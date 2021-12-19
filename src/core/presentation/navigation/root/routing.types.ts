@@ -6,9 +6,9 @@ export type RootNavigatorParamList = {
     Tabs: undefined;
     ExpandedCard: {
         user: User;
-        onGoBack: (reaction: Reaction) => void;
+        onGoBack?: (reaction: Reaction) => void;
     };
     Chat: {
-        id: number;
+        user: User;
     };
 };

@@ -22,7 +22,7 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = (props: ChatsList
                 keyExtractor={(item) => item.id.toString()}
                 showsVerticalScrollIndicator={false}
                 ListFooterComponent={<FooterView insets={insets} />}
-                renderItem={({ item }) => <ChatsItem navigation={props.navigation} userId={item.id} />}
+                renderItem={({ item }) => <ChatsItem navigation={props.navigation} user={item} />}
             />
         </SafeArea>
     );

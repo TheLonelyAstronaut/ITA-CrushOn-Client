@@ -2,6 +2,7 @@ import { Dimensions, Platform, StatusBar } from 'react-native';
 import { DefaultTheme } from 'styled-components';
 
 export enum ThemesEnum {
+    AUTO,
     LIGHT,
     DARK,
 }

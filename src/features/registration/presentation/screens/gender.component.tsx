@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 
 import { ActiveButton } from '../../../../core/presentation/components/auth/active-button.component';
 import { AuthBackground } from '../../../../core/presentation/components/container/auth-background.styled';
@@ -11,6 +12,7 @@ import { Buttons } from '../../../../core/presentation/components/container/butt
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
+import { REGISTER } from '../../data/store/registration.actions';
 import { Gender } from '../components/gender-item.component';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
@@ -23,13 +25,7 @@ export type GenderScreenProps = {
 export const GenderScreen: React.FC<GenderScreenProps> = (props: GenderScreenProps) => {
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
-
-    const goBack = useCallback(() => {
-        props.navigation.goBack();
-    }, [props]);
-    const goNext = useCallback(() => {
-        props.navigation.navigate('Birthday');
-    }, [props]);
+    const dispatch = useDispatch();
 
     const [maleSelected, setMaleSelected] = useState(false);
     const toggleMale = useCallback(() => {
@@ -42,6 +38,14 @@ export const GenderScreen: React.FC<GenderScreenProps> = (props: GenderScreenPro
         setMaleSelected(femaleSelected ? true : false);
         setFemaleSelected(femaleSelected ? false : true);
     }, [femaleSelected]);
+
+    const goBack = useCallback(() => {
+        props.navigation.goBack();
+    }, [props]);
+    const goNext = useCallback(() => {
+        dispatch(REGISTER.SET_GENDER(maleSelected ? 'male' : 'female'));
+        props.navigation.navigate('Birthday');
+    }, [props, maleSelected, dispatch]);
 
     return (
         <AuthBackground>

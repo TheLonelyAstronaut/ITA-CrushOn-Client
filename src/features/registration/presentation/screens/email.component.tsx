@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components/native';
 
 import { ActiveButton } from '../../../../core/presentation/components/auth/active-button.component';
@@ -16,6 +17,7 @@ import { HeaderText } from '../../../../core/presentation/components/text/auth-h
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
+import { REGISTER } from '../../data/store/registration.actions';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { EmailScreenNavigationProp } from '../navigation/routing.types';
@@ -28,6 +30,7 @@ export const EmailScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps)
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
 
@@ -35,8 +38,9 @@ export const EmailScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps)
         props.navigation.goBack();
     }, [props]);
     const goNext = useCallback(() => {
+        dispatch(REGISTER.SET_EMAIL(email));
         props.navigation.navigate('Password');
-    }, [props]);
+    }, [props, email, dispatch]);
 
     return (
         <AuthBackground>

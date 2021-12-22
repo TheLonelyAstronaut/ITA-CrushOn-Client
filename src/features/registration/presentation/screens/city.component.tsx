@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import SearchableDropdown from 'react-native-searchable-dropdown';
+import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components/native';
 
 import { ActiveButton } from '../../../../core/presentation/components/auth/active-button.component';
@@ -18,6 +19,7 @@ import { HeaderText } from '../../../../core/presentation/components/text/auth-h
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
 import { CitiesData, cityItem } from '../../../../mocks/cities.data';
+import { REGISTER } from '../../data/store/registration.actions';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { CityScreenNavigationProp } from '../navigation/routing.types';
@@ -30,15 +32,18 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
+    const dispatch = useDispatch();
 
     const [city, setCity] = useState('Minsk');
+    const [cityId, setCityId] = useState(7);
 
     const goBack = useCallback(() => {
         props.navigation.goBack();
     }, [props]);
     const goNext = useCallback(() => {
+        dispatch(REGISTER.SET_CITY(cityId));
         props.navigation.navigate('Photo');
-    }, [props]);
+    }, [props, cityId, dispatch]);
 
     return (
         <AuthBackground>
@@ -52,6 +57,7 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
                 <SearchableDropdown
                     onItemSelect={(item: cityItem) => {
                         setCity(item.name);
+                        setCityId(item.id);
                     }}
                     containerStyle={{
                         paddingHorizontal: currentTheme.spacer * 1.5,

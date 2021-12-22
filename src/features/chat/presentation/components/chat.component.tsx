@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import {
@@ -22,8 +22,6 @@ import { useTheme } from 'styled-components';
 
 import { SendSVG } from '../../../../assets/components/send-icon.component';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
-import { CustomSwipeableRef } from '../../../../core/presentation/components/swipes/swipeable.component';
-import { Reaction } from '../../../../core/util/reaction.util';
 import { Messages } from '../../../../mocks/messages.data';
 import { ChatScreenNavigationProp, ChatScreenRouteProp } from '../navigation/routing.types';
 
@@ -41,7 +39,6 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     const theme = useTheme();
     const insets = useSafeAreaInsets();
     const [messages, setMessages] = useState(Messages);
-    const swipeable = useRef<CustomSwipeableRef>(null);
 
     useEffect(() => {
         setMessages([
@@ -82,7 +79,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 system: true,
             },
         ]);
-    }, []);
+    }, [props.route.params]);
 
     const renderTime = (props: TimeProps) => {
         return (

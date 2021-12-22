@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components/native';
 
 import { ActiveButton } from '../../../../core/presentation/components/auth/active-button.component';
@@ -16,6 +17,7 @@ import { HeaderText } from '../../../../core/presentation/components/text/auth-h
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
+import { REGISTER } from '../../data/store/registration.actions';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { PasswordScreenNavigationProp } from '../navigation/routing.types';
@@ -28,6 +30,7 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScr
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
+    const dispatch = useDispatch();
 
     const [password, setPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
@@ -36,8 +39,9 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScr
         props.navigation.goBack();
     }, [props]);
     const goNext = useCallback(() => {
+        dispatch(REGISTER.SET_PASSWORD(password));
         props.navigation.navigate('Name');
-    }, [props]);
+    }, [props, password, dispatch]);
 
     return (
         <AuthBackground>

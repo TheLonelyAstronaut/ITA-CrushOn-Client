@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Platform, Pressable } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components/native';
 
 import { AddPhotoSVG } from '../../../../assets/components/add-photo-icon.component';
@@ -16,6 +17,8 @@ import { Center } from '../../../../core/presentation/components/container/cente
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
+import { REGISTER } from '../../data/store/registration.actions';
+import { getRegistrationData } from '../../data/store/registration.selectors';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { PickerOutline } from '../components/styled/picker-button-container.styled';
@@ -31,13 +34,7 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
-
-    const goBack = useCallback(() => {
-        props.navigation.goBack();
-    }, [props]);
-    const done = useCallback(() => {
-        props.navigation.navigate('Login');
-    }, [props]);
+    const dispatch = useDispatch();
 
     const [image, setImage] = useState({
         uri: '',
@@ -63,6 +60,18 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
             setIsSelected(true);
         });
     }, []);
+
+    const registrationData = useSelector(getRegistrationData);
+
+    const goBack = useCallback(() => {
+        props.navigation.goBack();
+    }, [props]);
+    const done = useCallback(() => {
+        dispatch(REGISTER.SET_PHOTO(image));
+        //dispatch(REGISTER.SEND_DATA);
+        console.log(registrationData);
+        props.navigation.navigate('Login');
+    }, [props, image, registrationData, dispatch]);
 
     return (
         <AuthBackground>

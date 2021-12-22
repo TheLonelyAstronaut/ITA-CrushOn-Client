@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components/native';
 
 import { AuthBackground } from '../../../../core/presentation/components/container/auth-background.styled';
@@ -12,6 +13,7 @@ import { Buttons } from '../../../../core/presentation/components/container/butt
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
+import { REGISTER } from '../../data/store/registration.actions';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { BirthdayScreenNavigationProp } from '../navigation/routing.types';
@@ -24,6 +26,7 @@ export const BirthdayScreen: React.FC<BirthdayScreenProps> = (props: BirthdayScr
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
+    const dispatch = useDispatch();
 
     const currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - 18);
@@ -33,8 +36,9 @@ export const BirthdayScreen: React.FC<BirthdayScreenProps> = (props: BirthdayScr
         props.navigation.goBack();
     }, [props]);
     const goNext = useCallback(() => {
+        dispatch(REGISTER.SET_DATE(date));
         props.navigation.navigate('City');
-    }, [props]);
+    }, [props, date, dispatch]);
 
     return (
         <AuthBackground>

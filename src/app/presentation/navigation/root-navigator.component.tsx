@@ -1,7 +1,9 @@
 import { TransitionPresets } from '@react-navigation/stack';
 import React from 'react';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import { useSelector } from 'react-redux';
 
+import { getToken } from '../../../core/data/store/user/user.selectors';
 import { RootNavigatorParamList } from '../../../core/presentation/navigation/root/routing.types';
 import { ChatScreen } from '../../../features/chat/presentation/components/chat.component';
 import { ExpandedCardScreen } from '../../../features/expanded-card/presentation/components/expanded-card.component';
@@ -24,7 +26,7 @@ const createNestedSharedStack = ( routeName: string, component: React.FC<any>): 
 const Chat = createNestedSharedStack('ChatNested', ChatScreen);
 
 export const RootNavigator: React.FC = () => {
-    const token = '';
+    const token = useSelector(getToken);
 
     return (
         <RootStack.Navigator
@@ -36,7 +38,7 @@ export const RootNavigator: React.FC = () => {
                 },
             }}
         >
-            {/* {token !== '' ? (<>
+            {token !== '' ? (<>
                 <RootStack.Screen name={'Tabs'} component={TabNavigator} />
                 <RootStack.Screen
                     name={'ExpandedCard'}
@@ -57,26 +59,7 @@ export const RootNavigator: React.FC = () => {
                 <RootStack.Screen name={'Chat'} component={Chat} />
             </>) : (
                 <RootStack.Screen name={'Auth'} component={AuthenticationNavigator} />
-            )} */}
-            <RootStack.Screen name={'Auth'} component={AuthenticationNavigator} />
-            <RootStack.Screen name={'Tabs'} component={TabNavigator} />
-            <RootStack.Screen
-                name={'ExpandedCard'}
-                component={ExpandedCardScreen}
-                options={{ gestureEnabled: false }}
-                sharedElements={(route, otherRoute, showing) => {
-                    const { user } = route.params;
-                    return [
-                        {
-                            id: `user_image.${user.id}`,
-                            //animation: 'fade',
-                            //resize: 'stretch'
-                            //animation: 'move'
-                        },
-                    ];
-                }}
-            />
-            <RootStack.Screen name={'Chat'} component={Chat} />
+            )}
         </RootStack.Navigator>
     );
 };

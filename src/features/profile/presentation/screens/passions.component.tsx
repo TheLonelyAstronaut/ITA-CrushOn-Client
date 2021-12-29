@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getUserPassions } from '../../../../core/data/store/user/user.selectors';
 import { DoneButton } from '../../../../core/presentation/components/button/done-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
@@ -12,6 +14,7 @@ import { SeparatorVertical } from '../../../../core/presentation/components/cont
 import { Text } from '../../../../core/presentation/components/text/text.styled';
 import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
 import { PassionsData } from '../../../../mocks/passions.data';
+import { SET_PASSIONS } from '../../data/store/passions.actions';
 import { Passion } from '../components/passion-item.component';
 import { Description } from '../components/styled/description-container.styled';
 import { PassionsContainer } from '../components/styled/passions-container.styled';
@@ -24,10 +27,26 @@ export type PassionsScreenProps = {
 export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScreenProps) => {
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const userPassions = useSelector(getUserPassions);
+
+    const [passions, setPassions] = useState(userPassions);
+
+    const handleSelection = useCallback((selectedPassion: string) => {
+        if (passions.includes(selectedPassion)) {
+            const newPassions = passions.filter((passion) => {
+                return passion !== selectedPassion;
+            });
+            setPassions(newPassions);
+        } else {
+            setPassions([...passions, selectedPassion]);
+        }
+    }, [passions, setPassions]);
 
     const done = useCallback(() => {
+        dispatch(SET_PASSIONS.TRIGGER(passions));
         props.navigation.goBack();
-    }, [props]);
+    }, [props, passions, dispatch]);
 
     return (
         <SafeArea edges={['top']}>
@@ -48,7 +67,14 @@ export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScr
             <Scroll>
                 <PassionsContainer>
                     {PassionsData.map((item, index) => {
-                        return <Passion key={index.toString()} label={item} />;
+                        if (passions.includes(item)) {
+                            return <Passion key={index.toString()} label={item} selected={true} handleSelection={handleSelection}/>;
+                        } else {
+                            return <Passion key={index.toString()} label={item} selected={false} handleSelection={handleSelection}/>;
+                        }
+                        // passions.includes(item)
+                        //     ? <Passion key={index.toString()} label={item} selected={true} handleSelection={handleSelection}/>
+                        //     : <Passion key={index.toString()} label={item} selected={false} handleSelection={handleSelection}/>;
                     })}
                 </PassionsContainer>
                 <ScrollFooter insets={insets} />

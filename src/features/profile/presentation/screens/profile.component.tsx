@@ -2,11 +2,13 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 import { DefaultTheme } from 'styled-components/native';
 
 import { EditSVG } from '../../../../assets/components/edit-icon.component';
 import { MoreSVG } from '../../../../assets/components/more-icon.component';
+import { getUser } from '../../../../core/data/store/user/user.selectors';
 import { User } from '../../../../core/model/user.model';
 import { LabeledButton } from '../../../../core/presentation/components/button/labeled-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
@@ -29,22 +31,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
     const { t } = useTranslation();
-    const user: User = {
-        id: 48,
-        name: 'Liu',
-        age: 23,
-        imgUrl: 'https://yt3.ggpht.com/YXesX1-BuQmClDrybWgDnTthrtdD5BjkniOC83HXZZgNBNMNbv1jF50su3DIHrNaLTWWxPBxag=s900-c-k-c0x00ffffff-no-rj',
-        lives: 'London',
-        location: 4,
-        passions: [
-            'Singing with my granny',
-            'Cybersport',
-            "Music (but only Kizaru's songs)",
-            'Spirituality',
-            'Moviemaking like a pro',
-        ],
-        bio: `Hi, I’m Liu. I'm looking for someone who will go to the cinema with me. Message me if you like Marvel.`,
-    };
+    const user: User = useSelector(getUser);
 
     const editProfile = useCallback(() => {
         props.navigation.navigate('EditProfile');

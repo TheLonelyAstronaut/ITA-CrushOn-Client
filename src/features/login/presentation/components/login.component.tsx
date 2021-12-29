@@ -2,9 +2,11 @@ import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, StatusBar, StatusBarStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components/native';
 
 import { LogoSVG } from '../../../../assets/components/logo.component';
+import { GET_TOKEN } from '../../../../core/data/store/user/user.actions';
 import { ActiveButton } from '../../../../core/presentation/components/auth/active-button.component';
 import { AuthBackground } from '../../../../core/presentation/components/container/auth-background.styled';
 import { AuthInputContainer } from '../../../../core/presentation/components/container/auth-input-container.styled';
@@ -31,13 +33,17 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [password, setpassword] = useState('');
 
     const login = useCallback(() => {
-        props.navigation.navigate('Tabs');
-    }, [props]);
+        dispatch(GET_TOKEN.TRIGGER({
+            login: email,
+            password: password,
+        }));
+    }, [email, password, dispatch]);
     const signUp = useCallback(() => {
         props.navigation.navigate('Registration');
     }, [props]);

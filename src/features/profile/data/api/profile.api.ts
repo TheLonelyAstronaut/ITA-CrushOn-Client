@@ -1,17 +1,7 @@
-class APIService {
-    getToken(authData: {login: string, password: string}) {
-        const myAuthData = {
-            login: "asdf",
-            password: "asdf",
-        };
-        const myToken = "abpoqwrnafbwlkj";
-        
-        if (JSON.stringify(authData) === JSON.stringify(myAuthData))
-            return myToken;
-    }
+import { coreAPIClient } from "../../../../core/data/api/core.api";
 
-    getUserInfo(token: string) {
-        const myToken = "abpoqwrnafbwlkj";
+export class ProfileAPIClient {
+    getUserInfo(): any {
         const myInfo = {
             id: 48,
             name: 'Liu',
@@ -22,15 +12,17 @@ class APIService {
             passions: [
                 'Singing with my granny',
                 'Cybersport',
-                "Music (but only Kizaru's songs)",
+                'Music (but only Kizaru songs)',
                 'Spirituality',
                 'Moviemaking like a pro',
             ],
             bio: `Hi, I’m Liu. I'm looking for someone who will go to the cinema with me. Message me if you like Marvel.`,
         }
-        if (token === myToken)
-            return myInfo;
+
+        const userInfo = coreAPIClient.get('/user');
+
+        return userInfo;
     }
 }
 
-export const apiService = new APIService();
+export const profileAPIClient = new ProfileAPIClient();

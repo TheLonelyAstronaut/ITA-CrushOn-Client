@@ -197,7 +197,6 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
 
     const onSend = useCallback((messages = []) => {
         setMessages((previousMessages) => GiftedChat.append(previousMessages, messages));
-        console.log(messages);
     }, []);
 
     return (

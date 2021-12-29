@@ -4,6 +4,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ThemesEnum } from '../../../../app/presentation/themes/root.theme';
+import { CLEAR_TOKEN } from '../../../../core/data/store/user/user.actions';
+import { getToken } from '../../../../core/data/store/user/user.selectors';
 import { DoneButton } from '../../../../core/presentation/components/button/done-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
 import { Colored } from '../../../../core/presentation/components/container/colored-container.styled';
@@ -28,6 +30,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = (props: SettingsScr
     const { t, i18n } = useTranslation();
     const theme = useSelector(getTheme);
     const dispatch = useDispatch();
+    const token = useSelector(getToken);
 
 
     const selectEn = useCallback(() => {
@@ -57,8 +60,8 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = (props: SettingsScr
 
 
     const logOut = useCallback(() => {
-        console.log('logged out');
-    }, []);
+        dispatch(CLEAR_TOKEN.TRIGGER(token));
+    }, [dispatch, token]);
 
     const done = useCallback(() => {
         props.navigation.goBack();

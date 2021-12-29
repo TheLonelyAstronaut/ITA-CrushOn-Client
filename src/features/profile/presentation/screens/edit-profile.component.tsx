@@ -5,9 +5,11 @@ import { Pressable } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
 import { ArrowRightSVG } from '../../../../assets/components/arrow-right-icon.component';
+import { getUser } from '../../../../core/data/store/user/user.selectors';
 import { User } from '../../../../core/model/user.model';
 import { DoneButton } from '../../../../core/presentation/components/button/done-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
@@ -20,6 +22,7 @@ import { SeparatorVertical } from '../../../../core/presentation/components/cont
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { Text } from '../../../../core/presentation/components/text/text.styled';
 import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
+import { SET_BIO } from '../../data/store/edit-profile.actions';
 import { ColoredPressable } from '../components/styled/colored-pressable-container.styled';
 import { Passions } from '../components/styled/passions-texted-container.styled';
 import { EditProfileScreenNavigationProp } from '../navigation/routing.types';
@@ -31,30 +34,9 @@ export type EditProfileScreenProps = {
 export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditProfileScreenProps) => {
     const currentTheme = useTheme();
     const { t } = useTranslation();
-    const user: User = {
-        id: 48,
-        name: 'Liu',
-        age: 23,
-        imgUrl: 'https://yt3.ggpht.com/YXesX1-BuQmClDrybWgDnTthrtdD5BjkniOC83HXZZgNBNMNbv1jF50su3DIHrNaLTWWxPBxag=s900-c-k-c0x00ffffff-no-rj',
-        lives: 'London',
-        location: 4,
-        passions: [
-            'Singing with my granny',
-            'Cybersport',
-            "Music (but only Kizaru's songs)",
-            'Spirituality',
-            'Moviemaking like a pro',
-        ],
-        bio: `Hi, I’m Liu. I'm looking for someone who will go to the cinema with me. Message me if you like Marvel.`,
-    };
+    const user: User = useSelector(getUser);
     const insets = useSafeAreaInsets();
-
-    const done = useCallback(() => {
-        props.navigation.goBack();
-    }, [props]);
-    const editPassions = useCallback(() => {
-        props.navigation.navigate('Passions');
-    }, [props]);
+    const dispatch = useDispatch();
 
     const [image, setImage] = useState({
         uri: '',
@@ -79,6 +61,14 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
     }, []);
 
     const [aboutMe, setAboutMe] = useState(user.bio);
+
+    const done = useCallback(() => {
+        dispatch(SET_BIO.TRIGGER(aboutMe));
+        props.navigation.goBack();
+    }, [props, aboutMe, dispatch]);
+    const editPassions = useCallback(() => {
+        props.navigation.navigate('Passions');
+    }, [props]);
 
     return (
         <SafeArea edges={['top']}>

@@ -7,7 +7,7 @@ import { CLEAR_TOKEN, GET_TOKEN, GET_USER } from "./user.actions";
 import { UserState } from "./user.state";
 
 const initialState: UserState = {
-    user: {
+    userInfo: {
         id: 123,
         name: 'abc',
         age: 123,
@@ -29,13 +29,13 @@ export const userReducer = createReducer<UserState>(initialState, (builder) => {
             state.token = action.payload;
         })
         .addCase(GET_USER.COMPLETED, (state, action) => {
-            state.user = action.payload;
+            state.userInfo = action.payload;
         })
         .addCase(SET_PASSIONS.COMPLETED, (state, action) => {
-            state.user.passions = action.payload;
+            state.userInfo.passions = action.payload;
         })
         .addCase(SET_BIO.COMPLETED, (state, action) => {
-            state.user.bio = action.payload;
+            state.userInfo.bio = action.payload;
         })
         .addCase(CLEAR_TOKEN.COMPLETED, (state) => {
             state.token = '';

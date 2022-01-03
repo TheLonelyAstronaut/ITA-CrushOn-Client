@@ -12,7 +12,7 @@ export const getUserState: Selector<ApplicationState, UserState> = createSelecto
 
 export const getUser: Selector<ApplicationState, User> = createSelector(
     getUserState,
-    (state) => state.user,
+    (state) => state.userInfo,
 );
 
 export const getUserPassions: Selector<ApplicationState, string[]> = createSelector(

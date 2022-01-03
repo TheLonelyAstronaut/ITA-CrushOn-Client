@@ -1,7 +1,7 @@
 import { User } from "../../../model/user.model";
 
 export type UserState = {
-    user: User;
+    userInfo: User;
     token: string;
 };
 

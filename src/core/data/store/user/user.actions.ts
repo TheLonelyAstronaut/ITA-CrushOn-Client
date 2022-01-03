@@ -11,13 +11,13 @@ export const GET_TOKEN = {
 };
 
 export const CLEAR_TOKEN = {
-    TRIGGER: createAction<string>('[Clear token] triggered'),
+    TRIGGER: createAction('[Clear token] triggered'),
     STARTED: createAction('[Clear token] started'),
     COMPLETED: createAction('[Clear token] completed'),
 };
 
 export const GET_USER = {
-    TRIGGER: createAction<string>('[Get user] triggered'),
+    TRIGGER: createAction('[Get user] triggered'),
     STARTED: createAction('[Get user] started'),
     COMPLETED: createAction<User>('[Get user] completed'),
 };

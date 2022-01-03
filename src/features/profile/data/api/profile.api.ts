@@ -2,7 +2,8 @@ import { coreAPIClient } from "../../../../core/data/api/core.api";
 
 export class ProfileAPIClient {
     getUserInfo(): any {
-        const myInfo = {
+        //const userInfo = coreAPIClient.get('/user');
+        const userInfo = {
             id: 48,
             name: 'Liu',
             age: 23,
@@ -12,15 +13,12 @@ export class ProfileAPIClient {
             passions: [
                 'Singing with my granny',
                 'Cybersport',
-                'Music (but only Kizaru songs)',
+                "Music (but only Kizaru's songs)",
                 'Spirituality',
                 'Moviemaking like a pro',
             ],
             bio: `Hi, I’m Liu. I'm looking for someone who will go to the cinema with me. Message me if you like Marvel.`,
-        }
-
-        const userInfo = coreAPIClient.get('/user');
-
+        };
         return userInfo;
     }
 }

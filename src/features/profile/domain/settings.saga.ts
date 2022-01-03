@@ -1,12 +1,12 @@
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { apiService } from "../../../app/data/api/server";
 import { CLEAR_TOKEN } from "../../../core/data/store/user/user.actions";
+import { tokenRepository } from '../../../core/util/token-repository.util';
 
-function* clearTokenSaga(action: ReturnType<typeof CLEAR_TOKEN.TRIGGER>): SagaIterator {
+function* clearTokenSaga(): SagaIterator {
     //yield put(GET_TOKEN.STARTED);
-    yield call(apiService.clearToken, action.payload);
+    yield call(tokenRepository.clearToken);
     yield put(CLEAR_TOKEN.COMPLETED());
 }
 

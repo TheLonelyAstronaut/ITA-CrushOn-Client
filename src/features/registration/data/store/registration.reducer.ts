@@ -1,46 +1,44 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-import { REGISTER } from "./registration.actions";
+import { RegistrationUser } from "../../model/register-user.model";
+
+import { REGISTRATION } from "./registration.actions";
 import { RegistrationState } from "./registration.state";
 
 const initialState: RegistrationState = {
-    data: {
-        email: '',
-        password: '',
-        name: '',
-        gender: 'male',
-        dateOfBirth: new Date,
-        city: 7,
-        photo: {
-            uri: '',
-            mime: '',
-            width: 300,
-            height: 400,
-        },
-    },
+    registrationData: undefined,
 };
 
 export const registrationReducer = createReducer(initialState, (builder) => {
     builder
-        .addCase(REGISTER.SET_EMAIL, (state, action) => {
-            state.data.email = action.payload;
+        .addCase(REGISTRATION.SET_USERNAME, (state, action) => {
+            state.registrationData = {
+                ...state.registrationData,
+                username: action.payload,
+            } as RegistrationUser;
         })
-        .addCase(REGISTER.SET_PASSWORD, (state, action) => {
-            state.data.password = action.payload;
+        .addCase(REGISTRATION.SET_PASSWORD, (state, action) => {
+            state.registrationData = {
+                ...state.registrationData,
+                password: action.payload,
+            } as RegistrationUser;
         })
-        .addCase(REGISTER.SET_NAME, (state, action) => {
-            state.data.name = action.payload;
+        .addCase(REGISTRATION.SET_NAME, (state, action) => {
+            state.registrationData = {
+                ...state.registrationData,
+                name: action.payload,
+            } as RegistrationUser;
         })
-        .addCase(REGISTER.SET_GENDER, (state, action) => {
-            state.data.gender = action.payload;
+        .addCase(REGISTRATION.SET_GENDER, (state, action) => {
+            state.registrationData = {
+                ...state.registrationData,
+                gender: action.payload,
+            } as RegistrationUser;
         })
-        .addCase(REGISTER.SET_DATE, (state, action) => {
-            state.data.dateOfBirth = action.payload;
-        })
-        .addCase(REGISTER.SET_CITY, (state, action) => {
-            state.data.city = action.payload;
-        })
-        .addCase(REGISTER.SET_PHOTO, (state, action) => {
-            state.data.photo = action.payload;
+        .addCase(REGISTRATION.SET_DATE, (state, action) => {
+            state.registrationData = {
+                ...state.registrationData,
+                dateOfBirth: action.payload,
+            } as RegistrationUser;
         });
 });

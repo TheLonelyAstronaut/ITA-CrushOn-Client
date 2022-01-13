@@ -17,7 +17,7 @@ import { HeaderText } from '../../../../core/presentation/components/text/auth-h
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
-import { REGISTER } from '../../data/store/registration.actions';
+import { REGISTRATION } from '../../data/store/registration.actions';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { NameScreenNavigationProp } from '../navigation/routing.types';
@@ -38,7 +38,7 @@ export const NameScreen: React.FC<NameScreenProps> = (props: NameScreenProps) =>
         props.navigation.goBack();
     }, [props]);
     const goNext = useCallback(() => {
-        dispatch(REGISTER.SET_NAME(name));
+        dispatch(REGISTRATION.SET_NAME(name));
         props.navigation.navigate('Gender');
     }, [props, name, dispatch]);
 

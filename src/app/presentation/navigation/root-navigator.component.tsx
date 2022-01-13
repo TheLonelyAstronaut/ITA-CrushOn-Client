@@ -3,7 +3,7 @@ import React from 'react';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { useSelector } from 'react-redux';
 
-import { getToken } from '../../../core/data/store/user/user.selectors';
+import { getIsAuthenticated } from '../../../core/data/store/user/user.selectors';
 import { RootNavigatorParamList } from '../../../core/presentation/navigation/root/routing.types';
 import { ChatScreen } from '../../../features/chat/presentation/components/chat.component';
 import { ExpandedCardScreen } from '../../../features/expanded-card/presentation/components/expanded-card.component';
@@ -26,7 +26,7 @@ const createNestedSharedStack = ( routeName: string, component: React.FC<any>): 
 const Chat = createNestedSharedStack('ChatNested', ChatScreen);
 
 export const RootNavigator: React.FC = () => {
-    const token = useSelector(getToken);
+    const isAuthenticated = useSelector(getIsAuthenticated);
 
     return (
         <RootStack.Navigator
@@ -38,7 +38,7 @@ export const RootNavigator: React.FC = () => {
                 },
             }}
         >
-            {token !== '' ? (<>
+            {isAuthenticated ? (<>
                 <RootStack.Screen name={'Tabs'} component={TabNavigator} />
                 <RootStack.Screen
                     name={'ExpandedCard'}

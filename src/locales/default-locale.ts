@@ -11,7 +11,7 @@ export type DefaultLocale = {
             signUp: string;
             continue: string;
             return: string;
-            email: string;
+            username: string;
             repeatPassword: string;
             name: string;
             male: string;
@@ -20,7 +20,7 @@ export type DefaultLocale = {
             rechoosePhoto: string;
         };
         appeals: {
-            writeEmail: string;
+            createUsername: string;
             createPassword: string;
             writeName: string;
             pointGender: string;

@@ -1,13 +1,16 @@
-import { APIClient } from '../../../../../core/data/api/api-client.api';
-import { apiClient } from '../../../../../core/data/api/impl/api-client-impl.api';
+import { AxiosResponse } from 'axios';
+
+import { coreAPIClient, CoreAPIClient } from '../../../../../core/data/api/core.api';
+import { AuthTokens } from '../../../../../core/model/auth.model';
+import { RegistrationUser } from '../../../model/register-user.model';
 import { RegistrationService } from '../registration-service.api';
 
 class RegistrationServiceImpl implements RegistrationService {
-    constructor(private apiClient: APIClient) {}
+    constructor(private coreAPI: CoreAPIClient) {}
 
-    register(username: string, password: string): void {
-        const result = apiClient.post<boolean>({ username, password });
+    register = async (registrationData: RegistrationUser): Promise<AxiosResponse<AuthTokens>> => {
+        return this.coreAPI.post<AuthTokens, RegistrationUser>('api/v1/auth/register', registrationData);
     }
 }
 
-export const registrationService: RegistrationService = new RegistrationServiceImpl(apiClient);
+export const registrationService: RegistrationService = new RegistrationServiceImpl(coreAPIClient);

@@ -16,12 +16,14 @@ import {
     MessageTextProps,
     SendProps,
     Send,
+    IMessage,
 } from 'react-native-gifted-chat';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components';
 
 import { SendSVG } from '../../../../assets/components/send-icon.component';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
+import { tokenRepository } from '../../../../core/util/token-repository.util';
 import { Messages } from '../../../../mocks/messages.data';
 import { ChatScreenNavigationProp, ChatScreenRouteProp } from '../navigation/routing.types';
 
@@ -49,7 +51,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 user: {
                     _id: props.route.params.user.id,
                     name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any',
+                    avatar: props.route.params.user.photo.link,
                 },
             },
             {
@@ -59,7 +61,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 user: {
                     _id: props.route.params.user.id,
                     name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any',
+                    avatar: props.route.params.user.photo.link,
                 },
             },
             {
@@ -69,7 +71,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 user: {
                     _id: props.route.params.user.id,
                     name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any',
+                    avatar: props.route.params.user.photo.link,
                 },
             },
             {
@@ -79,9 +81,9 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
                 system: true,
             },
         ]);
-    }, [props.route.params]);
+    }, [props]);
 
-    const renderTime = (props: TimeProps) => {
+    const renderTime = (props: TimeProps<IMessage>) => {
         return (
             <Time
                 {...props}
@@ -111,17 +113,17 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     };
 
     const renderAvatar = () => {
-        return <Avatar source={{ uri: props.route.params.user.imgUrl }} />;
+        return <Avatar source={{ uri: props.route.params.user.photo.link }} />;
     };
 
     const expandCard = useCallback(() => {
         navigation.navigate('ExpandedCard', {
             user: props.route.params.user,
         })},
-        [navigation, props.route.params]
+        [navigation, props]
     );
 
-    const renderBubble = (props: BubbleProps) => {
+    const renderBubble = (props: BubbleProps<IMessage>) => {
         return (
             <Bubble
                 {...props}
@@ -139,7 +141,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
         );
     };
 
-    const renderMessageText = (props: MessageTextProps) => (
+    const renderMessageText = (props: MessageTextProps<IMessage>) => (
         <MessageText
             {...props}
             textStyle={{
@@ -174,7 +176,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
         />
     );
 
-    const renderSend = (props: SendProps) => (
+    const renderSend = (props: SendProps<IMessage>) => (
         <Send {...props} disabled={!props.text} containerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
             <SendSVG color={theme.colors.componentLabel} />
         </Send>
@@ -199,11 +201,13 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
         setMessages((previousMessages) => GiftedChat.append(previousMessages, messages));
     }, []);
 
+
+
     return (
         <SafeArea edges={['top']}>
             <ChatHeader
-                goBack={() => props.navigation.goBack()}
                 user={props.route.params.user}
+                goBack={() => props.navigation.goBack()}
                 expandCard={expandCard}
             />
             <GiftedChat

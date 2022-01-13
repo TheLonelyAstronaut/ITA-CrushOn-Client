@@ -1,34 +1,32 @@
+import { AxiosResponse } from 'axios';
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { tokenAPIClient } from '../../../core/data/api/token.api';
-import { GET_TOKEN, GET_USER } from "../../../core/data/store/user/user.actions";
+import { coreAPIClient } from '../../../core/data/api/core.api';
+import { AUTHENTICATE } from "../../../core/data/store/user/user.actions";
+import { getUserSaga } from '../../../core/domain/user.saga';
+import { AuthTokens } from '../../../core/model/auth.model';
 import { tokenRepository } from '../../../core/util/token-repository.util';
-import { profileAPIClient } from '../../profile/data/api/profile.api';
+import { loginService } from '../data/api/impl/login-service-impl.api';
+import { LOGIN } from '../data/store/login.actions';
 
-function* getTokenSaga(action: ReturnType<typeof GET_TOKEN.TRIGGER>): SagaIterator {
-    //yield put(GET_TOKEN.STARTED);
-        const token: string = yield call(tokenAPIClient.getToken, action.payload);
-        if (token !== '') {
-            console.log(`token is ${token}`);
-            yield call(tokenRepository.saveTokenToStorage, action.payload.login, token);
-            yield put(GET_TOKEN.COMPLETED(token));
-            yield put(GET_USER.TRIGGER());
-        } else {
-            console.log(`token is '', wrong auth data?`);
-        }
+
+function* loginSaga(action: ReturnType<typeof LOGIN.TRIGGER>): SagaIterator {
+
+    const response: AxiosResponse<AuthTokens> = yield call(loginService.login, action.payload.username, action.payload.password);
+
+    if (response.data) {
+        yield call(coreAPIClient.setToken, response.data.authorizationToken);
+        yield call(tokenRepository.saveAuthTokenToStorage, response.data.authorizationToken);
+        yield call(tokenRepository.saveRefreshTokenToStorage, response.data.refreshToken);
+
+        yield call(getUserSaga);
+        yield put(AUTHENTICATE.LOGIN());
+    } else {
+        console.log(response.status, response.statusText);
+    }
 }
 
-export function* watchGetTokenSaga(): SagaIterator {
-    yield takeLatest(GET_TOKEN.TRIGGER, getTokenSaga);
-}
-
-function* getUserSaga(): SagaIterator {
-    //yield put(GET_USER.STARTED);
-        const user = yield call(profileAPIClient.getUserInfo);
-        yield put(GET_USER.COMPLETED(user));
-}
-
-export function* watchGetUserSaga(): SagaIterator {
-    yield takeLatest(GET_USER.TRIGGER, getUserSaga);
+export function* watchLoginSaga(): SagaIterator {
+    yield takeLatest(LOGIN.TRIGGER, loginSaga);
 }

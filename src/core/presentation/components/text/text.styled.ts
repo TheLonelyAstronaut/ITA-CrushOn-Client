@@ -60,7 +60,7 @@ export const Text = styled.Text<{ type: TextType; scale?: number }>`
             case TextType.cardName:
                 return props.theme.fontSize.large * (props?.scale ?? 1); // props?.scale ? props?.scale : 1
             case TextType.cardGeo:
-                return props.theme.fontSize.extraSmall * (props?.scale ?? 1);
+                return props.theme.fontSize.medium * (props?.scale ?? 1);
             case TextType.label:
                 return props.theme.fontSize.medium;
             case TextType.button:
@@ -71,12 +71,18 @@ export const Text = styled.Text<{ type: TextType; scale?: number }>`
     }}px;
     margin-left: ${(props) => {
         switch (props.type) {
-            case TextType.cardGeo:
-                return (props.theme.spacer / 2) * (props?.scale ?? 1);
             case TextType.label:
                 return props.theme.spacer / 4;
             case TextType.button:
                 return props.theme.spacer / 4;
+            default:
+                return 0;
+        }
+    }}px;
+    margin-right: ${(props) => {
+        switch (props.type) {
+            case TextType.cardGeo:
+                return (props.theme.spacer / 4) * (props?.scale ?? 1);
             default:
                 return 0;
         }

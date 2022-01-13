@@ -5,7 +5,7 @@ export type cityItem = {
 
 export const CitiesData: cityItem[] = [
     {
-        id: 7,
+        id: 2,
         name: 'Minsk',
     },
     {
@@ -13,7 +13,7 @@ export const CitiesData: cityItem[] = [
         name: 'Brest',
     },
     {
-        id: 2,
+        id: 5,
         name: 'Vitebsk',
     },
     {

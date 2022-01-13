@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components/native';
 
 import { LogoSVG } from '../../../../assets/components/logo.component';
-import { GET_TOKEN } from '../../../../core/data/store/user/user.actions';
+import { AuthData } from '../../../../core/model/auth.model';
 import { ActiveButton } from '../../../../core/presentation/components/auth/active-button.component';
 import { AuthBackground } from '../../../../core/presentation/components/container/auth-background.styled';
 import { AuthInputContainer } from '../../../../core/presentation/components/container/auth-input-container.styled';
@@ -20,6 +20,7 @@ import { HeaderText } from '../../../../core/presentation/components/text/auth-h
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
+import { LOGIN } from '../../data/store/login.actions';
 import { LoginScreenNavigationProp } from '../navigation/routing.types';
 
 import { AppsName } from './styled/app-name-text.styled';
@@ -39,11 +40,12 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
     const [password, setpassword] = useState('');
 
     const login = useCallback(() => {
-        dispatch(GET_TOKEN.TRIGGER({
-            login: email,
+        dispatch(LOGIN.TRIGGER({
+            username: email,
             password: password,
-        }));
+        } as AuthData));
     }, [email, password, dispatch]);
+
     const signUp = useCallback(() => {
         props.navigation.navigate('Registration');
     }, [props]);

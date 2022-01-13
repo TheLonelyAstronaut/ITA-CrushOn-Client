@@ -59,7 +59,7 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
         <View style={{ flex: 1 }}>
             <SharedElement id={`user_image.${props.route.params.user.id}`} style={StyleSheet.absoluteFill}>
                 <Image
-                    source={{ uri: props.route.params.user.imgUrl }}
+                    source={{ uri: props.route.params.user.photo.link }}
                     style={[StyleSheet.absoluteFill, { resizeMode: 'cover' }]}
                 />
             </SharedElement>
@@ -87,7 +87,7 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
                             width: theme.dimensions.width * 0.2,
                         }}
                     >
-                        <View style={{ flex: 1, alignItems: 'center', backgroundColor: theme.colors.background }}>
+                        <View style={{ flex: 1, alignItems: 'center', backgroundColor: theme.colors.background, marginTop: 25 }}>
                             <UserInfo user={props.route.params.user}/>
                         </View>
                     </BottomSheet>

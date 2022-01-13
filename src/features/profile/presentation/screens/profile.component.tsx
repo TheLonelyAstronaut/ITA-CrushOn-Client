@@ -8,7 +8,7 @@ import { DefaultTheme } from 'styled-components/native';
 
 import { EditSVG } from '../../../../assets/components/edit-icon.component';
 import { MoreSVG } from '../../../../assets/components/more-icon.component';
-import { getUser } from '../../../../core/data/store/user/user.selectors';
+import { getUserDangerously } from '../../../../core/data/store/user/user.selectors';
 import { User } from '../../../../core/model/user.model';
 import { LabeledButton } from '../../../../core/presentation/components/button/labeled-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
@@ -31,7 +31,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
     const { t } = useTranslation();
-    const user: User = useSelector(getUser);
+    const user = useSelector(getUserDangerously);
 
     const editProfile = useCallback(() => {
         props.navigation.navigate('EditProfile');
@@ -54,7 +54,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
 
                 <Center>
                     <Photo
-                        source={{ uri: user.imgUrl }}
+                        source={{ uri: user.photo.link }}
                         resizeMode="cover"
                         imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
                     />

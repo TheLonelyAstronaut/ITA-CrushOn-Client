@@ -6,7 +6,7 @@ import { RegistationParamList } from '../../../../core/presentation/navigation/r
 
 export type EmailScreenNavigationProp = CompositeNavigationProp<
     StackNavigationProp<AuthenticationParamList, 'Registration'>,
-    StackNavigationProp<RegistationParamList, 'Email'>
+    StackNavigationProp<RegistationParamList, 'Username'>
 >;
 
 export type PasswordScreenNavigationProp = StackNavigationProp<RegistationParamList, 'Password'>;
@@ -19,7 +19,4 @@ export type BirthdayScreenNavigationProp = StackNavigationProp<RegistationParamL
 
 export type CityScreenNavigationProp = StackNavigationProp<RegistationParamList, 'City'>;
 
-export type PhotoScreenNavigationProp = CompositeNavigationProp<
-    StackNavigationProp<AuthenticationParamList, 'Registration'>,
-    StackNavigationProp<RegistationParamList, 'Photo'>
->;
+export type PhotoScreenNavigationProp = StackNavigationProp<RegistationParamList, 'Photo'>;

@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-color-literals */
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
 
 import { User } from '../../../../core/model/user.model';
@@ -13,14 +14,26 @@ import { Name } from './styled/chats-item-name.styled';
 import { ChatsItemView } from './styled/chats-item-view.styled';
 
 export type ChatsItemProps = {
-    navigation: ChatsListScreenNavigationProp;
     user: User;
 };
 
 export const ChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) => {
+    const navigation = useNavigation() as ChatsListScreenNavigationProp;
+
+    const openChat = useCallback(() => {
+        navigation.navigate('Chat', { 
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            screen: 'ChatNested',
+            params: {
+                user: props.user
+            }
+        });
+    }, [navigation, props.user]);
+
     return (
-        <ChatsItemView onPress={() => props.navigation.navigate('Chat', { user: props.user })}>
-            <Avatar source={{ uri: props.user.imgUrl }} />
+        <ChatsItemView onPress={openChat}>
+            <Avatar source={{ uri: props.user.photo.link }} />
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Name>{props.user.name}</Name>
                 <LastMessage numberOfLines={2} ellipsizeMode={'tail'}>

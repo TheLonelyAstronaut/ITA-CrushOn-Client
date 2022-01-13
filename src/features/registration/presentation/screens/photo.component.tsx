@@ -17,7 +17,7 @@ import { Center } from '../../../../core/presentation/components/container/cente
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
-import { REGISTER } from '../../data/store/registration.actions';
+import { REGISTRATION } from '../../data/store/registration.actions';
 import { getRegistrationData } from '../../data/store/registration.selectors';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
@@ -37,7 +37,7 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
     const dispatch = useDispatch();
 
     const [image, setImage] = useState({
-        uri: '',
+        path: '',
         width: 300,
         height: 400,
         mime: '',
@@ -52,7 +52,7 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
             height: 1920,
         }).then((image) => {
             setImage({
-                uri: image.path,
+                path: image.path,
                 width: image.width,
                 height: image.height,
                 mime: image.mime,
@@ -61,17 +61,13 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
         });
     }, []);
 
-    const registrationData = useSelector(getRegistrationData);
-
     const goBack = useCallback(() => {
         props.navigation.goBack();
     }, [props]);
+    
     const done = useCallback(() => {
-        dispatch(REGISTER.SET_PHOTO(image));
-        //dispatch(REGISTER.SEND_DATA);
-        console.log(registrationData);
-        props.navigation.navigate('Login');
-    }, [props, image, registrationData, dispatch]);
+        dispatch(REGISTRATION.SET_PHOTO(image));
+    }, [image, dispatch]);
 
     return (
         <AuthBackground>
@@ -82,7 +78,7 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
             <AuthInputContainer behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
                 {isSelected ? (
                     <>
-                        <UploadedImage resizeMode={'cover'} source={image} />
+                        <UploadedImage resizeMode={'cover'} source={{ uri: image.path }} />
                         <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
 
                         <PickerOutline onPress={choosePhoto}>
@@ -101,10 +97,6 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
 
             <Buttons insets={insets}>
                 <ActiveButton onPress={done} active={isSelected ? true : false} label={t('common.done')} />
-
-                <Button onPress={goBack}>
-                    <Label>{t('auth.return')}</Label>
-                </Button>
             </Buttons>
         </AuthBackground>
     );

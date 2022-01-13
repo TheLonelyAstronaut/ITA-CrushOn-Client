@@ -12,7 +12,7 @@ import { Buttons } from '../../../../core/presentation/components/container/butt
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
-import { REGISTER } from '../../data/store/registration.actions';
+import { REGISTRATION } from '../../data/store/registration.actions';
 import { Gender } from '../components/gender-item.component';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
@@ -43,7 +43,7 @@ export const GenderScreen: React.FC<GenderScreenProps> = (props: GenderScreenPro
         props.navigation.goBack();
     }, [props]);
     const goNext = useCallback(() => {
-        dispatch(REGISTER.SET_GENDER(maleSelected ? 'male' : 'female'));
+        dispatch(REGISTRATION.SET_GENDER(maleSelected ? 'male' : 'female'));
         props.navigation.navigate('Birthday');
     }, [props, maleSelected, dispatch]);
 

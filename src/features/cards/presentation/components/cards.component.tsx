@@ -22,11 +22,11 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
     const [list, setList] = useState<User[]>(CardsData);
     const currentTheme: DefaultTheme = useTheme();
 
-    useFocusEffect(
-        useCallback(() => {
-            console.log('HERE', props.route.params?.reaction);
-        }, [props.route])
-    );
+    // useFocusEffect(
+    //     useCallback(() => {
+            
+    //     }, [props.route])
+    // );
 
     const setReaction = useCallback(() => {
         list.shift();

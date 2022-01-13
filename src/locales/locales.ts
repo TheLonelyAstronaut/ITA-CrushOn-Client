@@ -1,5 +1,12 @@
 import { DefaultLocale } from './default-locale';
 
+// export type City = {
+//     id: number;
+//     en: string;
+//     by: string;
+//     ru: string;
+// }
+
 export const en: DefaultLocale = {
     translation: {
         common: {
@@ -13,7 +20,7 @@ export const en: DefaultLocale = {
             signUp: 'Sign up',
             continue: 'Continue',
             return: 'Return',
-            email: 'Email',
+            username: 'Email',
             repeatPassword: 'Repeat password',
             name: 'Name',
             male: 'Male',
@@ -22,7 +29,7 @@ export const en: DefaultLocale = {
             rechoosePhoto: 'Choose another photo',
         },
         appeals: {
-            writeEmail: `WRITE\nYOUR EMAIL`,
+            createUsername: `CREATE\nA USERNAME`,
             createPassword: `CREATE\nA PASSWORD`,
             writeName: `WRITE\nYOUR NAME`,
             pointGender: `POINT\nYOUR GENDER`,
@@ -72,7 +79,7 @@ export const ru: DefaultLocale = {
             signUp: 'Регистрация',
             continue: 'Продолжить',
             return: 'Назад',
-            email: 'Почта',
+            username: 'Имя профиля',
             repeatPassword: 'Повторите пароль',
             name: 'Имя',
             male: 'Мужчина',
@@ -81,7 +88,7 @@ export const ru: DefaultLocale = {
             rechoosePhoto: 'Выбрать другое фото',
         },
         appeals: {
-            writeEmail: `УКАЖИТЕ\nВАШУ ПОЧТУ`,
+            createUsername: `ПРИДУМАЙТЕ\nИМЯ ПРОФИЛЯ`,
             createPassword: `ПРИДУМАЙТЕ\nПАРОЛЬ`,
             writeName: `УКАЖИТЕ\nВАШЕ ИМЯ`,
             pointGender: `УКАЖИТЕ\nВАШ ПОЛ`,
@@ -131,7 +138,7 @@ export const be: DefaultLocale = {
             signUp: 'Рэгістрацыя',
             continue: 'Далей',
             return: 'Назад',
-            email: 'Пошта',
+            username: 'Імя профілю',
             repeatPassword: 'Паўтарыце пароль',
             name: 'Імя',
             male: 'Мужчына',
@@ -140,13 +147,13 @@ export const be: DefaultLocale = {
             rechoosePhoto: 'Абраць іншае фота',
         },
         appeals: {
-            writeEmail: `УКАЖИТЕ\nВАШУ ПОЧТУ`,
-            createPassword: `ПРИДУМАЙТЕ\nПАРОЛЬ`,
-            writeName: `УКАЖИТЕ\nВАШЕ ИМЯ`,
-            pointGender: `УКАЖИТЕ\nВАШ ПОЛ`,
-            selectBirthday: `УКАЖИТЕ\nДАТУ ВАШЕГО РОЖДЕНИЯ`,
+            createUsername: `ПРЫДУМАЙЦЕ\nІМЯ ПРОФІЛЮ`,
+            createPassword: `ПРЫДУМАЙЦЕ\nПАРОЛЬ`,
+            writeName: `ПАЗНАЧЦЕ\nВАША ІМЯ`,
+            pointGender: `ПАЗНАЧЦЕ\nВАШ ПОЛ`,
+            selectBirthday: `ПАЗНАЧЦЕ\nДАТУ НАРАДЖЭННЯ`,
             selectCity: `АБЯРЫЦЕ\nВАШ ГОРАД`,
-            uploadPhoto: `ЗАГРУЗИТЕ\nВАШЕ ФОТО`,
+            uploadPhoto: `ЗАГРУЗІЦЕ\nВАША ФОТА`,
         },
         tabbar: {
             cards: 'Пошук',
@@ -168,7 +175,7 @@ export const be: DefaultLocale = {
         settings: {
             settings: 'Налады',
             language: 'Мова',
-            theme: 'Тема',
+            theme: 'Тэма',
             auto: 'Аўтаматычна',
             light: 'Светлая',
             dark: 'Цёмная',

@@ -58,7 +58,7 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
         >
             <SharedElement id={`user_image.${props.user.id}`} style={StyleSheet.absoluteFill}>
                 <FastImage
-                    source={{ uri: props.user.imgUrl }}
+                    source={{ uri: props.user.photo.link }}
                     style={{ borderRadius: 15, flex: 1 }}
                     resizeMode={'cover'}
                 />
@@ -69,10 +69,10 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
                         {props.user.name},{props.user.age}
                     </Text>
                     <LocationWrapper>
-                        <LocationSVG color="white" size={14 * props.scale} strokeWidth={props.scale} />
                         <Text type={TextType.cardGeo} scale={props.scale}>
-                            {props.user.location} {t('card.kmAway')}
+                            {props.user.city.name}
                         </Text>
+                        <LocationSVG color="white" size={10* props.scale} strokeWidth={props.scale * 1.2} />
                     </LocationWrapper>
                 </CardTextWrapper>
             </FullyPressable>

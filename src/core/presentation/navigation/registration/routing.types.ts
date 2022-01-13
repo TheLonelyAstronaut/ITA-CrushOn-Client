@@ -1,5 +1,5 @@
 export type RegistationParamList = {
-    Email: undefined;
+    Username: undefined;
     Password: undefined;
     Name: undefined;
     Gender: undefined;

@@ -15,6 +15,7 @@ export type ChatsListScreenProps = {
 
 export const ChatsListScreen: React.FC<ChatsListScreenProps> = (props: ChatsListScreenProps) => {
     const insets = useSafeAreaInsets();
+    
     return (
         <SafeArea edges={['top']}>
             <FlatList
@@ -22,7 +23,7 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = (props: ChatsList
                 keyExtractor={(item) => item.id.toString()}
                 showsVerticalScrollIndicator={false}
                 ListFooterComponent={<FooterView insets={insets} />}
-                renderItem={({ item }) => <ChatsItem navigation={props.navigation} user={item} />}
+                renderItem={({ item }) => <ChatsItem user={item} />}
             />
         </SafeArea>
     );

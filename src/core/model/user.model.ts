@@ -1,12 +1,28 @@
 export type User = {
+    username: string;
     id: number;
-    imgUrl: string;
+    photo: Photo;
     name: string;
-    age: number;
-    lives: string;
-    location: number;
-    bio: string;
-    passions: string[];
+    gender: 'male' | 'female';
+    dateOfBirth: number;
+    city: City;
+    bio: string | undefined;
+    passions: Passion[] | undefined;
+};
+
+export type Photo = {
+    id: number;
+    link: string;
+}
+
+export type Passion = {
+    id: number;
+    description: string;
+}
+
+export type City = {
+    id: number;
+    name: string;
 };
 
 /*const calculateSum = (a: number, b: number) => {

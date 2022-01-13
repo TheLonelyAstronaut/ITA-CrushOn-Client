@@ -35,7 +35,7 @@ export const ChatHeader: React.FC<chatHeaderProps> = (props: chatHeaderProps) =>
             <View style={{ flex: 1, alignItems: 'flex-end', paddingRight: theme.spacer }}>
                 <Pressable onPress={props.expandCard}>
                     <SharedElement id={`user_image.${props.user.id}`}>
-                        <Avatar source={{ uri: props.user.imgUrl }} />
+                        <Avatar source={{ uri: props.user.photo.link }} />
                     </SharedElement>
                 </Pressable>
             </View>

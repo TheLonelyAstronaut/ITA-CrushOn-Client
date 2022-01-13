@@ -9,8 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
 import { ArrowRightSVG } from '../../../../assets/components/arrow-right-icon.component';
-import { getUser } from '../../../../core/data/store/user/user.selectors';
-import { User } from '../../../../core/model/user.model';
+import { getPassionsDangerously, getUserDangerously } from '../../../../core/data/store/user/user.selectors';
 import { DoneButton } from '../../../../core/presentation/components/button/done-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
 import { Colored } from '../../../../core/presentation/components/container/colored-container.styled';
@@ -22,7 +21,8 @@ import { SeparatorVertical } from '../../../../core/presentation/components/cont
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { Text } from '../../../../core/presentation/components/text/text.styled';
 import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
-import { SET_BIO } from '../../data/store/edit-profile.actions';
+import { PhotoPicker } from '../../../../core/util/upload.util';
+import { SET_PHOTO, SET_USER_INFO } from '../../data/store/edit-profile.actions';
 import { ColoredPressable } from '../components/styled/colored-pressable-container.styled';
 import { Passions } from '../components/styled/passions-texted-container.styled';
 import { EditProfileScreenNavigationProp } from '../navigation/routing.types';
@@ -34,12 +34,13 @@ export type EditProfileScreenProps = {
 export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditProfileScreenProps) => {
     const currentTheme = useTheme();
     const { t } = useTranslation();
-    const user: User = useSelector(getUser);
+    const user = useSelector(getUserDangerously);
+    const passions = useSelector(getPassionsDangerously);
     const insets = useSafeAreaInsets();
     const dispatch = useDispatch();
 
-    const [image, setImage] = useState({
-        uri: '',
+    const [image, setImage] = useState<PhotoPicker>({
+        path: '',
         width: 1,
         height: 1,
         mime: '',
@@ -51,7 +52,7 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
             cropping: true,
         }).then((image) => {
             setImage({
-                uri: image.path,
+                path: image.path,
                 width: image.width,
                 height: image.height,
                 mime: image.mime,
@@ -63,9 +64,14 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
     const [aboutMe, setAboutMe] = useState(user.bio);
 
     const done = useCallback(() => {
-        dispatch(SET_BIO.TRIGGER(aboutMe));
+        if (aboutMe) dispatch(SET_USER_INFO.STARTED({
+            ...user,
+            bio: aboutMe,
+        }));
+        //if (imageIsChanged) dispatch(SET_PHOTO.STARTED(image));
         props.navigation.goBack();
-    }, [props, aboutMe, dispatch]);
+    }, [props, user, aboutMe, dispatch]);
+
     const editPassions = useCallback(() => {
         props.navigation.navigate('Passions');
     }, [props]);
@@ -78,7 +84,7 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
 
                 <Center>
                     <Photo
-                        source={imageIsChanged ? image : { uri: user.imgUrl }}
+                        source={imageIsChanged ? image : { uri: user.photo.link }}
                         resizeMode="cover"
                         imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
                     />
@@ -108,17 +114,17 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
                 </Header>
                 <ColoredPressable onPress={editPassions}>
                     <Passions>
-                        {user.passions.map((item, index, arr) => {
+                        {passions && passions.map((item, index, arr) => {
                             if (index !== arr.length - 1) {
                                 return (
                                     <Text type={TextType.regular} key={index}>
-                                        {item},{' '}
+                                        {item.description},{' '}
                                     </Text>
                                 );
                             } else {
                                 return (
                                     <Text type={TextType.regular} key={index}>
-                                        {item}
+                                        {item.description}
                                     </Text>
                                 );
                             }

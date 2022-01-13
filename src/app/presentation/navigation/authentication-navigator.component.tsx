@@ -12,7 +12,9 @@ export const AuthenticationNavigator: React.FC = () => {
     return (
         <AuthStack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Login">
             <AuthStack.Screen name={'Login'} component={LoginScreen} />
-            <AuthStack.Screen name={'Registration'} component={RegistrationNavigator} />
+            <AuthStack.Screen name={'Registration'} component={RegistrationNavigator} options={{
+                gestureEnabled: false
+            }}/>
         </AuthStack.Navigator>
     );
 };

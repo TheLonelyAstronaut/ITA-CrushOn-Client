@@ -17,7 +17,7 @@ import { HeaderText } from '../../../../core/presentation/components/text/auth-h
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
-import { REGISTER } from '../../data/store/registration.actions';
+import { REGISTRATION } from '../../data/store/registration.actions';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { EmailScreenNavigationProp } from '../navigation/routing.types';
@@ -26,36 +26,36 @@ export type EmailScreenProps = {
     navigation: EmailScreenNavigationProp;
 };
 
-export const EmailScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps) => {
+export const UsernameScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps) => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
 
     const goBack = useCallback(() => {
         props.navigation.goBack();
     }, [props]);
     const goNext = useCallback(() => {
-        dispatch(REGISTER.SET_EMAIL(email));
+        dispatch(REGISTRATION.SET_USERNAME(username));
         props.navigation.navigate('Password');
-    }, [props, email, dispatch]);
+    }, [props, username, dispatch]);
 
     return (
         <AuthBackground>
             <AppealContainer insets={insets}>
-                <Appeal>{t('appeals.writeEmail')}</Appeal>
+                <Appeal>{t('appeals.createUsername')}</Appeal>
             </AppealContainer>
 
             <AuthInputContainer behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
                 <Header>
-                    <HeaderText>{t('auth.email')}</HeaderText>
+                    <HeaderText>{t('auth.username')}</HeaderText>
                 </Header>
                 <Colored>
                     <TextInput
-                        value={email}
-                        onChangeText={setEmail}
+                        value={username}
+                        onChangeText={setUsername}
                         autoCompleteType={'email'}
                         textContentType={'emailAddress'}
                         keyboardType={'email-address'}
@@ -68,7 +68,7 @@ export const EmailScreen: React.FC<EmailScreenProps> = (props: EmailScreenProps)
             </AuthInputContainer>
 
             <Buttons insets={insets}>
-                <ActiveButton onPress={goNext} active={email ? true : false} label={t('auth.continue')} />
+                <ActiveButton onPress={goNext} active={username ? true : false} label={t('auth.continue')} />
 
                 <Button onPress={goBack}>
                     <Label>{t('auth.return')}</Label>

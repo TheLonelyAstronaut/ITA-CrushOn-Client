@@ -17,7 +17,7 @@ import { HeaderText } from '../../../../core/presentation/components/text/auth-h
 import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
-import { REGISTER } from '../../data/store/registration.actions';
+import { REGISTRATION } from '../../data/store/registration.actions';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { PasswordScreenNavigationProp } from '../navigation/routing.types';
@@ -39,7 +39,7 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = (props: PasswordScr
         props.navigation.goBack();
     }, [props]);
     const goNext = useCallback(() => {
-        dispatch(REGISTER.SET_PASSWORD(password));
+        dispatch(REGISTRATION.SET_PASSWORD(password));
         props.navigation.navigate('Name');
     }, [props, password, dispatch]);
 

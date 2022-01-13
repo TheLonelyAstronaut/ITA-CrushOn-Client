@@ -1,17 +1,18 @@
 import React, { useCallback } from 'react';
 import { useTheme } from 'styled-components';
 
+import { Passion } from '../../../../core/model/user.model';
 import { PassionLabel } from '../../../../core/presentation/components/user-info/styled/passion-label.styled';
 
 import { PassionOutline } from './styled/passion-item-container.styled';
 
-export type PassionProps = {
-    label: string;
+export type PassionItemProps = {
+    passion: Passion;
     selected: boolean;
-    handleSelection: (passion: string) => void;
+    handleSelection: (passion: Passion) => void;
 };
 
-export const Passion: React.FC<PassionProps> = (props: PassionProps) => {
+export const PassionItem: React.FC<PassionItemProps> = (props: PassionItemProps) => {
     const currentTheme = useTheme();
     const unactiveColor = currentTheme.colors.text;
     const activeColor = currentTheme.colors.contrast;
@@ -19,12 +20,12 @@ export const Passion: React.FC<PassionProps> = (props: PassionProps) => {
     const color = props.selected ? activeColor : unactiveColor;
 
     const handleOnPress = useCallback(() => {
-        props.handleSelection(props.label);
+        props.handleSelection(props.passion);
     }, [props])
 
     return (
         <PassionOutline borderColor={color} onPress={handleOnPress}>
-            <PassionLabel color={color}>{props.label}</PassionLabel>
+            <PassionLabel color={color}>{props.passion.description}</PassionLabel>
         </PassionOutline>
     );
 };

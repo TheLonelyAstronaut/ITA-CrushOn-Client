@@ -282,6 +282,8 @@ PODS:
     - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
+  - react-native-sensitive-info (6.0.0-alpha.9):
+    - React-Core
   - React-perflogger (0.65.2)
   - React-RCTActionSheet (0.65.2):
     - React-Core/RCTActionSheetHeaders (= 0.65.2)
@@ -346,6 +348,8 @@ PODS:
     - React-cxxreact (= 0.65.2)
     - React-jsi (= 0.65.2)
     - React-perflogger (= 0.65.2)
+  - RNBootSplash (4.0.2):
+    - React-Core
   - RNCMaskedView (0.1.11):
     - React
   - RNFastImage (8.5.11):
@@ -453,6 +457,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-sensitive-info (from `../node_modules/react-native-sensitive-info`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -465,6 +470,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -533,6 +539,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-date-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-sensitive-info:
+    :path: "../node_modules/react-native-sensitive-info"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -557,6 +565,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNBootSplash:
+    :path: "../node_modules/react-native-bootsplash"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNFastImage:
@@ -611,6 +621,7 @@ SPEC CHECKSUMS:
   React-jsinspector: d6addf5799e8dbf9d27b3191810225f0276dfb2d
   react-native-date-picker: d0d724ce1829d2e5d0f75e9ea4ed0f639ecf70e6
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
+  react-native-sensitive-info: d44e909d065f9c0e15734245e5dd6a24b82e3dcd
   React-perflogger: 939564c838f8b6ec099b4f858559f0f406c99745
   React-RCTActionSheet: b5135d36ee35ebd883c4fe043db7bd8cbba7516e
   React-RCTAnimation: 93aeefce33bb73f8d82132d7a362819676e1d1e4
@@ -623,6 +634,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: ccbce3086f3a296f2773d1d4feb7d4e56b0d5737
   React-runtimeexecutor: 5bedf6e704373fe9f0cc54aa35a112e5b0051b94
   ReactCommon: bf5dc45e9ec73a75f00de565f2519d6f8594ddf5
+  RNBootSplash: 5e82ba24a59a07315cbb2bb4855bb8d76fc7e802
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNFastImage: 1f2cab428712a4baaf78d6169eaec7f622556dd7
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211

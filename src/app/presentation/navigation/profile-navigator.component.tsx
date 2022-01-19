@@ -6,7 +6,7 @@ import { ProfileNavigatorParamList } from '../../../core/presentation/navigation
 import { EditProfileScreen } from '../../../features/profile/presentation/screens/edit-profile.component';
 import { PassionsScreen } from '../../../features/profile/presentation/screens/passions.component';
 import { ProfileScreen } from '../../../features/profile/presentation/screens/profile.component';
-import { SettingsScreen } from '../../../features/profile/presentation/screens/settings.component';
+import { SettingsScreen } from '../../../features/settings/presentation/screens/settings.component';
 
 const ProfileStack = createStackNavigator<ProfileNavigatorParamList>();
 

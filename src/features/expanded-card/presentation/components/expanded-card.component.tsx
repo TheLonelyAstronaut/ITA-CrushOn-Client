@@ -5,9 +5,10 @@ import { Image, StyleSheet, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useTheme } from 'styled-components';
 
+import { Reaction } from '../../../../core/model/explore.model';
+import { Background } from '../../../../core/presentation/components/container/background.styled';
 import { CustomSwipeableRef, Swipeable } from '../../../../core/presentation/components/swipes/swipeable.component';
 import { UserInfo } from '../../../../core/presentation/components/user-info/user-info.component';
-import { Reaction } from '../../../../core/util/reaction.util';
 import { ExpandedCardScreenNavigationProp, ExpandedCardScreenRouteProp } from '../navigation/routing.types';
 
 export type ExpandedCardScreenProps = {
@@ -87,9 +88,9 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
                             width: theme.dimensions.width * 0.2,
                         }}
                     >
-                        <View style={{ flex: 1, alignItems: 'center', backgroundColor: theme.colors.background, marginTop: 25 }}>
+                        <Background>
                             <UserInfo user={props.route.params.user}/>
-                        </View>
+                        </Background>
                     </BottomSheet>
                 )}
             </Swipeable>

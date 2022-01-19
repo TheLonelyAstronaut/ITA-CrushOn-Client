@@ -1,17 +1,32 @@
-import { applyMiddleware, createStore } from "redux";
+import { useEffect, useRef, useState } from "react";
+import { applyMiddleware, createStore, Store } from "redux";
 import createSagaMiddleware from "redux-saga";
 
 import rootSaga from "../../domain/root.saga";
 
 import rootReducer from "./root.reducer";
+import { ApplicationState } from "./types";
 
-const sagaMiddleware = createSagaMiddleware();
+export const useStore = (): { store: Store<ApplicationState> } | undefined => {
+    const [, setIsReady] = useState(false);
+    const store = useRef<{ store: Store<ApplicationState> }>();
 
-const store = createStore(
-    rootReducer,
-    applyMiddleware(sagaMiddleware)    
-);
+    useEffect(() => {
+        (async () => {
+            const sagaMiddleware = createSagaMiddleware();
 
-sagaMiddleware.run(rootSaga);
+            store.current = {
+                store: createStore(
+                    rootReducer,
+                    applyMiddleware(sagaMiddleware)    
+                )
+            }
 
-export default store;
+            sagaMiddleware.run(rootSaga);
+
+            setIsReady(true)
+        })();
+    }, [])
+
+    return store.current
+}

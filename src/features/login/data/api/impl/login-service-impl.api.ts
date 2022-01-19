@@ -8,11 +8,11 @@ class LoginServiceImpl implements LoginService {
     constructor(private coreAPI: CoreAPIClient) {}
 
     refreshTokens = async (refreshToken: string): Promise<AxiosResponse<AuthTokens>> => {
-        return this.coreAPI.post<AuthTokens, RefreshTokenData>('/api/v1/auth/refresh_tokens', { refreshToken });
+        return this.coreAPI.post<AuthTokens, RefreshTokenData>('api/v1/auth/refresh_tokens', { refreshToken });
     }
 
     login = async (username: string, password: string): Promise<AxiosResponse<AuthTokens>> => {
-        return this.coreAPI.post<AuthTokens, AuthData>('/api/v1/auth/authenticate', { username, password});
+        return this.coreAPI.post<AuthTokens, AuthData>('api/v1/auth/authenticate', { username, password});
     }
 }
 

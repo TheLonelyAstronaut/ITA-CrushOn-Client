@@ -1,9 +1,10 @@
-import React, { ReactNode } from "react";
-import { useColorScheme } from "react-native";
+import React, { ReactNode, useEffect, useState } from "react";
+import { Appearance, useColorScheme } from "react-native";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components/native";
 
-import { getTheme } from "../../../features/profile/data/store/settings.selectors";
+import { getTheme } from "../../../features/settings/data/store/settings.selectors";
+
 
 import { darkTheme, lightTheme, ThemesEnum } from "./root.theme";
 
@@ -14,15 +15,21 @@ type ThemeProviderProps = {
 export const ConnectedThemeProvider: React.FC<ThemeProviderProps> = (props: ThemeProviderProps) => {
     const preferredTheme = useSelector(getTheme);
 
-    const colorScheme = useColorScheme();
+    const [theme, setTheme] = useState(ThemesEnum.LIGHT);
 
-    let theme: ThemesEnum = ThemesEnum.LIGHT;
+    useEffect(() => {
+        if(preferredTheme === ThemesEnum.AUTO) {
+            const sub = Appearance.addChangeListener((data) => {
+                setTheme(data.colorScheme === 'light' ? ThemesEnum.LIGHT : ThemesEnum.DARK);
+            });
 
-    if (preferredTheme === ThemesEnum.AUTO) {
-        theme = ( colorScheme === 'light' ? ThemesEnum.LIGHT : ThemesEnum.DARK);
-    } else {
-        theme = preferredTheme;
-    }
+            setTheme(Appearance.getColorScheme() === 'light' ? ThemesEnum.LIGHT : ThemesEnum.DARK);
+
+            return () => sub.remove && sub.remove();
+        } else {
+            setTheme(preferredTheme)
+        }
+    }, [preferredTheme]);
 
     return (
         <ThemeProvider theme={theme === ThemesEnum.LIGHT ? lightTheme : darkTheme}>

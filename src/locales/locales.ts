@@ -48,7 +48,7 @@ export const en: DefaultLocale = {
         },
         profile: {
             editProfile: 'Edit Profile',
-            livesIn: 'Lives in',
+            livesIn: 'Lives in ',
             passions: 'Passions',
             about: 'bio',
             changePhoto: 'Change Photo',

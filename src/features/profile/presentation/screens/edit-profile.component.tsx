@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
 import { ArrowRightSVG } from '../../../../assets/components/arrow-right-icon.component';
+import { getPassionsData } from '../../../../core/data/store/remote-config/remote-config.selectors';
 import { getPassionsDangerously, getUserDangerously } from '../../../../core/data/store/user/user.selectors';
 import { DoneButton } from '../../../../core/presentation/components/button/done-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
@@ -21,8 +22,9 @@ import { SeparatorVertical } from '../../../../core/presentation/components/cont
 import { TextInput } from '../../../../core/presentation/components/text/text-input.styled';
 import { Text } from '../../../../core/presentation/components/text/text.styled';
 import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
+import { useResolveLocalizedString } from '../../../../core/util/resolve-localized-string.util';
 import { PhotoPicker } from '../../../../core/util/upload.util';
-import { SET_PHOTO, SET_USER_INFO } from '../../data/store/edit-profile.actions';
+import { SET_USER_INFO } from '../../data/store/edit-profile.actions';
 import { ColoredPressable } from '../components/styled/colored-pressable-container.styled';
 import { Passions } from '../components/styled/passions-texted-container.styled';
 import { EditProfileScreenNavigationProp } from '../navigation/routing.types';
@@ -38,41 +40,52 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
     const passions = useSelector(getPassionsDangerously);
     const insets = useSafeAreaInsets();
     const dispatch = useDispatch();
+    const passionsNames = useResolveLocalizedString(passions);
 
-    const [image, setImage] = useState<PhotoPicker>({
+    const passionsId = passions
+        ? passions.map(item => item.id)
+        : [];
+
+    const [photo, setPhoto] = useState<PhotoPicker>({
         path: '',
         width: 1,
         height: 1,
         mime: '',
     });
-    const [imageIsChanged, setImageChanged] = useState(false);
+    const [photoIsChanged, setPhotoChanged] = useState(false);
+
     const changePhoto = useCallback(() => {
         ImageCropPicker.openPicker({
             mediaType: 'photo',
             cropping: true,
         }).then((image) => {
-            setImage({
+            setPhoto({
                 path: image.path,
                 width: image.width,
                 height: image.height,
                 mime: image.mime,
             });
-            setImageChanged(true);
+            setPhotoChanged(true);
         });
     }, []);
 
-    const [aboutMe, setAboutMe] = useState(user.bio);
+    const [bio, setBio] = useState(user.bio as string | '');
 
     const done = useCallback(() => {
-        if (aboutMe) dispatch(SET_USER_INFO.STARTED({
-            ...user,
-            bio: aboutMe,
+        dispatch(SET_USER_INFO.STARTED({
+            bio: bio,
+            passions: passionsId,
+            photo: photoIsChanged ? photo : user.photo.id,
         }));
-        //if (imageIsChanged) dispatch(SET_PHOTO.STARTED(image));
+        console.log({
+            bio: bio,
+            passions: passionsId,
+            photo: photoIsChanged ? photo : user.photo.id,
+        });
         props.navigation.goBack();
-    }, [props, user, aboutMe, dispatch]);
+    }, [bio, dispatch, passionsId, photo, photoIsChanged, props.navigation, user.photo.id]);
 
-    const editPassions = useCallback(() => {
+    const goToEditPassions = useCallback(() => {
         props.navigation.navigate('Passions');
     }, [props]);
 
@@ -84,7 +97,7 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
 
                 <Center>
                     <Photo
-                        source={imageIsChanged ? image : { uri: user.photo.link }}
+                        source={photoIsChanged ? { uri: photo.path } : { uri: user.photo.link }}
                         resizeMode="cover"
                         imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
                     />
@@ -104,7 +117,7 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
                     <Text type={TextType.header}>{t('profile.about')}</Text>
                 </Header>
                 <Colored>
-                    <TextInput value={aboutMe} onChangeText={setAboutMe} multiline={true} />
+                    <TextInput value={bio} onChangeText={setBio} multiline={true} />
                 </Colored>
 
                 <SeparatorVertical height={SeparatorVerticalType.small} />
@@ -112,19 +125,19 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
                 <Header>
                     <Text type={TextType.header}>{t('profile.passions')}</Text>
                 </Header>
-                <ColoredPressable onPress={editPassions}>
+                <ColoredPressable onPress={goToEditPassions}>
                     <Passions>
                         {passions && passions.map((item, index, arr) => {
                             if (index !== arr.length - 1) {
                                 return (
                                     <Text type={TextType.regular} key={index}>
-                                        {item.description},{' '}
+                                        {passionsNames[index]},{' '}
                                     </Text>
                                 );
                             } else {
                                 return (
                                     <Text type={TextType.regular} key={index}>
-                                        {item.description}
+                                        {passionsNames[index]}
                                     </Text>
                                 );
                             }

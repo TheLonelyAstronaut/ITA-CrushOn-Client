@@ -12,10 +12,10 @@ import { LOGIN } from '../data/store/login.actions';
 
 
 function* loginSaga(action: ReturnType<typeof LOGIN.TRIGGER>): SagaIterator {
-
     const response: AxiosResponse<AuthTokens> = yield call(loginService.login, action.payload.username, action.payload.password);
+    if (response.status === 200) {
+        //console.log(response.data);
 
-    if (response.data) {
         yield call(coreAPIClient.setToken, response.data.authorizationToken);
         yield call(tokenRepository.saveAuthTokenToStorage, response.data.authorizationToken);
         yield call(tokenRepository.saveRefreshTokenToStorage, response.data.refreshToken);
@@ -23,7 +23,7 @@ function* loginSaga(action: ReturnType<typeof LOGIN.TRIGGER>): SagaIterator {
         yield call(getUserSaga);
         yield put(AUTHENTICATE.LOGIN());
     } else {
-        console.log(response.status, response.statusText);
+        alert('wrong username or password');
     }
 }
 

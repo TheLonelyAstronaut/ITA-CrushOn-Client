@@ -5,4 +5,5 @@ export type RegistrationUser = {
     gender: 'male' | 'female';
     dateOfBirth: number;
     city: number;
+    bio: string;
 };

@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 
+import { remoteConfigReducer } from "../../../core/data/store/remote-config/remote-config.reducer";
 import { userReducer } from "../../../core/data/store/user/user.reducer";
 import { cardsReducer } from "../../../features/cards/data/store/cards.reducer";
-import { settingsReducer } from "../../../features/profile/data/store/settings.reducer";
 import { registrationReducer } from "../../../features/registration/data/store/registration.reducer";
+import { settingsReducer } from "../../../features/settings/data/store/settings.reducer";
 
 import { ApplicationState } from "./types";
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers<ApplicationState>({
     registration: registrationReducer,
     user: userReducer,
     cards: cardsReducer,
+    remoteConfig: remoteConfigReducer, 
 });
 
 export default rootReducer;

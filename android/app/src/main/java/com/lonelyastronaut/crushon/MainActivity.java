@@ -1,4 +1,4 @@
-package com.crushon;
+package com.lonelyastronaut.crushon;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

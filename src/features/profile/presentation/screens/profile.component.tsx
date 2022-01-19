@@ -1,7 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable } from 'react-native';
+import { Animated, Pressable } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ShimmerPlaceholder, { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
 import { useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 import { DefaultTheme } from 'styled-components/native';
@@ -9,7 +11,6 @@ import { DefaultTheme } from 'styled-components/native';
 import { EditSVG } from '../../../../assets/components/edit-icon.component';
 import { MoreSVG } from '../../../../assets/components/more-icon.component';
 import { getUserDangerously } from '../../../../core/data/store/user/user.selectors';
-import { User } from '../../../../core/model/user.model';
 import { LabeledButton } from '../../../../core/presentation/components/button/labeled-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
 import { Photo } from '../../../../core/presentation/components/container/photo.styled';
@@ -27,11 +28,27 @@ export type ProfileScreenProps = {
     navigation: ProfileScreenNavigationProp;
 };
 
+const CustomShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
+
 export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreenProps) => {
     const insets = useSafeAreaInsets();
     const currentTheme: DefaultTheme = useTheme();
     const { t } = useTranslation();
     const user = useSelector(getUserDangerously);
+
+
+    const avatarRef = React.createRef<ShimmerPlaceholder>();
+
+    React.useEffect(() => {
+        const avatarAnimation = Animated.sequence([avatarRef.current!.getAnimated()])
+        Animated.loop(avatarAnimation).start();
+    }, [avatarRef]);
+
+    const [isDownloaded, setIsDownloaded] = useState(false);
+    const onLoaded = useCallback(() => {
+        setIsDownloaded(true);
+    }, []);
+
 
     const editProfile = useCallback(() => {
         props.navigation.navigate('EditProfile');
@@ -53,11 +70,19 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
                 <SeparatorVertical height={SeparatorVerticalType.small} />
 
                 <Center>
-                    <Photo
-                        source={{ uri: user.photo.link }}
-                        resizeMode="cover"
-                        imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
-                    />
+                    <CustomShimmerPlaceholder
+                        ref={avatarRef}
+                        style={{ borderRadius: 100, width: 200, height: 200 }}
+                        isInteraction={false}
+                        visible={isDownloaded}
+                    >
+                        <Photo
+                            source={{ uri: user?.photo.link }}
+                            resizeMode="cover"
+                            imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
+                            onLoadEnd={onLoaded}
+                        />
+                    </CustomShimmerPlaceholder>
                 </Center>
 
                 <SeparatorVertical height={SeparatorVerticalType.medium} />

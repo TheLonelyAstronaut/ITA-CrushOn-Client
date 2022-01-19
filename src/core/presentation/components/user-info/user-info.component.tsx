@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
-import { User } from '../../../model/user.model';
+import { City, Passion, User } from '../../../model/user.model';
+import { useCalculateAge } from '../../../util/calculate-age.util';
+import { useResolveLocalizedString } from '../../../util/resolve-localized-string.util';
 import { Palette } from '../../themes/palette.themes';
 import { SeparatorVerticalType, TextType } from '../../themes/types';
 import { SeparatorVertical } from '../container/separator-vertical.styled';
@@ -21,17 +23,21 @@ type UserInfoProps = {
 
 export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
     const currentTheme = useTheme();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const city = useResolveLocalizedString(props.user.city);
+    const passions = useResolveLocalizedString(props.user.passions as Passion[]);
+    const age = useCalculateAge(props.user.dateOfBirth);
+
 
     return (
         <UserInfoWrapper>
             <Text type={TextType.name}>
-                {props.user.name},{props.user.age}
+                {props.user.name},{age}
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text type={TextType.geo} style={{ paddingRight: currentTheme.spacer }}>
                     {t('profile.livesIn')}
-                    {props.user.city.name}
+                    {city}
                 </Text>
                 <LocationSVG color={currentTheme.colors.componentLabel} size={14} strokeWidth={2} />
             </View>
@@ -50,7 +56,7 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
     
                         return (
                             <PassionView key={index.toString()} backgroundColor={boxColor}>
-                                <PassionLabel color={labelColor}>{item.description}</PassionLabel>
+                                <PassionLabel color={labelColor}>{passions[index]}</PassionLabel>
                             </PassionView>
                         );
                     })}

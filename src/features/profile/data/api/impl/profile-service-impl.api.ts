@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import { CoreAPIClient, coreAPIClient } from "../../../../../core/data/api/core.api";
+import { UpdateSettingsData } from "../../../../../core/model/profile.model";
 import { User } from "../../../../../core/model/user.model";
 import { ProfileService } from "../profile-service.api";
 
@@ -12,8 +13,8 @@ class ProfileServiceImpl implements ProfileService {
         return this.coreAPI.get<User>('api/v1/user');
     }
 
-    setUserInfo = async (userInfo: User) => {
-        this.coreAPI.post<void, User>('api/v1/user/update_settings', userInfo);
+    setUserInfo = async (updateUserInfo: UpdateSettingsData) => {
+        return this.coreAPI.post<User, UpdateSettingsData>('api/v1/user/update_settings', updateUserInfo);
     }
 
     setPhoto = async (photoId: number) => {

@@ -12,10 +12,5 @@ export const getCardsState: Selector<ApplicationState, CardsState> = createSelec
 
 export const getCards: Selector<ApplicationState, User[]> = createSelector(
     getCardsState,
-    (state) => state.cards,
-);
-
-export const getPage: Selector<ApplicationState, number> = createSelector(
-    getCardsState,
-    (state) => state.page,
+    (state) => state.cards as User[],
 );

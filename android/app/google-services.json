@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "77832793411",
+    "project_id": "crushon-fca23",
+    "storage_bucket": "crushon-fca23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77832793411:android:43b167316d3cc1b888d3f6",
+        "android_client_info": {
+          "package_name": "com.lonelyastronaut.crushon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77832793411-cgsj9nsna6d232ep8jlsubpup0kv4hkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0_VFAebsIoKZh6g8bnQ8NMG0GXfIMdic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77832793411-cgsj9nsna6d232ep8jlsubpup0kv4hkg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77832793411-fqn0qagd582v451dv8rvq2ie9egvlj3p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lonelyastronaut.crushon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

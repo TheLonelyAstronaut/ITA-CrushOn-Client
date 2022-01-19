@@ -13,5 +13,3 @@ export type ProfileScreenNavigationProp = CompositeNavigationProp<
 export type EditProfileScreenNavigationProp = StackNavigationProp<ProfileNavigatorParamList, 'EditProfile'>;
 
 export type PassionsScreenNavigationProp = StackNavigationProp<ProfileNavigatorParamList, 'Passions'>;
-
-export type SettingsScreenNavigationProp = StackNavigationProp<ProfileNavigatorParamList, 'Settings'>;

@@ -10,7 +10,8 @@ export class CoreAPIClient {
                 'Accept': '*/*',
                 'Content-Type': 'application/json',
                 //'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBc3RybyIsImlhdCI6MTY0MjAyNjE0MiwiZXhwIjoxNjQyMTEyNTQyfQ.rd31IGDIt7Fd7nyMSZWbWU5OZaWyBJ-wus1FXQVrzNE'
-            }
+            },
+            timeout: 60000
         });
     }
 

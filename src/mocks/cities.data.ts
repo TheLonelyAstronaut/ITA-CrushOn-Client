@@ -1,31 +1,40 @@
-export type cityItem = {
-    id: number;
-    name: string;
-};
+import { City } from "../core/model/user.model";
 
-export const CitiesData: cityItem[] = [
-    {
-        id: 2,
-        name: 'Minsk',
-    },
+export const CitiesData: City[] = [
     {
         id: 1,
-        name: 'Brest',
+        en: 'Minsk',
+        ru: 'Минск',
+        be: 'Мінск',
     },
     {
         id: 5,
-        name: 'Vitebsk',
+        en: 'Brest',
+        ru: 'Брест',
+        be: 'Брэст',
+    },
+    {
+        id: 2,
+        en: 'Vitebsk',
+        ru: 'Витебск',
+        be: 'Віцебск',
     },
     {
         id: 3,
-        name: 'Gomel',
+        en: 'Gomel',
+        ru: 'Гомель',
+        be: 'Гомель',
     },
     {
         id: 4,
-        name: 'Grodno',
+        en: 'Grodno',
+        ru: 'Гродно',
+        be: 'Гродна',
     },
     {
         id: 6,
-        name: 'Mogilev',
+        en: 'Mogilev',
+        ru: 'Могилев',
+        be: 'Магілёў',
     },
 ];

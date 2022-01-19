@@ -1,16 +1,25 @@
+import { createAction } from "@reduxjs/toolkit";
 import { SagaIterator } from "redux-saga";
-import { call, put } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 
 import { coreAPIClient } from "../../core/data/api/core.api";
+import { GET_CITIES_DATA, GET_PASSIONS_DATA } from "../../core/data/store/remote-config/remote-config.actions";
 import { AUTHENTICATE, GET_USER_INFO } from "../../core/data/store/user/user.actions";
 import { splashscreen } from "../../core/util/splashscreen.util";
 import { tokenRepository } from "../../core/util/token-repository.util";
+import { exploreService } from "../../features/explore/data/api/impl/explore-service-impl.api";
 import { loginService } from "../../features/login/data/api/impl/login-service-impl.api";
 import { profileService } from "../../features/profile/data/api/impl/profile-service-impl.api";
 
 
 export function* initializationSaga(): SagaIterator {
-    //get cities and passions data from server...
+    const citiesResponse = yield call(exploreService.getCities);
+    const passionsResponse = yield call(exploreService.getPassions);
+
+    if (citiesResponse.status === 200 && passionsResponse.status === 200) {
+        yield put(GET_CITIES_DATA.COMPLETED(citiesResponse.data));
+        yield put(GET_PASSIONS_DATA.COMPLETED(passionsResponse.data));
+    }
 
     const token = yield call(tokenRepository.getAuthTokenFromStorage);
 
@@ -18,7 +27,7 @@ export function* initializationSaga(): SagaIterator {
         yield call(coreAPIClient.setToken, token);
         const response = yield call(profileService.getUserInfo);
 
-        if(response.data) {
+        if(response.status == 200) {
             yield put(GET_USER_INFO(response.data));
             yield put(AUTHENTICATE.LOGIN());
         } else {
@@ -26,16 +35,18 @@ export function* initializationSaga(): SagaIterator {
             const refreshToken = yield call(tokenRepository.getRefreshTokenFromStorage);
 
             const response = yield call(loginService.refreshTokens, refreshToken);
-
-            if(response.data) {
+            
+            if(response.status == 200) {
                 yield call(tokenRepository.saveAuthTokenToStorage, response.data.authorizationToken)
                 yield call(tokenRepository.saveRefreshTokenToStorage, response.data.refreshToken)
                 yield call(coreAPIClient.setToken, response.data.authorizationToken);
 
                 const userResponse = yield call(profileService.getUserInfo);
 
-                yield put(GET_USER_INFO(userResponse.data));
-                yield put(AUTHENTICATE.LOGIN());
+                if(userResponse.status == 200) {
+                    yield put(GET_USER_INFO(userResponse.data));
+                    yield put(AUTHENTICATE.LOGIN());
+                } 
             }
         }
         

@@ -3,6 +3,7 @@ import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
+import { getPassionsData } from '../../../../core/data/store/remote-config/remote-config.selectors';
 
 import { getPassionsDangerously, getUserDangerously } from '../../../../core/data/store/user/user.selectors';
 import { Passion } from '../../../../core/model/user.model';
@@ -30,6 +31,7 @@ export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScr
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const user = useSelector(getUserDangerously);
+    const passionsData = useSelector(getPassionsData);
 
     const [passions, setPassions] = useState(useSelector(getPassionsDangerously));
 
@@ -70,8 +72,12 @@ export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScr
 
             <Scroll>
                 <PassionsContainer>
-                    {PassionsData.map((item, index) => {
-                        if (passions.includes(item)) {
+                    {passionsData.map((item, index) => {
+                        let isIncluded = false;
+                        passions.forEach(passion => {
+                            if (passion.id === item.id) isIncluded = true;
+                        })
+                        if (isIncluded) {
                             return <PassionItem key={index.toString()} passion={item} selected={true} handleSelection={handleSelection}/>;
                         } else {
                             return <PassionItem key={index.toString()} passion={item} selected={false} handleSelection={handleSelection}/>;

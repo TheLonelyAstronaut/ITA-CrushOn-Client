@@ -1,13 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { useCallback, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { SharedElement } from 'react-navigation-shared-element';
 
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
+import { Reaction } from '../../../model/explore.model';
 import { User } from '../../../model/user.model';
-import { Reaction } from '../../../util/reaction.util';
+import { useCalculateAge } from '../../../util/calculate-age.util';
+import { useResolveLocalizedString } from '../../../util/resolve-localized-string.util';
+import { RootNavigatorParamList } from '../../navigation/root/routing.types';
 import { TextType } from '../../themes/types';
 import { CustomSwipeableRef, Swipeable } from '../swipes/swipeable.component';
 import { Text } from '../text/text.styled';
@@ -19,17 +21,19 @@ import { CardTextWrapper } from './styled/text-wrapper.styled';
 export type CardProps = {
     user: User;
     scale: number;
-    handleReaction?: () => void;
+    handleReaction?: (userId: number, reaction: Reaction) => void;
 };
 
+
 export const Card: React.FC<CardProps> = (props: CardProps) => {
-    const navigation = useNavigation();
-    const { t } = useTranslation();
+    const navigation = useNavigation<NavigationProp<RootNavigatorParamList>>();
     const swipeable = useRef<CustomSwipeableRef>(null);
+    const city = useResolveLocalizedString(props.user.city);
+    const age = useCalculateAge(props.user.dateOfBirth);
 
     const handleReaction = useCallback(
-        (reaction: Reaction) => {// why to give it reaction??? to send like/dislike to server?---------------------------------------------------------
-            props?.handleReaction && props.handleReaction();
+        (reaction: Reaction) => {
+            props?.handleReaction && props.handleReaction(props.user.id, reaction);
         },
         [props]
     );
@@ -45,7 +49,7 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
     const expandCard = useCallback(() => {
         navigation.navigate('ExpandedCard', {
             user: props.user,
-            onGoBack: props?.handleReaction ? handleBackNavigation : undefined, //is this norma???????---------------------
+            onGoBack: props?.handleReaction ? handleBackNavigation : undefined,
         });
     }, [handleBackNavigation, navigation, props.user, props?.handleReaction]);
 
@@ -53,7 +57,7 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
         <Swipeable
             ref={swipeable}
             disabled={!props.handleReaction}
-            onRightSwipe={() => handleReaction(Reaction.LIKE)}// why to give it reaction???--------------------------------
+            onRightSwipe={() => handleReaction(Reaction.LIKE)}
             onLeftSwipe={() => handleReaction(Reaction.DISLIKE)}
         >
             <SharedElement id={`user_image.${props.user.id}`} style={StyleSheet.absoluteFill}>
@@ -66,11 +70,11 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
             <FullyPressable onPress={expandCard}>
                 <CardTextWrapper scale={props.scale}>
                     <Text type={TextType.cardName} scale={props.scale}>
-                        {props.user.name},{props.user.age}
+                        {props.user.name},{age}
                     </Text>
                     <LocationWrapper>
                         <Text type={TextType.cardGeo} scale={props.scale}>
-                            {props.user.city.name}
+                            {city}
                         </Text>
                         <LocationSVG color="white" size={10* props.scale} strokeWidth={props.scale * 1.2} />
                     </LocationWrapper>

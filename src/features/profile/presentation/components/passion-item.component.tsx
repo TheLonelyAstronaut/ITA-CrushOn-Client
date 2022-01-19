@@ -3,6 +3,7 @@ import { useTheme } from 'styled-components';
 
 import { Passion } from '../../../../core/model/user.model';
 import { PassionLabel } from '../../../../core/presentation/components/user-info/styled/passion-label.styled';
+import { useResolveLocalizedString } from '../../../../core/util/resolve-localized-string.util';
 
 import { PassionOutline } from './styled/passion-item-container.styled';
 
@@ -16,6 +17,7 @@ export const PassionItem: React.FC<PassionItemProps> = (props: PassionItemProps)
     const currentTheme = useTheme();
     const unactiveColor = currentTheme.colors.text;
     const activeColor = currentTheme.colors.contrast;
+    const label = useResolveLocalizedString(props.passion);
 
     const color = props.selected ? activeColor : unactiveColor;
 
@@ -25,7 +27,7 @@ export const PassionItem: React.FC<PassionItemProps> = (props: PassionItemProps)
 
     return (
         <PassionOutline borderColor={color} onPress={handleOnPress}>
-            <PassionLabel color={color}>{props.passion.description}</PassionLabel>
+            <PassionLabel color={color}>{label}</PassionLabel>
         </PassionOutline>
     );
 };

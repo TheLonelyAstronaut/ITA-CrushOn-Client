@@ -1,5 +1,5 @@
+import { Reaction } from '../../../model/explore.model';
 import { User } from '../../../model/user.model';
-import { Reaction } from '../../../util/reaction.util';
 
 export type RootNavigatorParamList = {
     Auth: undefined;

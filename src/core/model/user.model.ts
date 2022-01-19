@@ -1,9 +1,11 @@
+import { Locale } from "../util/resolve-localized-string.util";
+
 export type User = {
     username: string;
     id: number;
     photo: Photo;
     name: string;
-    gender: 'male' | 'female';
+    gender: 'MALE' | 'FEMALE';
     dateOfBirth: number;
     city: City;
     bio: string | undefined;
@@ -15,14 +17,12 @@ export type Photo = {
     link: string;
 }
 
-export type Passion = {
+export type Passion = Locale & {
     id: number;
-    description: string;
 }
 
-export type City = {
-    id: number;
-    name: string;
+export type City = Locale & {
+    id: number; 
 };
 
 /*const calculateSum = (a: number, b: number) => {

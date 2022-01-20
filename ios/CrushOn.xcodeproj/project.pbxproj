@@ -13,6 +13,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		558039CF98B6CC216A74B516 /* libPods-CrushOn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DBFCABD1C26BEB2A0DD4ED /* libPods-CrushOn.a */; };
+		7DC099DD2799DA03006CBBC4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DC099DC2799DA03006CBBC4 /* GoogleService-Info.plist */; };
 		7DF7042E2789F32A00847D6C /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DF7042D2789F32A00847D6C /* BootSplash.storyboard */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AD34FCCDE88450D7887709BA /* libPods-CrushOn-CrushOnTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7714F1F6F0D2EC18B6C8F63 /* libPods-CrushOn-CrushOnTests.a */; };
@@ -42,6 +43,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CrushOn/main.m; sourceTree = "<group>"; };
 		13DBFCABD1C26BEB2A0DD4ED /* libPods-CrushOn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CrushOn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D7958D3C59C8C5D0928673 /* Pods-CrushOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn.release.xcconfig"; path = "Target Support Files/Pods-CrushOn/Pods-CrushOn.release.xcconfig"; sourceTree = "<group>"; };
+		7DC099DC2799DA03006CBBC4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7DF7042D2789F32A00847D6C /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = CrushOn/BootSplash.storyboard; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CrushOn/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A41D55C43A32140871F6E85E /* Pods-CrushOn-CrushOnTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrushOn-CrushOnTests.debug.xcconfig"; path = "Target Support Files/Pods-CrushOn-CrushOnTests/Pods-CrushOn-CrushOnTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				7DC099DC2799DA03006CBBC4 /* GoogleService-Info.plist */,
 				0D4E472927387315000503DD /* File.swift */,
 				13B07FAE1A68108700A75B9A /* CrushOn */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DF7042E2789F32A00847D6C /* BootSplash.storyboard in Resources */,
+				7DC099DD2799DA03006CBBC4 /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

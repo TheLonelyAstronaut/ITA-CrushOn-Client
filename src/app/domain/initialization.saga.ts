@@ -1,20 +1,19 @@
-import { createAction } from "@reduxjs/toolkit";
 import { SagaIterator } from "redux-saga";
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 
 import { coreAPIClient } from "../../core/data/api/core.api";
 import { GET_CITIES_DATA, GET_PASSIONS_DATA } from "../../core/data/store/remote-config/remote-config.actions";
 import { AUTHENTICATE, GET_USER_INFO } from "../../core/data/store/user/user.actions";
 import { splashscreen } from "../../core/util/splashscreen.util";
 import { tokenRepository } from "../../core/util/token-repository.util";
-import { exploreService } from "../../features/explore/data/api/impl/explore-service-impl.api";
+import { cardsService } from "../../features/cards/data/api/impl/cards-service-impl.api";
 import { loginService } from "../../features/login/data/api/impl/login-service-impl.api";
 import { profileService } from "../../features/profile/data/api/impl/profile-service-impl.api";
 
 
 export function* initializationSaga(): SagaIterator {
-    const citiesResponse = yield call(exploreService.getCities);
-    const passionsResponse = yield call(exploreService.getPassions);
+    const citiesResponse = yield call(cardsService.getCities);
+    const passionsResponse = yield call(cardsService.getPassions);
 
     if (citiesResponse.status === 200 && passionsResponse.status === 200) {
         yield put(GET_CITIES_DATA.COMPLETED(citiesResponse.data));

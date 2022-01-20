@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
 import { ArrowRightSVG } from '../../../../assets/components/arrow-right-icon.component';
-import { getPassionsData } from '../../../../core/data/store/remote-config/remote-config.selectors';
 import { getPassionsDangerously, getUserDangerously } from '../../../../core/data/store/user/user.selectors';
 import { DoneButton } from '../../../../core/presentation/components/button/done-button.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
@@ -77,11 +76,6 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
             passions: passionsId,
             photo: photoIsChanged ? photo : user.photo.id,
         }));
-        console.log({
-            bio: bio,
-            passions: passionsId,
-            photo: photoIsChanged ? photo : user.photo.id,
-        });
         props.navigation.goBack();
     }, [bio, dispatch, passionsId, photo, photoIsChanged, props.navigation, user.photo.id]);
 

@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { coreAPIClient, CoreAPIClient } from "../../../../../core/data/api/core.api";
 import { SetReactionData, SetReactionResponse } from "../../../../../core/model/explore.model";
-import { User } from "../../../../../core/model/user.model";
+import { City, Passion, User } from "../../../../../core/model/user.model";
 import { CardsService } from "../cards-service.api";
 
 class CardsServiceImpl implements CardsService {
@@ -14,6 +14,14 @@ class CardsServiceImpl implements CardsService {
 
     setReaction = async (reactionData: SetReactionData): Promise<AxiosResponse<SetReactionResponse>> => {
         return this.coreAPI.post<SetReactionResponse, SetReactionData>('api/v1/explore/react', reactionData);
+    }
+    
+    getCities = async (): Promise<AxiosResponse<City[]>>=> {
+        return this.coreAPI.get('api/v1/explore/cities');
+    }
+
+    getPassions = async (): Promise<AxiosResponse<Passion[]>> => {
+        return this.coreAPI.get('api/v1/explore/passions');
     }
 }
 

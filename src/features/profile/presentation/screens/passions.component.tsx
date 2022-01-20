@@ -3,8 +3,8 @@ import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPassionsData } from '../../../../core/data/store/remote-config/remote-config.selectors';
 
+import { getPassionsData } from '../../../../core/data/store/remote-config/remote-config.selectors';
 import { getPassionsDangerously, getUserDangerously } from '../../../../core/data/store/user/user.selectors';
 import { Passion } from '../../../../core/model/user.model';
 import { DoneButton } from '../../../../core/presentation/components/button/done-button.styled';
@@ -15,7 +15,6 @@ import { Scroll } from '../../../../core/presentation/components/container/scrol
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
 import { Text } from '../../../../core/presentation/components/text/text.styled';
 import { SeparatorVerticalType, TextType } from '../../../../core/presentation/themes/types';
-import { PassionsData } from '../../../../mocks/passions.data';
 import { SET_USER_INFO } from '../../data/store/edit-profile.actions';
 import { PassionItem } from '../components/passion-item.component';
 import { Description } from '../components/styled/description-container.styled';
@@ -32,13 +31,18 @@ export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScr
     const dispatch = useDispatch();
     const user = useSelector(getUserDangerously);
     const passionsData = useSelector(getPassionsData);
+    const passionsUser = useSelector(getPassionsDangerously);
 
-    const [passions, setPassions] = useState(useSelector(getPassionsDangerously));
+    const [passions, setPassions] = useState(passionsUser);
 
     const handleSelection = useCallback((selectedPassion: Passion) => {
-        if (passions.includes(selectedPassion)) {
+        let isIncluded = false;
+        passions.forEach(passion => {
+            if (passion.id === selectedPassion.id) isIncluded = true;
+        })
+        if (isIncluded) {
             const newPassions = passions.filter((passion) => {
-                return passion !== selectedPassion;
+                return passion.id !== selectedPassion.id;
             });
             setPassions(newPassions);
         } else {

@@ -1,15 +1,15 @@
+import messaging from "@react-native-firebase/messaging"
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { LogBox } from 'react-native';
 import { Provider } from 'react-redux';
 
 import { navigationService } from '../../../core/util/navigation-container.util';
+import { notificationService, RemoteMessage } from '../../../core/util/notification-service';
 import { useStore } from '../../data/store/store';
 import { RootNavigator } from '../navigation/root-navigator.component';
 import { ConnectedThemeProvider } from '../themes/theme-provider';
 
-import messaging from "@react-native-firebase/messaging"
-import { notificationService, RemoteMessage } from '../../../core/util/notification-service';
 
 messaging().getToken().then(console.log)
 

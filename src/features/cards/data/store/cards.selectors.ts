@@ -7,7 +7,10 @@ import { CardsState } from "./cards.state";
 
 export const getCardsState: Selector<ApplicationState, CardsState> = createSelector(
     (state: ApplicationState) => state,
-    (state) => state.cards,
+    (state) => {
+        console.log(state);
+        return state.cards
+    },
 );
 
 export const getCards: Selector<ApplicationState, User[]> = createSelector(

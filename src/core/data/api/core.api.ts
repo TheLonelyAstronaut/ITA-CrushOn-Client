@@ -5,13 +5,13 @@ export class CoreAPIClient {
 
     constructor() {
         this.axiosClient = new Axios({
-            baseURL: 'https://crushon-webflux-api.herokuapp.com/',
+            baseURL: 'http://192.168.31.233:8080/',
             headers: {
                 'Accept': '*/*',
                 'Content-Type': 'application/json',
                 //'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBc3RybyIsImlhdCI6MTY0MjAyNjE0MiwiZXhwIjoxNjQyMTEyNTQyfQ.rd31IGDIt7Fd7nyMSZWbWU5OZaWyBJ-wus1FXQVrzNE'
             },
-            timeout: 60000
+            //timeout: 60000
         });
     }
 

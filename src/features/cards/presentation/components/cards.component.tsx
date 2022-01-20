@@ -27,7 +27,6 @@ const CustomShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps) => {
     const insets = useSafeAreaInsets();
     const cardsData = useSelector(getCards);
-    const [list, setList] = useState<User[]>(CardsData);
     const theme: DefaultTheme = useTheme();
     const dispatch = useDispatch();
 
@@ -37,10 +36,7 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
 
     const setReaction = useCallback(( userId: number, reaction: Reaction) => {
         dispatch(SET_REACTION.STARTED({userId: userId, reaction: reaction}));
-        list.shift();
-
-        setList([...list]);
-    }, [dispatch, list]);
+    }, [dispatch]);
 
     return (
         <SafeArea>
@@ -57,7 +53,7 @@ export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps)
                     }}
                 />
             </CardsView>
-            {list
+            {cardsData && cardsData
                 .filter((_, index) => index < 2)
                 .map((user, index) => {
                     return (

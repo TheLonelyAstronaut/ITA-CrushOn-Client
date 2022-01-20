@@ -10,6 +10,7 @@ const initialState: CardsState = {
 export const cardsReducer = createReducer<CardsState>(initialState, (builder) => {
     builder
         .addCase(GET_CARDS.COMPLETED, (state, action) => {
+            console.log(action)
             state.cards = action.payload;
         });
 });

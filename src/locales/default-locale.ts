@@ -36,6 +36,10 @@ export type DefaultLocale = {
         };
         card: {
             kmAway: string;
+            noResults: string;
+        };
+        discover: {
+            noMatches: string;
         };
         profile: {
             editProfile: string;

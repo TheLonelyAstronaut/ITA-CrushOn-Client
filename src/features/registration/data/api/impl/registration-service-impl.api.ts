@@ -10,7 +10,7 @@ class RegistrationServiceImpl implements RegistrationService {
 
     register = async (registrationData: RegistrationUser): Promise<AxiosResponse<AuthTokens>> => {
         return this.coreAPI.post<AuthTokens, RegistrationUser>('api/v1/auth/register', registrationData);
-    }
+    };
 }
 
 export const registrationService: RegistrationService = new RegistrationServiceImpl(coreAPIClient);

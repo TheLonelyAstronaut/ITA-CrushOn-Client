@@ -30,7 +30,6 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = (props: SettingsScr
     const theme = useSelector(getTheme);
     const dispatch = useDispatch();
 
-
     const selectEn = useCallback(() => {
         i18n.changeLanguage('en');
     }, [i18n]);
@@ -43,7 +42,6 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = (props: SettingsScr
         i18n.changeLanguage('be');
     }, [i18n]);
 
-
     const selectAutoTheme = useCallback(() => {
         dispatch(SET_THEME.SET(ThemesEnum.AUTO));
     }, [dispatch]);
@@ -55,7 +53,6 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = (props: SettingsScr
     const selectDarkTheme = useCallback(() => {
         dispatch(SET_THEME.SET(ThemesEnum.DARK));
     }, [dispatch]);
-
 
     const logOut = useCallback(() => {
         dispatch(AUTHENTICATE.LOGOUT.TRIGGER());
@@ -79,23 +76,11 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = (props: SettingsScr
                 <Text type={TextType.header}>{t('settings.language')}</Text>
             </Header>
             <Colored style={{ flexDirection: 'column' }}>
-                <SelectableTextedButton
-                    onPress={selectEn}
-                    selected={i18n.language === 'en'}
-                    text={'English'}
-                />
+                <SelectableTextedButton onPress={selectEn} selected={i18n.language === 'en'} text={'English'} />
                 <Separator />
-                <SelectableTextedButton
-                    onPress={selectRu}
-                    selected={i18n.language === 'ru'}
-                    text={'Русский'}
-                />
+                <SelectableTextedButton onPress={selectRu} selected={i18n.language === 'ru'} text={'Русский'} />
                 <Separator />
-                <SelectableTextedButton
-                    onPress={selectBe}
-                    selected={i18n.language === 'be'}
-                    text={'Беларуская'}
-                />
+                <SelectableTextedButton onPress={selectBe} selected={i18n.language === 'be'} text={'Беларуская'} />
             </Colored>
 
             <SeparatorVertical height={SeparatorVerticalType.small} />

@@ -13,9 +13,7 @@ import { uploadService } from '../../upload/data/api/impl/upload-service-impl.ap
 import { registrationService } from '../data/api/impl/registration-service-impl.api';
 import { REGISTRATION } from '../data/store/registration.actions';
 
-
 export function* registrationSaga(action: ReturnType<typeof REGISTRATION.SEND_REGISTRATION_DATA>): SagaIterator {
-    console.log('REGISTER ', action.payload);
     const response: AxiosResponse<AuthTokens> = yield call(registrationService.register, action.payload);
     if (response.data) {
         yield call(coreAPIClient.setToken, response.data.authorizationToken);
@@ -31,14 +29,13 @@ export function* watchRegistrationSaga(): SagaIterator {
     yield takeLatest(REGISTRATION.SEND_REGISTRATION_DATA, registrationSaga);
 }
 
-
 export function* setPhotoRegistrationSaga(action: ReturnType<typeof REGISTRATION.SET_PHOTO>): SagaIterator {
     const photoIdResponse: AxiosResponse<number> = yield call(uploadService.uploadPhoto, action.payload);
 
-    if(photoIdResponse.data) {
+    if (photoIdResponse.data) {
         yield call(profileService.setPhoto, photoIdResponse.data);
     }
-    
+
     yield call(getUserSaga);
     yield put(AUTHENTICATE.LOGIN());
 }

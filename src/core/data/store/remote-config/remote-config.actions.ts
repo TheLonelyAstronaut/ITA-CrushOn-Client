@@ -1,6 +1,6 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction } from '@reduxjs/toolkit';
 
-import { City, Passion } from "../../../model/user.model";
+import { City, Passion } from '../../../model/user.model';
 
 export const GET_CITIES_DATA = {
     COMPLETED: createAction<City[]>('[Get cities data] completed'),

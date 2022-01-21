@@ -1,8 +1,7 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction } from '@reduxjs/toolkit';
 
-import { PhotoPicker } from "../../../../core/util/upload.util";
-import { RegistrationUser } from "../../model/register-user.model";
-
+import { PhotoPicker } from '../../../../core/util/upload.util';
+import { RegistrationUser } from '../../model/register-user.model';
 
 export const REGISTRATION = {
     SET_USERNAME: createAction<string>('Email is added'),

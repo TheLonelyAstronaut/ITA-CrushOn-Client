@@ -1,8 +1,8 @@
-import RNBootSplash from "react-native-bootsplash";
+import RNBootSplash from 'react-native-bootsplash';
 
 class Splashscreen {
     hide() {
-        RNBootSplash.hide({fade: true});
+        RNBootSplash.hide({ fade: true });
     }
 }
 

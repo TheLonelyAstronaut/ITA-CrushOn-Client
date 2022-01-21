@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Name = styled.Text`
     color: ${(props) => props.theme.colors.text};

@@ -35,26 +35,31 @@ export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScr
 
     const [passions, setPassions] = useState(passionsUser);
 
-    const handleSelection = useCallback((selectedPassion: Passion) => {
-        let isIncluded = false;
-        passions.forEach(passion => {
-            if (passion.id === selectedPassion.id) isIncluded = true;
-        })
-        if (isIncluded) {
-            const newPassions = passions.filter((passion) => {
-                return passion.id !== selectedPassion.id;
+    const handleSelection = useCallback(
+        (selectedPassion: Passion) => {
+            let isIncluded = false;
+            passions.forEach((passion) => {
+                if (passion.id === selectedPassion.id) isIncluded = true;
             });
-            setPassions(newPassions);
-        } else {
-            setPassions([...passions, selectedPassion]);
-        }
-    }, [passions, setPassions]);
+            if (isIncluded) {
+                const newPassions = passions.filter((passion) => {
+                    return passion.id !== selectedPassion.id;
+                });
+                setPassions(newPassions);
+            } else {
+                setPassions([...passions, selectedPassion]);
+            }
+        },
+        [passions, setPassions]
+    );
 
     const done = useCallback(() => {
-        dispatch(SET_USER_INFO.COMPLETED({
-            ...user,
-            passions: passions,
-        }));
+        dispatch(
+            SET_USER_INFO.COMPLETED({
+                ...user,
+                passions: passions,
+            })
+        );
         props.navigation.goBack();
     }, [props, user, passions, dispatch]);
 
@@ -78,13 +83,27 @@ export const PassionsScreen: React.FC<PassionsScreenProps> = (props: PassionsScr
                 <PassionsContainer>
                     {passionsData.map((item, index) => {
                         let isIncluded = false;
-                        passions.forEach(passion => {
+                        passions.forEach((passion) => {
                             if (passion.id === item.id) isIncluded = true;
-                        })
+                        });
                         if (isIncluded) {
-                            return <PassionItem key={index.toString()} passion={item} selected={true} handleSelection={handleSelection}/>;
+                            return (
+                                <PassionItem
+                                    key={index.toString()}
+                                    passion={item}
+                                    selected={true}
+                                    handleSelection={handleSelection}
+                                />
+                            );
                         } else {
-                            return <PassionItem key={index.toString()} passion={item} selected={false} handleSelection={handleSelection}/>;
+                            return (
+                                <PassionItem
+                                    key={index.toString()}
+                                    passion={item}
+                                    selected={false}
+                                    handleSelection={handleSelection}
+                                />
+                            );
                         }
                     })}
                 </PassionsContainer>

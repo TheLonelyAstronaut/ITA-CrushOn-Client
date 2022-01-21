@@ -15,7 +15,7 @@ export type ChatsListScreenProps = {
 
 export const ChatsListScreen: React.FC<ChatsListScreenProps> = (props: ChatsListScreenProps) => {
     const insets = useSafeAreaInsets();
-    
+
     return (
         <SafeArea edges={['top']}>
             <FlatList

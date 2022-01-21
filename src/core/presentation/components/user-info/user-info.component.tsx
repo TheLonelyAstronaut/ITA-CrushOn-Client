@@ -28,7 +28,6 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
     const passions = useResolveLocalizedString(props.user.passions as Passion[]);
     const age = useCalculateAge(props.user.dateOfBirth);
 
-
     return (
         <UserInfoWrapper>
             <Text type={TextType.name}>
@@ -44,26 +43,28 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
 
             <SeparatorVertical height={SeparatorVerticalType.small} />
 
-            { props.user?.passions && <>
-                <Text type={TextType.header}>{t('profile.passions')}</Text>
-                <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
-                
-                <PassionsWrapper>
-                    {props.user.passions.map((item, index) => {
-                        const n = Math.floor(Math.random() * 10);
-                        const boxColor = Palette[n].color;
-                        const labelColor = Palette[n].labelColor;
-    
-                        return (
-                            <PassionView key={index.toString()} backgroundColor={boxColor}>
-                                <PassionLabel color={labelColor}>{passions[index]}</PassionLabel>
-                            </PassionView>
-                        );
-                    })}
-                </PassionsWrapper>
-    
-                <SeparatorVertical height={SeparatorVerticalType.small} />
-            </>}
+            {props.user?.passions && (
+                <>
+                    <Text type={TextType.header}>{t('profile.passions')}</Text>
+                    <SeparatorVertical height={SeparatorVerticalType.extrasmall} />
+
+                    <PassionsWrapper>
+                        {props.user.passions.map((item, index) => {
+                            const n = Math.floor(Math.random() * 10);
+                            const boxColor = Palette[n].color;
+                            const labelColor = Palette[n].labelColor;
+
+                            return (
+                                <PassionView key={index.toString()} backgroundColor={boxColor}>
+                                    <PassionLabel color={labelColor}>{passions[index]}</PassionLabel>
+                                </PassionView>
+                            );
+                        })}
+                    </PassionsWrapper>
+
+                    <SeparatorVertical height={SeparatorVerticalType.small} />
+                </>
+            )}
 
             <Text type={TextType.header}>{t('profile.about')}</Text>
             <SeparatorVertical height={SeparatorVerticalType.extrasmall} />

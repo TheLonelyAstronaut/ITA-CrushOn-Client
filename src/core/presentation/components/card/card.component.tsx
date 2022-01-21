@@ -24,7 +24,6 @@ export type CardProps = {
     handleReaction?: (userId: number, reaction: Reaction) => void;
 };
 
-
 export const Card: React.FC<CardProps> = (props: CardProps) => {
     const navigation = useNavigation<NavigationProp<RootNavigatorParamList>>();
     const swipeable = useRef<CustomSwipeableRef>(null);
@@ -76,7 +75,7 @@ export const Card: React.FC<CardProps> = (props: CardProps) => {
                         <Text type={TextType.cardGeo} scale={props.scale}>
                             {city}
                         </Text>
-                        <LocationSVG color="white" size={10* props.scale} strokeWidth={props.scale * 1.2} />
+                        <LocationSVG color="white" size={10 * props.scale} strokeWidth={props.scale * 1.2} />
                     </LocationWrapper>
                 </CardTextWrapper>
             </FullyPressable>

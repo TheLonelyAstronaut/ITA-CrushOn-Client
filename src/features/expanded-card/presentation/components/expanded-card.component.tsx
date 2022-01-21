@@ -1,7 +1,8 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useTheme } from 'styled-components';
 
@@ -59,9 +60,10 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
     return (
         <View style={{ flex: 1 }}>
             <SharedElement id={`user_image.${props.route.params.user.id}`} style={StyleSheet.absoluteFill}>
-                <Image
+                <FastImage
                     source={{ uri: props.route.params.user.photo.link }}
-                    style={[StyleSheet.absoluteFill, { resizeMode: 'cover' }]}
+                    style={StyleSheet.absoluteFill}
+                    resizeMode={'cover'}
                 />
             </SharedElement>
             <Swipeable
@@ -79,17 +81,17 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
                         snapPoints={snapPoints}
                         onChange={handleSheetChanges}
                         handleStyle={{
-                            backgroundColor: theme.colors.background, 
+                            backgroundColor: theme.colors.background,
                             borderTopLeftRadius: theme.borderRadius.medium,
-                            borderTopRightRadius: theme.borderRadius.medium, 
+                            borderTopRightRadius: theme.borderRadius.medium,
                         }}
                         handleIndicatorStyle={{
-                            backgroundColor: theme.colors.componentLabel, 
+                            backgroundColor: theme.colors.componentLabel,
                             width: theme.dimensions.width * 0.2,
                         }}
                     >
                         <Background>
-                            <UserInfo user={props.route.params.user}/>
+                            <UserInfo user={props.route.params.user} />
                         </Background>
                     </BottomSheet>
                 )}

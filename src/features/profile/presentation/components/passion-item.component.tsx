@@ -23,7 +23,7 @@ export const PassionItem: React.FC<PassionItemProps> = (props: PassionItemProps)
 
     const handleOnPress = useCallback(() => {
         props.handleSelection(props.passion);
-    }, [props])
+    }, [props]);
 
     return (
         <PassionOutline borderColor={color} onPress={handleOnPress}>

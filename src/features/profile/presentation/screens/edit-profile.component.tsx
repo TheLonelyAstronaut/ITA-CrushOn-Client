@@ -41,9 +41,7 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
     const dispatch = useDispatch();
     const passionsNames = useResolveLocalizedString(passions);
 
-    const passionsId = passions
-        ? passions.map(item => item.id)
-        : [];
+    const passionsId = passions ? passions.map((item) => item.id) : [];
 
     const [photo, setPhoto] = useState<PhotoPicker>({
         path: '',
@@ -71,11 +69,13 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
     const [bio, setBio] = useState(user.bio as string | '');
 
     const done = useCallback(() => {
-        dispatch(SET_USER_INFO.STARTED({
-            bio: bio,
-            passions: passionsId,
-            photo: photoIsChanged ? photo : user.photo.id,
-        }));
+        dispatch(
+            SET_USER_INFO.STARTED({
+                bio: bio,
+                passions: passionsId,
+                photo: photoIsChanged ? photo : user.photo.id,
+            })
+        );
         props.navigation.goBack();
     }, [bio, dispatch, passionsId, photo, photoIsChanged, props.navigation, user.photo.id]);
 
@@ -121,21 +121,22 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
                 </Header>
                 <ColoredPressable onPress={goToEditPassions}>
                     <Passions>
-                        {passions && passions.map((item, index, arr) => {
-                            if (index !== arr.length - 1) {
-                                return (
-                                    <Text type={TextType.regular} key={index}>
-                                        {passionsNames[index]},{' '}
-                                    </Text>
-                                );
-                            } else {
-                                return (
-                                    <Text type={TextType.regular} key={index}>
-                                        {passionsNames[index]}
-                                    </Text>
-                                );
-                            }
-                        })}
+                        {passions &&
+                            passions.map((item, index, arr) => {
+                                if (index !== arr.length - 1) {
+                                    return (
+                                        <Text type={TextType.regular} key={index}>
+                                            {passionsNames[index]},{' '}
+                                        </Text>
+                                    );
+                                } else {
+                                    return (
+                                        <Text type={TextType.regular} key={index}>
+                                            {passionsNames[index]}
+                                        </Text>
+                                    );
+                                }
+                            })}
                     </Passions>
                     <ArrowRightSVG color={currentTheme.colors.componentLabel} size={16} />
                 </ColoredPressable>

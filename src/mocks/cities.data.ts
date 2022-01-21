@@ -1,4 +1,4 @@
-import { City } from "../core/model/user.model";
+import { City } from '../core/model/user.model';
 
 export const CitiesData: City[] = [
     {

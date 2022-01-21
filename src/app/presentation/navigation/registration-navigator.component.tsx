@@ -22,9 +22,13 @@ export const RegistrationNavigator: React.FC = () => {
             <RegistrationStack.Screen name={'Gender'} component={GenderScreen} />
             <RegistrationStack.Screen name={'Birthday'} component={BirthdayScreen} />
             <RegistrationStack.Screen name={'City'} component={CityScreen} />
-            <RegistrationStack.Screen name={'Photo'} component={PhotoScreen} options={{
-                gestureEnabled: false                
-            }}/>
+            <RegistrationStack.Screen
+                name={'Photo'}
+                component={PhotoScreen}
+                options={{
+                    gestureEnabled: false,
+                }}
+            />
         </RegistrationStack.Navigator>
     );
 };

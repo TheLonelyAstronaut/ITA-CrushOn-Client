@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Animated, Pressable } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ShimmerPlaceholder, { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
+import ShimmerPlaceholder, { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import { useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 import { DefaultTheme } from 'styled-components/native';
@@ -36,11 +36,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
     const { t } = useTranslation();
     const user = useSelector(getUserDangerously);
 
-
     const avatarRef = React.createRef<ShimmerPlaceholder>();
 
     React.useEffect(() => {
-        const avatarAnimation = Animated.sequence([avatarRef.current!.getAnimated()])
+        const avatarAnimation = Animated.sequence([avatarRef.current!.getAnimated()]);
         Animated.loop(avatarAnimation).start();
     }, [avatarRef]);
 
@@ -48,7 +47,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
     const onLoaded = useCallback(() => {
         setIsDownloaded(true);
     }, []);
-
 
     const editProfile = useCallback(() => {
         props.navigation.navigate('EditProfile');

@@ -64,7 +64,7 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
     const goBack = useCallback(() => {
         props.navigation.goBack();
     }, [props]);
-    
+
     const done = useCallback(() => {
         dispatch(REGISTRATION.SET_PHOTO(image));
     }, [image, dispatch]);

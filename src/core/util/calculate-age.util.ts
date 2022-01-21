@@ -1,5 +1,4 @@
-import { useCallback, useMemo } from "react";
-
+import { useCallback, useMemo } from 'react';
 
 export const useCalculateAge = (dateOfBirth: number): number => {
     const calculateAge = useCallback((dateOfBirth: number) => {
@@ -13,4 +12,4 @@ export const useCalculateAge = (dateOfBirth: number): number => {
         return age;
     }, []);
     return useMemo(() => calculateAge(dateOfBirth), [calculateAge, dateOfBirth]);
-}
+};

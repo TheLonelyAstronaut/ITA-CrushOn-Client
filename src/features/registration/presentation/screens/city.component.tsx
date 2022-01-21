@@ -38,12 +38,12 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
     const registrationData = useSelector(getRegistrationData);
     const citiesData = useSelector(getCitiesData);
     const citiesNames = useResolveLocalizedString(citiesData);
-    
+
     const cities = citiesData.map((item, index) => {
         return {
             label: citiesNames[index],
             value: item.id,
-        }
+        };
     });
     const [cityId, setCityId] = useState<number>(citiesData[0].id);
     const [isOpen, setIsOpen] = useState(false);
@@ -51,18 +51,15 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
     const goBack = useCallback(() => {
         props.navigation.goBack();
     }, [props]);
-    
+
     const goNext = useCallback(() => {
-        console.log({
-            ...registrationData,
-            city: cityId,
-            bio: 'empty bio',
-        });
-        dispatch(REGISTRATION.SEND_REGISTRATION_DATA({
-            ...registrationData,
-            city: cityId,
-            bio: 'empty bio',
-        }));
+        dispatch(
+            REGISTRATION.SEND_REGISTRATION_DATA({
+                ...registrationData,
+                city: cityId,
+                bio: 'empty bio',
+            })
+        );
     }, [dispatch, registrationData, cityId]);
 
     return (
@@ -92,15 +89,13 @@ export const CityScreen: React.FC<CityScreenProps> = (props: CityScreenProps) =>
                         borderBottomWidth: 0,
                         paddingVertical: currentTheme.spacer,
                         borderRadius: currentTheme.borderRadius.medium,
-
                     }}
                     style={{
                         borderWidth: 1,
                         borderColor: currentTheme.colors.componentLabel,
                         borderRadius: currentTheme.borderRadius.medium,
                     }}
-                    containerStyle={{
-                    }}
+                    containerStyle={{}}
                     labelStyle={{
                         //color: currentTheme.colors.componentLabel,
                         fontSize: currentTheme.fontSize.large,

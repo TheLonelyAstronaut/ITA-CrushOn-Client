@@ -45,6 +45,10 @@ export const en: DefaultLocale = {
         },
         card: {
             kmAway: 'km away',
+            noResults: 'Oops, you saw all our users, check it out a bit later... 😔',
+        },
+        discover: {
+            noMatches: 'Bad news for you, nobody liked u yet... 😔',
         },
         profile: {
             editProfile: 'Edit Profile',
@@ -104,6 +108,10 @@ export const ru: DefaultLocale = {
         },
         card: {
             kmAway: 'км от вас',
+            noResults: 'Упс, похоже, ты посмотрел всех подходящих тебе людей, возвращайся позже... 😔',
+        },
+        discover: {
+            noMatches: 'Плохие новости: ты пока никого не нашел... 😔',
         },
         profile: {
             editProfile: 'Редактировать',
@@ -163,6 +171,10 @@ export const be: DefaultLocale = {
         },
         card: {
             kmAway: 'км ад вас',
+            noResults: 'Упс, здаецца мне, ты паглядзеў усіх падыходзячых табе людзей, вяртайся пазней... 😔',
+        },
+        discover: {
+            noMatches: 'Дрэнныя навіны: ты пакуль нікога не знайшоў... 😔',
         },
         profile: {
             editProfile: 'Рэдагаваць',

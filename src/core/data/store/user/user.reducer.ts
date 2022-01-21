@@ -1,9 +1,9 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer } from '@reduxjs/toolkit';
 
-import { SET_USER_INFO } from "../../../../features/profile/data/store/edit-profile.actions";
+import { SET_USER_INFO } from '../../../../features/profile/data/store/edit-profile.actions';
 
-import { AUTHENTICATE, GET_USER_INFO } from "./user.actions";
-import { UserState } from "./user.state";
+import { AUTHENTICATE, GET_USER_INFO } from './user.actions';
+import { UserState } from './user.state';
 
 const initialState: UserState = {
     userInfo: undefined,

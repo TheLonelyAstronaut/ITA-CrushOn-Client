@@ -21,13 +21,13 @@ export const ChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) => {
     const navigation = useNavigation() as ChatsListScreenNavigationProp;
 
     const openChat = useCallback(() => {
-        navigation.navigate('Chat', { 
+        navigation.navigate('Chat', {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             screen: 'ChatNested',
             params: {
-                user: props.user
-            }
+                user: props.user,
+            },
         });
     }, [navigation, props.user]);
 

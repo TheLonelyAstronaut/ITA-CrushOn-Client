@@ -1,9 +1,9 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer } from '@reduxjs/toolkit';
 
-import { RegistrationUser } from "../../model/register-user.model";
+import { RegistrationUser } from '../../model/register-user.model';
 
-import { REGISTRATION } from "./registration.actions";
-import { RegistrationState } from "./registration.state";
+import { REGISTRATION } from './registration.actions';
+import { RegistrationState } from './registration.state';
 
 const initialState: RegistrationState = {
     registrationData: undefined,

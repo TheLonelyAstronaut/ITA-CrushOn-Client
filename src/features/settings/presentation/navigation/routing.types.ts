@@ -1,5 +1,5 @@
-import { StackNavigationProp } from "@react-navigation/stack";
+import { StackNavigationProp } from '@react-navigation/stack';
 
-import { ProfileNavigatorParamList } from "../../../../core/presentation/navigation/profile/routing-types";
+import { ProfileNavigatorParamList } from '../../../../core/presentation/navigation/profile/routing-types';
 
 export type SettingsScreenNavigationProp = StackNavigationProp<ProfileNavigatorParamList, 'Settings'>;

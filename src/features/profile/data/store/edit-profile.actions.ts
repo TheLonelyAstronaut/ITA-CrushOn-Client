@@ -1,9 +1,8 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction } from '@reduxjs/toolkit';
 
-import { SetUserInfoData } from "../../../../core/model/profile.model";
-import { User } from "../../../../core/model/user.model";
-import { PhotoPicker } from "../../../../core/util/upload.util";
-
+import { SetUserInfoData } from '../../../../core/model/profile.model';
+import { User } from '../../../../core/model/user.model';
+import { PhotoPicker } from '../../../../core/util/upload.util';
 
 export const SET_USER_INFO = {
     STARTED: createAction<SetUserInfoData>('[Set user info] started'),

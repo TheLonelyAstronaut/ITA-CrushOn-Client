@@ -6,8 +6,6 @@ class NotificationService {
     requestPermissions = async (): Promise<boolean> => {
         const authStatus = await messaging().requestPermission();
 
-        console.log(authStatus)
-
         return (
             authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
             authStatus === messaging.AuthorizationStatus.PROVISIONAL
@@ -20,6 +18,10 @@ class NotificationService {
 
     addBackgroundMessageHandler = (listener: (message: RemoteMessage) => Promise<unknown>): void => {
         messaging().setBackgroundMessageHandler(listener);
+    };
+
+    getNotificationToken = (): Promise<string> => {
+        return messaging().getToken();
     };
 }
 

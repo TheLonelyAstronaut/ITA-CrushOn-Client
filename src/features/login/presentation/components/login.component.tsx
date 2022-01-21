@@ -40,10 +40,12 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
     const [password, setpassword] = useState('');
 
     const login = useCallback(() => {
-        dispatch(LOGIN.TRIGGER({
-            username: email,
-            password: password,
-        } as AuthData));
+        dispatch(
+            LOGIN.TRIGGER({
+                username: email,
+                password: password,
+            } as AuthData)
+        );
     }, [email, password, dispatch]);
 
     const signUp = useCallback(() => {

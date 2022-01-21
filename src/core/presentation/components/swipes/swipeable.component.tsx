@@ -34,7 +34,7 @@ export const getRotateAngle = (translationX: number): number => {
 
     if (margin < 0) {
         return translationX < 0
-            ? (+(translationX + 70) * ROTATION_MAX_DEGREE) / LEFT_THRESHOLD// + is to transform into numbers?----------------------------------
+            ? (+(translationX + 70) * ROTATION_MAX_DEGREE) / LEFT_THRESHOLD // + is to transform into numbers?----------------------------------
             : (+(translationX - 70) * ROTATION_MAX_DEGREE) / LEFT_THRESHOLD;
     } else {
         return withTiming(0);
@@ -94,10 +94,11 @@ export const Swipeable: SwipeableComponentType = forwardRef(
                 const countFrom = value ?? rotate.value;
 
                 const rotationValue = countFrom > 0 ? 90 : -90;
-                rotate.value = withTiming(rotationValue, undefined, () => {// why do we put this in callback instead of writing it separately?----------------------------------
+                rotate.value = withTiming(rotationValue, undefined, () => {
+                    // why do we put this in callback instead of writing it separately?----------------------------------
                     if (rotate.value > 0) {
                         reaction.value = 1;
-                    } else {               
+                    } else {
                         reaction.value = 0;
                     }
 
@@ -117,7 +118,8 @@ export const Swipeable: SwipeableComponentType = forwardRef(
             { posX: number; posY: number; delta: number }
         >(
             {
-                onStart: (event, ctx) => {// where do we use this?--------------------------------------------------------------------
+                onStart: (event, ctx) => {
+                    // where do we use this?--------------------------------------------------------------------
                     ctx.posX = 0;
                     ctx.posY = 0;
                     ctx.delta = 70;
@@ -137,7 +139,7 @@ export const Swipeable: SwipeableComponentType = forwardRef(
                     }
                 },
             },
-            [onThresholdMet, setReaction]// is onThresholdMet needed?------------------------------------------------
+            [onThresholdMet, setReaction] // is onThresholdMet needed?------------------------------------------------
         );
 
         const swipeLeft = useCallback(

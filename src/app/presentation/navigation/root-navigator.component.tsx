@@ -13,12 +13,12 @@ import { TabNavigator } from './tab-navigator.component';
 
 const RootStack = createSharedElementStackNavigator<RootNavigatorParamList>();
 
-const createNestedSharedStack = ( routeName: string, component: React.FC<any>): React.FC => {
+const createNestedSharedStack = (routeName: string, component: React.FC<any>): React.FC => {
     const NestedSharedStack = createSharedElementStackNavigator();
     // eslint-disable-next-line react/display-name
     return () => (
         <NestedSharedStack.Navigator headerMode={'none'}>
-            <NestedSharedStack.Screen name={routeName} component={component}/>
+            <NestedSharedStack.Screen name={routeName} component={component} />
         </NestedSharedStack.Navigator>
     );
 };
@@ -38,26 +38,28 @@ export const RootNavigator: React.FC = () => {
                 },
             }}
         >
-            {isAuthenticated ? (<>
-                <RootStack.Screen name={'Tabs'} component={TabNavigator} />
-                <RootStack.Screen
-                    name={'ExpandedCard'}
-                    component={ExpandedCardScreen}
-                    options={{ gestureEnabled: false }}
-                    sharedElements={(route, otherRoute, showing) => {
-                        const { user } = route.params;
-                        return [
-                            {
-                                id: `user_image.${user.id}`,
-                                //animation: 'fade',
-                                //resize: 'stretch'
-                                //animation: 'move'
-                            },
-                        ];
-                    }}
-                />
-                <RootStack.Screen name={'Chat'} component={Chat} />
-            </>) : (
+            {isAuthenticated ? (
+                <>
+                    <RootStack.Screen name={'Tabs'} component={TabNavigator} />
+                    <RootStack.Screen
+                        name={'ExpandedCard'}
+                        component={ExpandedCardScreen}
+                        options={{ gestureEnabled: false }}
+                        sharedElements={(route, otherRoute, showing) => {
+                            const { user } = route.params;
+                            return [
+                                {
+                                    id: `user_image.${user.id}`,
+                                    //animation: 'fade',
+                                    //resize: 'stretch'
+                                    //animation: 'move'
+                                },
+                            ];
+                        }}
+                    />
+                    <RootStack.Screen name={'Chat'} component={Chat} />
+                </>
+            ) : (
                 <RootStack.Screen name={'Auth'} component={AuthenticationNavigator} />
             )}
         </RootStack.Navigator>

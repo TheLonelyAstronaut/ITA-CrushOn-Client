@@ -119,9 +119,8 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     const expandCard = useCallback(() => {
         navigation.navigate('ExpandedCard', {
             user: props.route.params.user,
-        })},
-        [navigation, props]
-    );
+        });
+    }, [navigation, props]);
 
     const renderBubble = (props: BubbleProps<IMessage>) => {
         return (
@@ -200,8 +199,6 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     const onSend = useCallback((messages = []) => {
         setMessages((previousMessages) => GiftedChat.append(previousMessages, messages));
     }, []);
-
-
 
     return (
         <SafeArea edges={['top']}>

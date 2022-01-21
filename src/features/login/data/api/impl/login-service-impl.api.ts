@@ -9,11 +9,15 @@ class LoginServiceImpl implements LoginService {
 
     refreshTokens = async (refreshToken: string): Promise<AxiosResponse<AuthTokens>> => {
         return this.coreAPI.post<AuthTokens, RefreshTokenData>('api/v1/auth/refresh_tokens', { refreshToken });
-    }
+    };
 
     login = async (username: string, password: string): Promise<AxiosResponse<AuthTokens>> => {
-        return this.coreAPI.post<AuthTokens, AuthData>('api/v1/auth/authenticate', { username, password});
-    }
+        return this.coreAPI.post<AuthTokens, AuthData>('api/v1/auth/authenticate', { username, password });
+    };
+
+    logout = async (firebaseToken: string) => {
+        return this.coreAPI.post('api/v1/auth/logout', { firebaseToken });
+    };
 }
 
 export const loginService: LoginService = new LoginServiceImpl(coreAPIClient);

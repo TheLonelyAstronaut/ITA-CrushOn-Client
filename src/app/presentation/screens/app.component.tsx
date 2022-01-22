@@ -11,8 +11,6 @@ import { useStore } from '../../data/store/store';
 import { RootNavigator } from '../navigation/root-navigator.component';
 import { ConnectedThemeProvider } from '../themes/theme-provider';
 
-messaging().getToken().then(console.log);
-
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 const App: React.FC = () => {

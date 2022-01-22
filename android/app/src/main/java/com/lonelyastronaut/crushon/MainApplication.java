@@ -2,6 +2,7 @@ package com.lonelyastronaut.crushon;
 
 import android.app.Application;
 import android.content.Context;
+import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage;
 import com.facebook.react.bridge.JSIModulePackage;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
@@ -38,7 +39,17 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected JSIModulePackage getJSIModulePackage() {
-            return new ReanimatedJSIModulePackage();
+          return new JSIModulePackage() {
+          @Override
+          public List<JSIModuleSpec> getJSIModules(
+            final ReactApplicationContext reactApplicationContext,
+            final JavaScriptContextHolder jsContext
+          ) {
+            List<JSIModuleSpec> modules = Arrays.asList();
+
+            modules.addAll(new WatermelonDBJSIPackage().getJSIModules(reactApplicationContext, jsContext));
+            modules.addAll(new ReanimatedJSIModulePackage().getJSIModules(reactApplicationContext, jsContext));
+            return modules;
         }
       };
 

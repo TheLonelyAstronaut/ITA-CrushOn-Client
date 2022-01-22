@@ -13,7 +13,7 @@ import { DiscoverSVG } from '../../../assets/components/discover-icon.component'
 import { ProfileSVG } from '../../../assets/components/profile-icon.component';
 import { TabNavigatorParamList } from '../../../core/presentation/navigation/tab/routing.types';
 import { CardsScreen } from '../../../features/cards/presentation/components/cards.component';
-import { ChatsListScreen } from '../../../features/chats-list/presentation/components/chats-list.component';
+import { ChatsListScreen } from '../../../features/chat/presentation/components/chats-list.component';
 import { DiscoverScreen } from '../../../features/discover/presentation/components/discover.component';
 
 import { ProfileNavigator } from './profile-navigator.component';

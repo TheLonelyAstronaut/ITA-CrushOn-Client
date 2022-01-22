@@ -13,11 +13,14 @@ import { loginService } from '../data/api/impl/login-service-impl.api';
 import { LOGIN } from '../data/store/login.actions';
 
 function* loginSaga(action: ReturnType<typeof LOGIN.TRIGGER>): SagaIterator {
+    yield call(coreAPIClient.clearAuthorizationHeaders);
+
     const response: AxiosResponse<AuthTokens> = yield call(
         loginService.login,
         action.payload.username,
         action.payload.password
     );
+
     if (response.status === 200) {
         yield call(coreAPIClient.setToken, response.data.authorizationToken);
         yield call(tokenRepository.saveAuthTokenToStorage, response.data.authorizationToken);

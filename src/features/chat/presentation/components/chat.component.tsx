@@ -23,7 +23,6 @@ import { useTheme } from 'styled-components';
 
 import { SendSVG } from '../../../../assets/components/send-icon.component';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
-import { tokenRepository } from '../../../../core/util/token-repository.util';
 import { Messages } from '../../../../mocks/messages.data';
 import { ChatScreenNavigationProp, ChatScreenRouteProp } from '../navigation/routing.types';
 

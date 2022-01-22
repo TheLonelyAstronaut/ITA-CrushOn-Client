@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
     "lib": [
       "dom",
-      "esnext"
+      "esnext",
+      "ES2016"
     ],
     "moduleResolution": "node",
     "noEmit": true,
@@ -14,7 +16,8 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "strictPropertyInitialization": false
   },
   "include": [
     "src/**/*.ts",

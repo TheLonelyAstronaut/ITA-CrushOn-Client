@@ -20,7 +20,7 @@ export const en: DefaultLocale = {
             signUp: 'Sign up',
             continue: 'Continue',
             return: 'Return',
-            username: 'Email',
+            username: 'Username',
             repeatPassword: 'Repeat password',
             name: 'Name',
             male: 'Male',

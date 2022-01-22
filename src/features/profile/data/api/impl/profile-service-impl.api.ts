@@ -8,8 +8,8 @@ import { ProfileService } from '../profile-service.api';
 class ProfileServiceImpl implements ProfileService {
     constructor(private coreAPI: CoreAPIClient) {}
 
-    getUserInfo = async (): Promise<AxiosResponse<User>> => {
-        return this.coreAPI.get<User>('api/v1/user');
+    getUserInfo = async (id?: number): Promise<AxiosResponse<User>> => {
+        return this.coreAPI.get<User>(`api/v1/user${id ? `/${id}` : ''}`);
     };
 
     setUserInfo = async (updateUserInfo: UpdateSettingsData) => {

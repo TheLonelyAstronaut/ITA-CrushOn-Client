@@ -13,7 +13,7 @@ class WatermelonDatabase {
     constructor() {
         const adapter = new SQLiteAdapter({
             schema,
-            jsi: true /* Platform.OS === 'ios' */,
+            jsi: true,
             onSetUpError: (error) => {
                 alert(`${error}/nreload the app`);
             },
@@ -33,25 +33,30 @@ class WatermelonDatabase {
     };
 
     getAllWithoutFetch = <T extends Model>(tableName: string, queryBy: Clause[]): Query<T> => {
-        return this.database
-        .get(tableName)
-        .query(...queryBy) as unknown as Query<T>
-    }
+        return this.database.get(tableName).query(...queryBy) as unknown as Query<T>;
+    };
 
     create = async <T extends Model>(tableName: string, setInitialFields: (data: T) => void): Promise<T> => {
         return this.database.get(tableName).create(setInitialFields as (data: Model) => void) as Promise<T>;
     };
 
-    createIfNotExist = async <T extends Model>(tableName: string, queryBy: Clause[], setInitialFields: (data: T) => void): Promise<T> => {
-        const item = this.database
+    createIfNotExist = async <T extends Model>(
+        tableName: string,
+        queryBy: Clause[],
+        setInitialFields: (data: T) => void
+    ): Promise<T> => {
+        const item = (await this.database
             .get(tableName)
             .query(...queryBy)
-            .fetch() as unknown as Promise<T>;
-        return item ?? this.database.get(tableName).create(setInitialFields as (data: Model) => void) as Promise<T>;
+            .fetch()) as unknown as Array<T>;
+
+        return item.length
+            ? item[0]
+            : (this.database.get(tableName).create(setInitialFields as (data: Model) => void) as Promise<T>);
     };
 
     destroy = async (model: Model) => {
-        model.destroyPermanently();
+        await model.destroyPermanently();
     };
 
     withDatabaseSession = async <T>(callback: () => Promise<T>): Promise<T | null> => {
@@ -78,6 +83,7 @@ class WatermelonDatabase {
                 chat.chatId = 12;
             });
 
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const message = await this.create<Message>(Message.table, (message) => {
                 message.text = 'Bruh';
                 message.messageId = 1;
@@ -86,13 +92,13 @@ class WatermelonDatabase {
                 message.chat.set(chat);
             });
 
-            chat.messages.fetch().then(chats => alert(chats.length))
+            chat.messages.fetch().then((chats) => alert(chats.length));
         });
     };
 
-    async clearDatabase() {
+    clearDatabase = async () => {
         await this.withDatabaseSession(async () => await this.database.unsafeResetDatabase());
-    }
+    };
 
     runTests = async () => {
         await this.clearDatabase();

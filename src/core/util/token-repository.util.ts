@@ -1,5 +1,7 @@
 import SInfo from 'react-native-sensitive-info';
 
+import { logger } from './logger.util';
+
 class TokenRepository {
     private async saveTokenToStorage(key: string, token: string) {
         await SInfo.setItem(key, token, {});
@@ -14,7 +16,7 @@ class TokenRepository {
                 return '';
             }
         } catch (error) {
-            console.log('failed to retrieve token from secure storage', error);
+            logger.error(error);
         }
 
         return '';

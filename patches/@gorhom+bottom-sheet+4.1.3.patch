@@ -47,12 +47,12 @@ index 3606001..8873d72 100644
 @@ -80,7 +80,9 @@ Animated.addWhitelistedUIProps({
    decelerationRate: true,
  });
-
+ 
 -type BottomSheet = BottomSheetMethods;
 +type BottomSheet = BottomSheetMethods & {
 +    internalPanRef: RefObject<PanGestureHandler>[]
 +};
-
+ 
  const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
    function BottomSheet(props, ref) {
 @@ -288,6 +290,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
@@ -72,7 +72,7 @@ index 3606001..8873d72 100644
 +      internalPanRef: [_internalPanHandlerRef1, _internalPanHandlerRef2]
      }));
      //#endregion
-
+ 
 @@ -1487,7 +1493,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, BottomSheetProps>(
           * than the sheet position had changed and we trigger
           * the `onChange` callback.
@@ -101,7 +101,7 @@ index 3606001..8873d72 100644
                    animatedIndex={animatedIndex}
                    animatedPosition={animatedPosition}
 diff --git a/node_modules/@gorhom/bottom-sheet/src/components/bottomSheetDraggableView/BottomSheetDraggableView.tsx b/node_modules/@gorhom/bottom-sheet/src/components/bottomSheetDraggableView/BottomSheetDraggableView.tsx
-index d01579b..86b4103 100644
+index d01579b..c8f57ab 100644
 --- a/node_modules/@gorhom/bottom-sheet/src/components/bottomSheetDraggableView/BottomSheetDraggableView.tsx
 +++ b/node_modules/@gorhom/bottom-sheet/src/components/bottomSheetDraggableView/BottomSheetDraggableView.tsx
 @@ -1,4 +1,4 @@
@@ -113,7 +113,7 @@ index d01579b..86b4103 100644
 @@ -8,15 +8,15 @@ import {
  import type { BottomSheetDraggableViewProps } from './types';
  import { styles } from './styles';
-
+ 
 -const BottomSheetDraggableViewComponent = ({
 +const BottomSheetDraggableViewComponent = forwardRef<PanGestureHandler, BottomSheetDraggableViewProps>( ({
    nativeGestureRef,
@@ -126,15 +126,11 @@ index d01579b..86b4103 100644
    // refs
 -  const panGestureRef = useRef<PanGestureHandler>(null);
 +  //const panGestureRef = useRef<PanGestureHandler>(null);
-
+ 
    // hooks
    const {
-@@ -70,9 +70,11 @@ const BottomSheetDraggableViewComponent = ({
-     return [styles.container, style];
-   }, [style]);
-
-+  console.log(simultaneousHandlers.length)
-+
+@@ -72,7 +72,7 @@ const BottomSheetDraggableViewComponent = ({
+ 
    return (
      <PanGestureHandler
 -      ref={panGestureRef}
@@ -142,13 +138,13 @@ index d01579b..86b4103 100644
        enabled={enableContentPanningGesture}
        simultaneousHandlers={simultaneousHandlers}
        shouldCancelWhenOutside={false}
-@@ -88,7 +90,7 @@ const BottomSheetDraggableViewComponent = ({
+@@ -88,7 +88,7 @@ const BottomSheetDraggableViewComponent = ({
        </Animated.View>
      </PanGestureHandler>
    );
 -};
 +});
-
+ 
  const BottomSheetDraggableView = memo(BottomSheetDraggableViewComponent);
  BottomSheetDraggableView.displayName = 'BottomSheetDraggableView';
 diff --git a/node_modules/@gorhom/bottom-sheet/src/components/bottomSheetHandleContainer/BottomSheetHandleContainer.tsx b/node_modules/@gorhom/bottom-sheet/src/components/bottomSheetHandleContainer/BottomSheetHandleContainer.tsx
@@ -164,7 +160,7 @@ index 9e48c17..d276589 100644
 @@ -10,7 +10,7 @@ import {
  import { print } from '../../utilities';
  import type { BottomSheetHandleContainerProps } from './types';
-
+ 
 -function BottomSheetHandleContainerComponent({
 +const BottomSheetHandleContainerComponent = forwardRef<PanGestureHandler, BottomSheetHandleContainerProps>(({
    animatedIndex,
@@ -193,6 +189,6 @@ index 9e48c17..d276589 100644
    //#endregion
 -}
 +})
-
+ 
  const BottomSheetHandleContainer = memo(BottomSheetHandleContainerComponent);
  BottomSheetHandleContainer.displayName = 'BottomSheetHandleContainer';

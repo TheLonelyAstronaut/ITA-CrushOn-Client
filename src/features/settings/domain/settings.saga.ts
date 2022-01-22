@@ -6,6 +6,7 @@ import { AUTHENTICATE } from '../../../core/data/store/user/user.actions';
 import { notificationService } from '../../../core/util/notification-service.utils';
 import { tokenRepository } from '../../../core/util/token-repository.util';
 import { GET_CARDS } from '../../cards/data/store/cards.actions';
+import { database } from '../../chat/data/database/watermelon.database';
 import { GET_MATCHES } from '../../discover/data/store/discover.actions';
 import { loginService } from '../../login/data/api/impl/login-service-impl.api';
 
@@ -13,6 +14,7 @@ function* logoutSaga(): SagaIterator {
     yield call(loginService.logout, yield call(notificationService.getNotificationToken));
     yield call(coreAPIClient.clearAuthorizationHeaders);
     yield call(tokenRepository.clearTokens);
+    yield call(database.clearDatabase);
     yield put(AUTHENTICATE.LOGOUT.COMPLETED());
     yield put(GET_CARDS.RESET([]));
     yield put(GET_MATCHES.COMPLETED([]));

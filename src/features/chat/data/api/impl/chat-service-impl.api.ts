@@ -1,8 +1,8 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from 'axios';
 
-import { coreAPIClient, CoreAPIClient } from "../../../../../core/data/api/core.api";
-import { Chat, Message, SendMessageData } from "../../../model/chat.model";
-import { ChatService } from "../chat-service.api";
+import { coreAPIClient, CoreAPIClient } from '../../../../../core/data/api/core.api';
+import { Chat, Message, SendMessageData } from '../../../model/chat.model';
+import { ChatService } from '../chat-service.api';
 
 class ChatServiceImpl implements ChatService {
     constructor(private core: CoreAPIClient) {}
@@ -12,13 +12,7 @@ class ChatServiceImpl implements ChatService {
     };
 
     getMessages = async (chatId: number): Promise<AxiosResponse<Message[]>> => {
-        return this.core.get('api/v1/chats/messages', {
-            params: {
-                body: {
-                    chatId: chatId,
-                },
-            },
-        });
+        return this.core.get(`api/v1/chats/${chatId}`);
     };
 
     sendMessage = async (data: SendMessageData): Promise<AxiosResponse<number>> => {

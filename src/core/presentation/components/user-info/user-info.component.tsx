@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import { LocationSVG } from '../../../../assets/components/location-icon.component';
-import { City, Passion, User } from '../../../model/user.model';
+import { Passion, User } from '../../../model/user.model';
 import { useCalculateAge } from '../../../util/calculate-age.util';
 import { useResolveLocalizedString } from '../../../util/resolve-localized-string.util';
 import { Palette } from '../../themes/palette.themes';
@@ -23,7 +23,7 @@ type UserInfoProps = {
 
 export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
     const currentTheme = useTheme();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const city = useResolveLocalizedString(props.user.city);
     const passions = useResolveLocalizedString(props.user.passions as Passion[]);
     const age = useCalculateAge(props.user.dateOfBirth);

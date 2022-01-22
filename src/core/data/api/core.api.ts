@@ -5,7 +5,7 @@ export class CoreAPIClient {
 
     constructor() {
         this.axiosClient = new Axios({
-            baseURL: 'https://crushon-webflux-api.herokuapp.com/',
+            baseURL: 'http://localhost:8080/',
             headers: {
                 Accept: '*/*',
                 'Content-Type': 'application/json',

@@ -39,8 +39,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
     const avatarRef = React.createRef<ShimmerPlaceholder>();
 
     React.useEffect(() => {
-        const avatarAnimation = Animated.sequence([avatarRef.current!.getAnimated()]);
-        Animated.loop(avatarAnimation).start();
+        if (avatarRef.current) {
+            const avatarAnimation = Animated.sequence([avatarRef.current.getAnimated()]);
+            Animated.loop(avatarAnimation).start();
+        }
     }, [avatarRef]);
 
     const [isDownloaded, setIsDownloaded] = useState(false);
@@ -74,12 +76,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = (props: ProfileScreen
                         isInteraction={false}
                         visible={isDownloaded}
                     >
-                        <Photo
-                            source={{ uri: user?.photo.link }}
-                            resizeMode="cover"
-                            imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
-                            onLoadEnd={onLoaded}
-                        />
+                        <Photo source={{ uri: user?.photo.link }} resizeMode="cover" onLoadEnd={onLoaded} />
                     </CustomShimmerPlaceholder>
                 </Center>
 

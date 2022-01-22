@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/core';
+import withObservables from '@nozbe/with-observables';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -19,68 +19,34 @@ import {
     IMessage,
 } from 'react-native-gifted-chat';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components';
 
 import { SendSVG } from '../../../../assets/components/send-icon.component';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
 import { Messages } from '../../../../mocks/messages.data';
+import { Chat } from '../../data/database/model/chat.model';
+import { GET_MESSAGES, OPEN_PROFILE_FROM_CHAT, SEND_MESSAGE } from '../../data/store/chat.actions';
+import { ChatHeader } from '../components/chat-header.component';
+import { Avatar } from '../components/styled/avatar-image.styled';
 import { ChatScreenNavigationProp, ChatScreenRouteProp } from '../navigation/routing.types';
-
-import { ChatHeader } from './chat-header.component';
-import { Avatar } from './styled/avatar-image.styled';
 
 export type ChatScreenProps = {
     navigation: ChatScreenNavigationProp;
     route: ChatScreenRouteProp;
+    chat: Chat;
 };
 
-export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) => {
-    const navigation = useNavigation();
+export const RawChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) => {
     const { t } = useTranslation();
     const theme = useTheme();
     const insets = useSafeAreaInsets();
-    const [messages, setMessages] = useState(Messages);
+    const dispatch = useDispatch();
+    const [messages] = useState(Messages);
 
     useEffect(() => {
-        setMessages([
-            {
-                _id: 3,
-                text: 'Have fun',
-                createdAt: new Date(),
-                user: {
-                    _id: props.route.params.user.id,
-                    name: 'React Native',
-                    avatar: props.route.params.user.photo.link,
-                },
-            },
-            {
-                _id: 2,
-                text: 'Good luck',
-                createdAt: new Date(),
-                user: {
-                    _id: props.route.params.user.id,
-                    name: 'React Native',
-                    avatar: props.route.params.user.photo.link,
-                },
-            },
-            {
-                _id: 1,
-                text: 'Hello developer',
-                createdAt: new Date(),
-                user: {
-                    _id: props.route.params.user.id,
-                    name: 'React Native',
-                    avatar: props.route.params.user.photo.link,
-                },
-            },
-            {
-                _id: 0,
-                text: 'This is a system message',
-                createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-                system: true,
-            },
-        ]);
-    }, [props]);
+        dispatch(GET_MESSAGES(props.route.params.chat.chatId));
+    }, [dispatch, props.route.params]);
 
     const renderTime = (props: TimeProps<IMessage>) => {
         return (
@@ -112,14 +78,12 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
     };
 
     const renderAvatar = () => {
-        return <Avatar source={{ uri: props.route.params.user.photo.link }} />;
+        return <Avatar source={{ uri: props.route.params.user.photo }} />;
     };
 
     const expandCard = useCallback(() => {
-        navigation.navigate('ExpandedCard', {
-            user: props.route.params.user,
-        });
-    }, [navigation, props]);
+        dispatch(OPEN_PROFILE_FROM_CHAT(props.route.params.user.userId));
+    }, [dispatch, props.route]);
 
     const renderBubble = (props: BubbleProps<IMessage>) => {
         return (
@@ -154,6 +118,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
             }}
         />
     );
+
     const renderComposer = (props: ComposerProps) => (
         <Composer
             {...props}
@@ -195,9 +160,12 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
         />
     );
 
-    const onSend = useCallback((messages = []) => {
-        setMessages((previousMessages) => GiftedChat.append(previousMessages, messages));
-    }, []);
+    const onSend = useCallback(
+        (messages: IMessage[]) => {
+            messages.forEach((message) => dispatch(SEND_MESSAGE({ chatId: props.chat.chatId, message: message.text })));
+        },
+        [dispatch, props.chat]
+    );
 
     return (
         <SafeArea edges={['top']}>
@@ -209,7 +177,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
             <GiftedChat
                 messages={messages}
                 alwaysShowSend={true}
-                onSend={(messages) => onSend(messages)}
+                onSend={onSend}
                 bottomOffset={insets.bottom ? insets.bottom : -theme.spacer}
                 user={{
                     _id: 1010,
@@ -228,3 +196,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) =>
         </SafeArea>
     );
 };
+
+export const ChatScreen = withObservables(['route'], ({ route }) => ({
+    chat: route.params.chat.observe(),
+}))(RawChatScreen);

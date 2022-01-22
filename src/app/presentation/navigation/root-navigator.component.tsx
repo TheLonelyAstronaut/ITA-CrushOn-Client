@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { getIsAuthenticated } from '../../../core/data/store/user/user.selectors';
 import { RootNavigatorParamList } from '../../../core/presentation/navigation/root/routing.types';
-import { ChatScreen } from '../../../features/chat/presentation/components/chat.component';
+import { ChatScreen } from '../../../features/chat/presentation/screens/chat.component';
 import { ExpandedCardScreen } from '../../../features/expanded-card/presentation/components/expanded-card.component';
 
 import { AuthenticationNavigator } from './authentication-navigator.component';
@@ -13,7 +13,10 @@ import { TabNavigator } from './tab-navigator.component';
 
 const RootStack = createSharedElementStackNavigator<RootNavigatorParamList>();
 
-const createNestedSharedStack = (routeName: string, component: React.FC<any>): React.FC => {
+const createNestedSharedStack = <T extends Record<never, unknown>>(
+    routeName: string,
+    component: React.FC<T>
+): React.FC => {
     const NestedSharedStack = createSharedElementStackNavigator();
     // eslint-disable-next-line react/display-name
     return () => (
@@ -45,7 +48,7 @@ export const RootNavigator: React.FC = () => {
                         name={'ExpandedCard'}
                         component={ExpandedCardScreen}
                         options={{ gestureEnabled: false }}
-                        sharedElements={(route, otherRoute, showing) => {
+                        sharedElements={(route) => {
                             const { user } = route.params;
                             return [
                                 {

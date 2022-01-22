@@ -1,10 +1,9 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useTheme } from 'styled-components/native';
 
-import { User } from '../../../../core/model/user.model';
+import { User } from '../../data/database/model/user.model';
 
 import { Avatar } from './styled/avatar-image.styled';
 import { Back } from './styled/header-back-text';
@@ -19,12 +18,12 @@ export type chatHeaderProps = {
 
 export const ChatHeader: React.FC<chatHeaderProps> = (props: chatHeaderProps) => {
     const theme = useTheme();
-    const { t } = useTranslation();
+
     return (
         <HeaderContainer>
             <View style={{ flex: 1, paddingLeft: theme.spacer }}>
                 <Pressable onPress={props.goBack}>
-                    <Back>{t('auth.return')}</Back>
+                    <Back>{'<'}</Back>
                 </Pressable>
             </View>
 
@@ -34,8 +33,8 @@ export const ChatHeader: React.FC<chatHeaderProps> = (props: chatHeaderProps) =>
 
             <View style={{ flex: 1, alignItems: 'flex-end', paddingRight: theme.spacer }}>
                 <Pressable onPress={props.expandCard}>
-                    <SharedElement id={`user_image.${props.user.id}`}>
-                        <Avatar source={{ uri: props.user.photo.link }} />
+                    <SharedElement id={`user_image.${props.user.userId}`}>
+                        <Avatar source={{ uri: props.user.photo }} />
                     </SharedElement>
                 </Pressable>
             </View>

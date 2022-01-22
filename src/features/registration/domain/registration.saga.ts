@@ -6,6 +6,7 @@ import { coreAPIClient } from '../../../core/data/api/core.api';
 import { AUTHENTICATE } from '../../../core/data/store/user/user.actions';
 import { getUserSaga } from '../../../core/domain/user.saga';
 import { AuthTokens } from '../../../core/model/auth.model';
+import { logger } from '../../../core/util/logger.util';
 import { navigationService } from '../../../core/util/navigation-container.util';
 import { tokenRepository } from '../../../core/util/token-repository.util';
 import { profileService } from '../../profile/data/api/impl/profile-service-impl.api';
@@ -22,7 +23,7 @@ export function* registrationSaga(action: ReturnType<typeof REGISTRATION.SEND_RE
 
         yield call(navigationService.navigate, 'Photo');
     } else {
-        console.log('FAILED TO REGISTER', response.status);
+        logger.log('FAILED TO REGISTER', response.status);
     }
 }
 export function* watchRegistrationSaga(): SagaIterator {

@@ -1,11 +1,11 @@
 import { SagaIterator } from 'redux-saga';
-import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 
+import { getUser } from '../../../core/data/store/user/user.selectors';
+import { User } from '../../../core/model/user.model';
 import { discoverService } from '../data/api/impl/discover-service-impl.api';
 import { GET_MATCHES } from '../data/store/discover.actions';
-import { getUser } from '../../../core/data/store/user/user.selectors';
 import { Match } from '../model/match.model';
-import { User } from '../../../core/model/user.model';
 
 export function* getMatchesSaga(): SagaIterator {
     yield put(GET_MATCHES.STARTED());

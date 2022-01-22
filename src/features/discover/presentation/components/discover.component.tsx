@@ -18,7 +18,7 @@ export type DiscoverScreenProps = {
     navigation: DiscoverScreenNavigationProp;
 };
 
-export const DiscoverScreen: React.FC<DiscoverScreenProps> = (props: DiscoverScreenProps) => {
+export const DiscoverScreen: React.FC<DiscoverScreenProps> = () => {
     const insets = useSafeAreaInsets();
     const dispatch = useDispatch();
     const isLoading = useSelector(getIsMatchesLoading);

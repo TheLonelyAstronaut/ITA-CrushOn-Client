@@ -17,7 +17,7 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
   },
   "include": [
     "src/**/*.ts",
@@ -31,6 +31,6 @@
     "**/*.spec.android.tsx",
     "**/*.spec.ios.ts",
     "**/*.spec.ios.tsx",
-    "node_modules"
+    "node_modules",
   ]
 }

@@ -4,10 +4,11 @@ import { call, put, select, takeEvery, takeLatest, all, delay } from 'redux-saga
 
 import { SetReactionResponse } from '../../../core/model/explore.model';
 import { User } from '../../../core/model/user.model';
+import { logger } from '../../../core/util/logger.util';
+import { getMatchesSaga } from '../../discover/domian/discover.sagas';
 import { cardsService } from '../data/api/impl/cards-service-impl.api';
 import { GET_CARDS, SET_REACTION } from '../data/store/cards.actions';
 import { getCards, getIsCardsLoading, getIsEndReached } from '../data/store/cards.selectors';
-import { getMatchesSaga } from '../../discover/domian/discover.sagas';
 
 function* cardsSaga(): SagaIterator {
     yield put(GET_CARDS.STARTED());
@@ -17,7 +18,7 @@ function* cardsSaga(): SagaIterator {
     if (cardsResponse.status === 200) {
         yield put(GET_CARDS.COMPLETED(cardsResponse.data));
     } else {
-        console.error(`cardsSaga: ${cardsResponse.status}`);
+        logger.error(`cardsSaga: ${cardsResponse.status}`);
     }
 }
 

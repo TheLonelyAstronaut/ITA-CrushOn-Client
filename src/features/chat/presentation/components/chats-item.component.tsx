@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-color-literals */
 import { Query } from '@nozbe/watermelondb';
 import withObservables from '@nozbe/with-observables';
 import { useNavigation } from '@react-navigation/native';
@@ -19,34 +18,39 @@ import { ChatsItemView } from './styled/chats-item-view.styled';
 
 export type ChatsItemProps = {
     chat: Chat;
+    currentUserId: number;
 };
 
 export const RawChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) => {
     const navigation = useNavigation() as ChatsListScreenNavigationProp;
-    const user = useDatabaseItem<User>(props.chat.firstUser);
+    const firstUser = useDatabaseItem<User>(props.chat.firstUser);
+    const secondUser = useDatabaseItem<User>(props.chat.secondUser);
+    const user = useMemo(
+        () => (props.currentUserId === firstUser?.userId ? secondUser : firstUser),
+        [firstUser, secondUser, props.currentUserId]
+    );
     const messages = useDatabaseItem<Message, Query<Message>>(props.chat.messages);
     const date = useMemo(() => {
-        if(!messages || messages?.length == 0) return '';
+        if (!messages || messages?.length == 0) return '';
 
-        const date = new Date(messages[0].sentAt)
+        const date = new Date(messages[0].sentAt);
 
-        return `${date.getHours()}:${date.getMinutes()}`
+        return `${date.getHours()}:${date.getMinutes()}`;
     }, [messages]);
 
     const openChat = useCallback(() => {
         navigation.navigate('Chat', {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // eslint-disable-next-line
             // @ts-ignore
             screen: 'ChatNested',
             params: {
                 user: user,
-                //chatId: props.
+                chat: props.chat,
             },
         });
-    }, [navigation, user]);
+    }, [navigation, user, props.chat]);
 
-    if(!user || !messages || messages?.length == 0) {
-        console.log('BRUH')
+    if (!user || !messages || messages?.length == 0) {
         return null;
     }
 
@@ -59,13 +63,11 @@ export const RawChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) =>
                     {messages[0].text}
                 </LastMessage>
             </View>
-            <DateComponent>
-                {date}
-            </DateComponent>
+            <DateComponent>{date}</DateComponent>
         </ChatsItemView>
     );
 };
 
-export const ChatsItem = withObservables([Chat.table], ({ chat }) => ({
+export const ChatsItem = withObservables(['chat'], ({ chat }) => ({
     chat: chat.observe(),
 }))(RawChatsItem);

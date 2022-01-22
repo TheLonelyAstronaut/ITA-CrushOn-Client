@@ -4,21 +4,18 @@ import { useTranslation } from 'react-i18next';
 import { Platform, Pressable } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components/native';
 
 import { AddPhotoSVG } from '../../../../assets/components/add-photo-icon.component';
 import { ActiveButton } from '../../../../core/presentation/components/auth/active-button.component';
 import { AuthBackground } from '../../../../core/presentation/components/container/auth-background.styled';
 import { AuthInputContainer } from '../../../../core/presentation/components/container/auth-input-container.styled';
-import { Button } from '../../../../core/presentation/components/container/button-container.styled';
 import { Buttons } from '../../../../core/presentation/components/container/buttons-container.styled';
 import { Center } from '../../../../core/presentation/components/container/center.styled';
 import { SeparatorVertical } from '../../../../core/presentation/components/container/separator-vertical.styled';
-import { Label } from '../../../../core/presentation/components/text/label.styled';
 import { SeparatorVerticalType } from '../../../../core/presentation/themes/types';
 import { REGISTRATION } from '../../data/store/registration.actions';
-import { getRegistrationData } from '../../data/store/registration.selectors';
 import { AppealContainer } from '../components/styled/appeal-container.styled';
 import { Appeal } from '../components/styled/appeal-text.styled';
 import { PickerOutline } from '../components/styled/picker-button-container.styled';
@@ -30,7 +27,7 @@ export type PhotoScreenProps = {
     navigation: PhotoScreenNavigationProp;
 };
 
-export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps) => {
+export const PhotoScreen: React.FC<PhotoScreenProps> = () => {
     const currentTheme = useTheme();
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
@@ -60,10 +57,6 @@ export const PhotoScreen: React.FC<PhotoScreenProps> = (props: PhotoScreenProps)
             setIsSelected(true);
         });
     }, []);
-
-    const goBack = useCallback(() => {
-        props.navigation.goBack();
-    }, [props]);
 
     const done = useCallback(() => {
         dispatch(REGISTRATION.SET_PHOTO(image));

@@ -1,0 +1,16 @@
+diff --git a/node_modules/@react-navigation/bottom-tabs/src/types.tsx b/node_modules/@react-navigation/bottom-tabs/src/types.tsx
+index 7015ac4..3db688e 100644
+--- a/node_modules/@react-navigation/bottom-tabs/src/types.tsx
++++ b/node_modules/@react-navigation/bottom-tabs/src/types.tsx
+@@ -154,9 +154,8 @@ export type BottomTabNavigationOptions = {
+ 
+ export type BottomTabDescriptor = Descriptor<
+   ParamListBase,
+-  string,
+-  TabNavigationState<ParamListBase>,
+-  BottomTabNavigationOptions
++  NavigationProp<any, any, any, any, any>,
++  RouteProp<any, any>
+ >;
+ 
+ export type BottomTabDescriptorMap = {

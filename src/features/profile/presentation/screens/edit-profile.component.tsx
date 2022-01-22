@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
@@ -41,7 +41,9 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
     const dispatch = useDispatch();
     const passionsNames = useResolveLocalizedString(passions);
 
-    const passionsId = passions ? passions.map((item) => item.id) : [];
+    const passionsId = useMemo(() => {
+        return passions ? passions.map((item) => item.id) : [];
+    }, [passions]);
 
     const [photo, setPhoto] = useState<PhotoPicker>({
         path: '',
@@ -93,7 +95,6 @@ export const EditProfileScreen: React.FC<EditProfileScreenProps> = (props: EditP
                     <Photo
                         source={photoIsChanged ? { uri: photo.path } : { uri: user.photo.link }}
                         resizeMode="cover"
-                        imageStyle={{ borderRadius: currentTheme.photo.borderRadius }}
                     />
                 </Center>
 

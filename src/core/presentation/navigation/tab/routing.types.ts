@@ -1,4 +1,4 @@
-import { Reaction } from '../../../util/reaction.util';
+import { Reaction } from '../../../model/explore.model';
 
 export type TabNavigatorParamList = {
     Cards: {

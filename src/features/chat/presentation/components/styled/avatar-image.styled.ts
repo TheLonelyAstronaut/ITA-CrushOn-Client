@@ -1,6 +1,7 @@
+import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/native';
 
-export const Avatar = styled.Image`
+export const Avatar = styled(FastImage)`
     width: ${(props) => props.theme.spacer * 5}px;
     height: ${(props) => props.theme.spacer * 5}px;
     border-radius: ${(props) => props.theme.spacer * 2.5}px;

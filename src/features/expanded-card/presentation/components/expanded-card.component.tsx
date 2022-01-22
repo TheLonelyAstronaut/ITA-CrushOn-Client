@@ -22,7 +22,7 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
     const [focused, setFocused] = useState(false);
     const snapPoints = useMemo(() => ['25%', '50%', '100%'], []);
     const bottomSheetRef = useRef<BottomSheet>(null);
-    const panRef = useRef<CustomSwipeableRef>();
+    const panRef = useRef<CustomSwipeableRef | null>(null);
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -67,7 +67,7 @@ export const ExpandedCardScreen: React.FC<ExpandedCardScreenProps> = (props: Exp
                 />
             </SharedElement>
             <Swipeable
-                ref={panRef}
+                ref={(ref) => (panRef.current = ref)}
                 disabled={!props.route.params.onGoBack}
                 onRightSwipe={() => handleSwipe(Reaction.LIKE)}
                 onLeftSwipe={() => handleSwipe(Reaction.DISLIKE)}

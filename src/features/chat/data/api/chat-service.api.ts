@@ -1,6 +1,6 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from 'axios';
 
-import { Chat, Message, SendMessageData } from "../../model/chat.model";
+import { Chat, Message, SendMessageData } from '../../model/chat.model';
 
 export interface ChatService {
     getChats: () => Promise<AxiosResponse<Chat[]>>;

@@ -6,10 +6,10 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import AppComponent from '../src/app/presentation/screens/App';
+import App from '../src/app/presentation/screens/app.component';
 
 // Note: test renderer must be required after react-native.
 
 it('renders correctly', () => {
-    renderer.create(<AppComponent />);
+    renderer.create(<App />);
 });

@@ -1,3 +1,5 @@
+import { Chat } from '../../../../features/chat/data/database/model/chat.model';
+import { User as DBUser } from '../../../../features/chat/data/database/model/user.model';
 import { Reaction } from '../../../model/explore.model';
 import { User } from '../../../model/user.model';
 
@@ -9,6 +11,7 @@ export type RootNavigatorParamList = {
         onGoBack?: (reaction: Reaction) => void;
     };
     Chat: {
-        user: User;
+        user: DBUser;
+        chat: Chat;
     };
 };

@@ -24,7 +24,7 @@ export type CardsScreenProps = {
 
 const CustomShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
-export const CardsScreen: React.FC<CardsScreenProps> = (props: CardsScreenProps) => {
+export const CardsScreen: React.FC<CardsScreenProps> = () => {
     const insets = useSafeAreaInsets();
     const cardsData = useSelector(getCards);
     const isLoading = useSelector(getIsCardsLoading);

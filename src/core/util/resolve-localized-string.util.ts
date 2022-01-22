@@ -23,5 +23,8 @@ export const useResolveLocalizedString = <K extends Locale | Locale[]>(data: K):
     const { i18n } = useTranslation();
     const translate = useCallback((text: Locale) => resolveLocalizedString(i18n.language, text), [i18n.language]);
 
-    return useMemo(() => (Array.isArray(data) ? data.map(translate) : translate(data)), [data, translate]) as F<K>;
+    return useMemo(
+        () => (Array.isArray(data) ? data.map(translate) : translate(data as Locale)),
+        [data, translate]
+    ) as F<K>;
 };

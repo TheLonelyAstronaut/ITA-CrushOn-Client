@@ -1,4 +1,3 @@
-import { Query } from '@nozbe/watermelondb';
 import withObservables from '@nozbe/with-observables';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useMemo } from 'react';
@@ -19,6 +18,7 @@ import { ChatsItemView } from './styled/chats-item-view.styled';
 export type ChatsItemProps = {
     chat: Chat;
     currentUserId: number;
+    messages: Array<Message>;
 };
 
 export const RawChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) => {
@@ -29,14 +29,14 @@ export const RawChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) =>
         () => (props.currentUserId === firstUser?.userId ? secondUser : firstUser),
         [firstUser, secondUser, props.currentUserId]
     );
-    const messages = useDatabaseItem<Message, Query<Message>>(props.chat.messages);
-    const date = useMemo(() => {
-        if (!messages || messages?.length == 0) return '';
 
-        const date = new Date(messages[0].sentAt);
+    const date = useMemo(() => {
+        if (!props.messages || props.messages?.length == 0) return '';
+
+        const date = new Date(props.messages[0].sentAt);
 
         return `${date.getHours()}:${date.getMinutes()}`;
-    }, [messages]);
+    }, [props.messages]);
 
     const openChat = useCallback(() => {
         navigation.navigate('Chat', {
@@ -50,7 +50,7 @@ export const RawChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) =>
         });
     }, [navigation, user, props.chat]);
 
-    if (!user || !messages || messages?.length == 0) {
+    if (!user || !props.messages) {
         return null;
     }
 
@@ -60,7 +60,7 @@ export const RawChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) =>
             <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Name>{user.name}</Name>
                 <LastMessage numberOfLines={2} ellipsizeMode={'tail'}>
-                    {messages[0].text}
+                    {props.messages.length == 0 ? 'No messages yet...' : props.messages[props.messages.length - 1].text}
                 </LastMessage>
             </View>
             <DateComponent>{date}</DateComponent>
@@ -70,4 +70,5 @@ export const RawChatsItem: React.FC<ChatsItemProps> = (props: ChatsItemProps) =>
 
 export const ChatsItem = withObservables(['chat'], ({ chat }) => ({
     chat: chat.observe(),
+    messages: chat.messages.observe(),
 }))(RawChatsItem);

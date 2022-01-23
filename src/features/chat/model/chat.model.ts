@@ -12,6 +12,7 @@ export type Message = {
     text: string;
     timestamp: number;
     id: number;
+    chatId: number;
 };
 
 export type SendMessageData = {

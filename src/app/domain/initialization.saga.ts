@@ -7,6 +7,7 @@ import { AUTHENTICATE, GET_USER_INFO } from '../../core/data/store/user/user.act
 import { splashscreen } from '../../core/util/splashscreen.util';
 import { tokenRepository } from '../../core/util/token-repository.util';
 import { cardsService } from '../../features/cards/data/api/impl/cards-service-impl.api';
+import { chatWebSocket } from '../../features/chat/data/api/impl/chat-web-socket-impl.api';
 import { loginService } from '../../features/login/data/api/impl/login-service-impl.api';
 import { profileService } from '../../features/profile/data/api/impl/profile-service-impl.api';
 
@@ -26,6 +27,8 @@ export function* initializationSaga(): SagaIterator {
         const response = yield call(profileService.getUserInfo);
 
         if (response.status == 200) {
+            yield call(chatWebSocket.connect, token);
+
             yield put(GET_USER_INFO(response.data));
             yield put(AUTHENTICATE.LOGIN());
         } else {
@@ -42,6 +45,8 @@ export function* initializationSaga(): SagaIterator {
                 const userResponse = yield call(profileService.getUserInfo);
 
                 if (userResponse.status == 200) {
+                    yield call(chatWebSocket.connect, token);
+
                     yield put(GET_USER_INFO(userResponse.data));
                     yield put(AUTHENTICATE.LOGIN());
                 }

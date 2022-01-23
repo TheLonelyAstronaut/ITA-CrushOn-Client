@@ -9,6 +9,7 @@ import { AuthTokens } from '../../../core/model/auth.model';
 import { logger } from '../../../core/util/logger.util';
 import { navigationService } from '../../../core/util/navigation-container.util';
 import { tokenRepository } from '../../../core/util/token-repository.util';
+import { chatWebSocket } from '../../chat/data/api/impl/chat-web-socket-impl.api';
 import { profileService } from '../../profile/data/api/impl/profile-service-impl.api';
 import { uploadService } from '../../upload/data/api/impl/upload-service-impl.api';
 import { registrationService } from '../data/api/impl/registration-service-impl.api';
@@ -20,6 +21,7 @@ export function* registrationSaga(action: ReturnType<typeof REGISTRATION.SEND_RE
         yield call(coreAPIClient.setToken, response.data.authorizationToken);
         yield call(tokenRepository.saveAuthTokenToStorage, response.data.authorizationToken);
         yield call(tokenRepository.saveRefreshTokenToStorage, response.data.refreshToken);
+        yield call(chatWebSocket.connect, response.data.authorizationToken);
 
         yield call(navigationService.navigate, 'Photo');
     } else {

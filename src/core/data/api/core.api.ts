@@ -1,11 +1,14 @@
 import { Axios, AxiosResponse, HeadersDefaults } from 'axios';
+import { Platform } from 'react-native';
+
+export const SERVER_ENDPOINT = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
 
 export class CoreAPIClient {
     private axiosClient: Axios;
 
     constructor() {
         this.axiosClient = new Axios({
-            baseURL: 'http://localhost:8080/',
+            baseURL: `http://${SERVER_ENDPOINT}:8080/`,
             headers: {
                 Accept: '*/*',
                 'Content-Type': 'application/json',

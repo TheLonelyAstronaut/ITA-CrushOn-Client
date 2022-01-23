@@ -8,6 +8,7 @@ import { getUserSaga } from '../../../core/domain/user.saga';
 import { AuthTokens } from '../../../core/model/auth.model';
 import { notificationService } from '../../../core/util/notification-service.utils';
 import { tokenRepository } from '../../../core/util/token-repository.util';
+import { chatWebSocket } from '../../chat/data/api/impl/chat-web-socket-impl.api';
 import { profileService } from '../../profile/data/api/impl/profile-service-impl.api';
 import { loginService } from '../data/api/impl/login-service-impl.api';
 import { LOGIN } from '../data/store/login.actions';
@@ -26,6 +27,7 @@ function* loginSaga(action: ReturnType<typeof LOGIN.TRIGGER>): SagaIterator {
         yield call(tokenRepository.saveAuthTokenToStorage, response.data.authorizationToken);
         yield call(tokenRepository.saveRefreshTokenToStorage, response.data.refreshToken);
         yield call(profileService.setFirebaseToken, yield call(notificationService.getNotificationToken));
+        yield call(chatWebSocket.connect, response.data.authorizationToken);
 
         yield call(getUserSaga);
         yield put(AUTHENTICATE.LOGIN());

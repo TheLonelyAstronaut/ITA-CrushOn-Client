@@ -2,6 +2,8 @@ import { Database, Model, Query } from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 import { Clause } from '@nozbe/watermelondb/QueryDescription';
 
+import { logger } from '../../../../core/util/logger.util';
+
 import { Chat } from './model/chat.model';
 import { Message } from './model/message.model';
 import schema from './model/schema';
@@ -34,6 +36,10 @@ class WatermelonDatabase {
 
     getAllWithoutFetch = <T extends Model>(tableName: string, queryBy: Clause[]): Query<T> => {
         return this.database.get(tableName).query(...queryBy) as unknown as Query<T>;
+    };
+
+    getByQuery = async <T extends Model>(tableName: string, queryBy: Clause[]): Promise<T> => {
+        return (await this.getAll<T>(tableName, queryBy))[0];
     };
 
     create = async <T extends Model>(tableName: string, setInitialFields: (data: T) => void): Promise<T> => {
@@ -97,7 +103,9 @@ class WatermelonDatabase {
     };
 
     clearDatabase = async () => {
-        await this.withDatabaseSession(async () => await this.database.unsafeResetDatabase());
+        this.withDatabaseSession(async () => {
+            await this.database.unsafeResetDatabase();
+        }).catch(logger.error);
     };
 
     runTests = async () => {

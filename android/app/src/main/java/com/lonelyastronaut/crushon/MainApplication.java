@@ -2,6 +2,10 @@ package com.lonelyastronaut.crushon;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.facebook.react.bridge.JSIModuleSpec;
+import com.facebook.react.bridge.JavaScriptContextHolder;
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage;
 import com.facebook.react.bridge.JSIModulePackage;
 import com.facebook.react.PackageList;
@@ -12,46 +16,49 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.swmansion.reanimated.ReanimatedJSIModulePackage;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-  private final ReactNativeHost mReactNativeHost =
-      new ReactNativeHost(this) {
-        @Override
-        public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
-        }
+    private final ReactNativeHost mReactNativeHost =
+            new ReactNativeHost(this) {
+                @Override
+                public boolean getUseDeveloperSupport() {
+                    return BuildConfig.DEBUG;
+                }
 
-        @Override
-        protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          return packages;
-        }
+                @Override
+                protected List<ReactPackage> getPackages() {
+                    @SuppressWarnings("UnnecessaryLocalVariable")
+                    List<ReactPackage> packages = new PackageList(this).getPackages();
+                    // Packages that cannot be autolinked yet can be added manually here, for example:
+                    // packages.add(new MyReactNativePackage());
+                    return packages;
+                }
 
-        @Override
-        protected String getJSMainModuleName() {
-          return "index";
-        }
+                @Override
+                protected String getJSMainModuleName() {
+                    return "index";
+                }
 
-        @Override
-        protected JSIModulePackage getJSIModulePackage() {
-          return new JSIModulePackage() {
-          @Override
-          public List<JSIModuleSpec> getJSIModules(
-            final ReactApplicationContext reactApplicationContext,
-            final JavaScriptContextHolder jsContext
-          ) {
-            List<JSIModuleSpec> modules = Arrays.asList();
+                @Override
+                protected JSIModulePackage getJSIModulePackage() {
+                    return new JSIModulePackage() {
+                        @Override
+                        public List<JSIModuleSpec> getJSIModules(
+                                final ReactApplicationContext reactApplicationContext,
+                                final JavaScriptContextHolder jsContext
+                        ) {
+                            List<JSIModuleSpec> modules = Arrays.asList();
 
-            modules.addAll(new WatermelonDBJSIPackage().getJSIModules(reactApplicationContext, jsContext));
-            modules.addAll(new ReanimatedJSIModulePackage().getJSIModules(reactApplicationContext, jsContext));
-            return modules;
-        }
-      };
+                            modules.addAll(new WatermelonDBJSIPackage().getJSIModules(reactApplicationContext, jsContext));
+                            modules.addAll(new ReanimatedJSIModulePackage().getJSIModules(reactApplicationContext, jsContext));
+                            return modules;
+                        }
+                    };
+                }
+            };
 
   @Override
   public ReactNativeHost getReactNativeHost() {

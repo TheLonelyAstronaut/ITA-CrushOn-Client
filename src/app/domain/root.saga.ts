@@ -2,12 +2,11 @@ import { SagaIterator } from 'redux-saga';
 import { spawn, call } from 'redux-saga/effects';
 
 import { watchCardsSaga, watchReactionSaga } from '../../features/cards/domain/cards.saga';
-import {
-    watchGetChatsSaga,
-    watchGetMessagesSaga,
-    watchProfileFromChatSaga,
-    watchSendMessageSaga,
-} from '../../features/chat/domain/chat.sagas';
+import { watchGetChatsSaga } from '../../features/chat/domain/get-chats.sagas';
+import { watchGetMessagesSaga } from '../../features/chat/domain/get-messages.sagas';
+import { watchProfileFromChatSaga } from '../../features/chat/domain/open-profile.sagas';
+import { bootstrapWebSocket } from '../../features/chat/domain/receive-message.sagas';
+import { watchSendMessageSaga } from '../../features/chat/domain/send-message.sagas';
 import { watchForGetMatchesSaga } from '../../features/discover/domian/discover.sagas';
 import { watchLoginSaga } from '../../features/login/domain/login.saga';
 import { watchSetPhotoSaga, watchSetUserInfoSaga } from '../../features/profile/domain/edit-profile.saga';
@@ -33,6 +32,7 @@ export default function* rootSaga(): SagaIterator {
     yield spawn(watchGetMessagesSaga);
     yield spawn(watchProfileFromChatSaga);
     yield spawn(watchSendMessageSaga);
+    yield spawn(bootstrapWebSocket);
 
     yield call(initializationSaga);
 }

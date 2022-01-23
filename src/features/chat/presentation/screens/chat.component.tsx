@@ -19,13 +19,15 @@ import {
     IMessage,
 } from 'react-native-gifted-chat';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
 import { SendSVG } from '../../../../assets/components/send-icon.component';
+import { getUser } from '../../../../core/data/store/user/user.selectors';
 import { SafeArea } from '../../../../core/presentation/components/container/safe-area-themed.styled';
-import { Messages } from '../../../../mocks/messages.data';
 import { Chat } from '../../data/database/model/chat.model';
+import { Message } from '../../data/database/model/message.model';
+import { User } from '../../data/database/model/user.model';
 import { GET_MESSAGES, OPEN_PROFILE_FROM_CHAT, SEND_MESSAGE } from '../../data/store/chat.actions';
 import { ChatHeader } from '../components/chat-header.component';
 import { Avatar } from '../components/styled/avatar-image.styled';
@@ -35,6 +37,7 @@ export type ChatScreenProps = {
     navigation: ChatScreenNavigationProp;
     route: ChatScreenRouteProp;
     chat: Chat;
+    messages: Array<Message>;
 };
 
 export const RawChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps) => {
@@ -42,7 +45,37 @@ export const RawChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps)
     const theme = useTheme();
     const insets = useSafeAreaInsets();
     const dispatch = useDispatch();
-    const [messages] = useState(Messages);
+
+    const user = useSelector(getUser);
+    const [giftedMessages, setGiftedMessages] = useState<Array<IMessage>>([]);
+
+    useEffect(() => {
+        (async () => {
+            if (!props.messages) {
+                return;
+            }
+
+            const filtered = props.messages.filter((msg) => msg.messageId > 0);
+            const messages: Array<IMessage> = [];
+
+            for (const message of filtered) {
+                const user = (await message.sender.fetch()) as User;
+
+                messages.push({
+                    _id: message.messageId,
+                    text: message.text,
+                    createdAt: message.sentAt,
+                    user: {
+                        _id: user.userId,
+                        name: user.name,
+                        avatar: user.photo,
+                    },
+                });
+            }
+
+            setGiftedMessages(messages);
+        })();
+    }, [props.messages]);
 
     useEffect(() => {
         dispatch(GET_MESSAGES(props.route.params.chat.chatId));
@@ -175,13 +208,12 @@ export const RawChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps)
                 expandCard={expandCard}
             />
             <GiftedChat
-                messages={messages}
+                messages={giftedMessages}
                 alwaysShowSend={true}
                 onSend={onSend}
+                inverted={false}
                 bottomOffset={insets.bottom ? insets.bottom : -theme.spacer}
-                user={{
-                    _id: 1010,
-                }}
+                user={{ _id: user?.id ?? 0 }}
                 minComposerHeight={theme.composerHeight}
                 minInputToolbarHeight={theme.composerHeight + theme.spacer * 2}
                 renderComposer={renderComposer}
@@ -199,4 +231,5 @@ export const RawChatScreen: React.FC<ChatScreenProps> = (props: ChatScreenProps)
 
 export const ChatScreen = withObservables(['route'], ({ route }) => ({
     chat: route.params.chat.observe(),
+    messages: route.params.chat.messages.observe(),
 }))(RawChatScreen);

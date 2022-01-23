@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { LogBox } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -11,12 +10,11 @@ import { useStore } from '../../data/store/store';
 import { RootNavigator } from '../navigation/root-navigator.component';
 import { ConnectedThemeProvider } from '../themes/theme-provider';
 
-LogBox.ignoreLogs(['VirtualizedLists should never be nested', 'Non-serializable values were found']);
-
 const App: React.FC = () => {
     const redux = useStore();
 
     useEffect(() => {
+        logger.configure();
         //iOS only, not working without dev account
         notificationService.requestPermissions().catch(logger.error);
         return notificationService.addForegroundMessageHandler(logger.log);

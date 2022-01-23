@@ -9,6 +9,7 @@ class UploadServiceImpl implements UploadService {
 
     uploadPhoto = async (photo: PhotoPicker): Promise<AxiosResponse<number>> => {
         const formdata = new FormData();
+
         formdata.append('file', {
             // eslint-disable-next-line
             // @ts-ignore

@@ -1,8 +1,11 @@
 import { SagaIterator } from 'redux-saga';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 
 import { coreAPIClient } from '../../../core/data/api/core.api';
 import { AUTHENTICATE } from '../../../core/data/store/user/user.actions';
+import { getUser } from '../../../core/data/store/user/user.selectors';
+import { EVENTS_LIST } from '../../../core/util/analytics.util';
+import { logger } from '../../../core/util/logger.util';
 import { notificationService } from '../../../core/util/notification-service.utils';
 import { tokenRepository } from '../../../core/util/token-repository.util';
 import { GET_CARDS } from '../../cards/data/store/cards.actions';
@@ -17,6 +20,10 @@ function* logoutSaga(): SagaIterator {
     yield call(tokenRepository.clearTokens);
     yield call(database.clearDatabase);
     yield call(chatWebSocket.disconnect);
+
+    const user = yield select(getUser);
+    yield call(logger.log, EVENTS_LIST.LOGOUT, { username: user.username });
+
     yield put(AUTHENTICATE.LOGOUT.COMPLETED());
     yield put(GET_CARDS.RESET([]));
     yield put(GET_MATCHES.COMPLETED([]));

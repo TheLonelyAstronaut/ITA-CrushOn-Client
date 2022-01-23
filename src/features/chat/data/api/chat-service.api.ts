@@ -1,6 +1,4 @@
-import { AxiosResponse } from 'axios';
 import { HTTPResponse } from '../../../../core/util/http-utils.util';
-
 import { Chat, Message, SendMessageData } from '../../model/chat.model';
 
 export interface ChatService {

@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 import { coreAPIClient, CoreAPIClient } from '../../../../../core/data/api/core.api';
 import { HTTPResponse } from '../../../../../core/util/http-utils.util';
 import { Chat, Message, SendMessageData } from '../../../model/chat.model';
@@ -16,7 +14,7 @@ class ChatServiceImpl implements ChatService {
         return this.core.get(`/api/v1/chats/${chatId}`);
     };
 
-    sendMessage = async (data: SendMessageData): Promise<HTTPResponse<{ timestamp: number; id: number; }>> => {
+    sendMessage = async (data: SendMessageData): Promise<HTTPResponse<{ timestamp: number; id: number }>> => {
         return this.core.post('/api/v1/chats/send', data);
     };
 }

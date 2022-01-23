@@ -3,6 +3,7 @@ import { call, put } from 'redux-saga/effects';
 
 import { profileService } from '../../features/profile/data/api/impl/profile-service-impl.api';
 import { GET_USER_INFO } from '../data/store/user/user.actions';
+import { crashlytics } from '../util/crashlytics.util';
 import { logger } from '../util/logger.util';
 
 export function* getUserSaga(): SagaIterator {
@@ -10,6 +11,7 @@ export function* getUserSaga(): SagaIterator {
 
     if (user.status === 200) {
         yield put(GET_USER_INFO(user.data));
+        yield call(crashlytics.setUser, user.data);
     } else {
         logger.log('wrong userInfo');
     }

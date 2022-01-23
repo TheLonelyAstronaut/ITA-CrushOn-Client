@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 import { coreAPIClient, CoreAPIClient } from '../../../../../core/data/api/core.api';
 import { HTTPResponse } from '../../../../../core/util/http-utils.util';
 import { Match } from '../../../model/match.model';

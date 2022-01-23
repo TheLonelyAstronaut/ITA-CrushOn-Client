@@ -2,8 +2,10 @@ import { AxiosResponse } from 'axios';
 import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery, takeLatest, all, delay } from 'redux-saga/effects';
 
+import { getUser } from '../../../core/data/store/user/user.selectors';
 import { SetReactionResponse } from '../../../core/model/explore.model';
 import { User } from '../../../core/model/user.model';
+import { EVENTS_LIST } from '../../../core/util/analytics.util';
 import { logger } from '../../../core/util/logger.util';
 import { getMatchesSaga } from '../../discover/domian/discover.sagas';
 import { cardsService } from '../data/api/impl/cards-service-impl.api';
@@ -17,8 +19,11 @@ function* cardsSaga(): SagaIterator {
 
     if (cardsResponse.status === 200) {
         yield put(GET_CARDS.COMPLETED(cardsResponse.data));
+
+        const user = yield select(getUser);
+        yield call(logger.log, EVENTS_LIST.GET_CARDS, { username: user.username });
     } else {
-        logger.error(`cardsSaga: ${cardsResponse.status}`);
+        yield call(logger.error, `cardsSaga: ${cardsResponse.status}`);
     }
 }
 
@@ -39,6 +44,12 @@ function* reactionSaga(action: ReturnType<typeof SET_REACTION.STARTED>): SagaIte
             //navigate to match screen with user prop
             alert(`match with ${setReactionResponse.data.target.name}`);
             yield call(getMatchesSaga);
+
+            const user = yield select(getUser);
+            yield call(logger.log, EVENTS_LIST.SET_REACTION, {
+                target: setReactionResponse.data.target.id,
+                viewer: user.id,
+            });
         }
     } else {
         alert(`reactionSaga: ${setReactionResponse.status}`);

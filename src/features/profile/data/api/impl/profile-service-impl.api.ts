@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 import { CoreAPIClient, coreAPIClient } from '../../../../../core/data/api/core.api';
 import { UpdateSettingsData } from '../../../../../core/model/profile.model';
 import { User } from '../../../../../core/model/user.model';

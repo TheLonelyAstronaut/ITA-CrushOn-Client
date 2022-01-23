@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import { crashlytics } from '../../../core/util/crashlytics.util';
 import { logger } from '../../../core/util/logger.util';
 import { navigationService } from '../../../core/util/navigation-container.util';
 import { notificationService } from '../../../core/util/notification-service.utils';
@@ -14,8 +15,11 @@ const App: React.FC = () => {
     const redux = useStore();
 
     useEffect(() => {
+        // In testing purposes
+        //crashlytics.testCrash();
+
         logger.configure();
-        //iOS only, not working without dev account
+        // iOS only, not working without dev account
         notificationService.requestPermissions().catch(logger.error);
         return notificationService.addForegroundMessageHandler(logger.log);
     }, []);

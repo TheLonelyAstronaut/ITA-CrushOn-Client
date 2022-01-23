@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 import { SetReactionData, SetReactionResponse } from '../../../../core/model/explore.model';
 import { City, Passion, User } from '../../../../core/model/user.model';
 import { HTTPResponse } from '../../../../core/util/http-utils.util';

@@ -4,6 +4,8 @@ import { call, put } from 'redux-saga/effects';
 import { coreAPIClient } from '../../core/data/api/core.api';
 import { GET_CITIES_DATA, GET_PASSIONS_DATA } from '../../core/data/store/remote-config/remote-config.actions';
 import { AUTHENTICATE, GET_USER_INFO } from '../../core/data/store/user/user.actions';
+import { EVENTS_LIST } from '../../core/util/analytics.util';
+import { logger } from '../../core/util/logger.util';
 import { splashscreen } from '../../core/util/splashscreen.util';
 import { tokenRepository } from '../../core/util/token-repository.util';
 import { cardsService } from '../../features/cards/data/api/impl/cards-service-impl.api';
@@ -16,8 +18,6 @@ export function* initializationSaga(): SagaIterator {
 
     const citiesResponse = yield call(cardsService.getCities);
     const passionsResponse = yield call(cardsService.getPassions);
-
-    console.log('OK')
 
     if (citiesResponse.status === 200 && passionsResponse.status === 200) {
         yield put(GET_CITIES_DATA.COMPLETED(citiesResponse.data));
@@ -58,5 +58,6 @@ export function* initializationSaga(): SagaIterator {
         }
     }
 
+    yield call(logger.log, EVENTS_LIST.LAUNCH, {});
     setTimeout(splashscreen.hide, 500);
 }

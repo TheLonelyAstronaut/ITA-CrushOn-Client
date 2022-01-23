@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 import { coreAPIClient, CoreAPIClient } from '../../../../../core/data/api/core.api';
 import { SetReactionData, SetReactionResponse } from '../../../../../core/model/explore.model';
 import { City, Passion, User } from '../../../../../core/model/user.model';

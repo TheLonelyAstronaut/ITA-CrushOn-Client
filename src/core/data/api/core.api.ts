@@ -1,9 +1,10 @@
 import { Axios, AxiosResponse, HeadersDefaults } from 'axios';
 
 import { HTTPResponse, httpUtils } from '../../util/http-utils.util';
+import { logger } from '../../util/logger.util';
 
 //export const SERVER_ENDPOINT = Platform.OS === 'android' ? '10.0.2.2:8080' : 'localhost:8080';
-export const SERVER_ENDPOINT = '192.168.31.233:8080'
+export const SERVER_ENDPOINT = '192.168.31.233:8080';
 
 export class CoreAPIClient {
     private uploader: Axios;
@@ -30,7 +31,7 @@ export class CoreAPIClient {
                 'Content-Type': 'application/json',
             },
         });
-    }
+    };
 
     setToken = async (token: string): Promise<void> => {
         this.uploader.defaults.headers = {
@@ -41,24 +42,23 @@ export class CoreAPIClient {
             },
         } as unknown as HeadersDefaults;
 
-        httpUtils.configure({
-            baseURL: `http://${SERVER_ENDPOINT}`,
-            headers: {
-                Accept: '*/*',
-                'Content-Type': 'application/json',
-                Authorization: token
-            },
-        });
+        httpUtils
+            .configure({
+                baseURL: `http://${SERVER_ENDPOINT}`,
+                headers: {
+                    Accept: '*/*',
+                    'Content-Type': 'application/json',
+                    Authorization: token,
+                },
+            })
+            .catch(logger.error);
     };
 
     clearAuthorizationHeaders = async (): Promise<void> => {
-       this.configure();
+        await this.configure();
     };
 
-    post = async <T, K extends Record<string, unknown>>(
-        endpoint: string,
-        data: K
-    ): Promise<HTTPResponse<T>> => {
+    post = async <T, K extends Record<string, unknown>>(endpoint: string, data: K): Promise<HTTPResponse<T>> => {
         return httpUtils.post(endpoint, data);
     };
 

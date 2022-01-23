@@ -6,6 +6,8 @@ import { coreAPIClient } from '../../../core/data/api/core.api';
 import { AUTHENTICATE } from '../../../core/data/store/user/user.actions';
 import { getUserSaga } from '../../../core/domain/user.saga';
 import { AuthTokens } from '../../../core/model/auth.model';
+import { EVENTS_LIST } from '../../../core/util/analytics.util';
+import { logger } from '../../../core/util/logger.util';
 import { notificationService } from '../../../core/util/notification-service.utils';
 import { tokenRepository } from '../../../core/util/token-repository.util';
 import { chatWebSocket } from '../../chat/data/api/impl/chat-web-socket-impl.api';
@@ -31,8 +33,10 @@ function* loginSaga(action: ReturnType<typeof LOGIN.TRIGGER>): SagaIterator {
 
         yield call(getUserSaga);
         yield put(AUTHENTICATE.LOGIN());
+
+        yield call(logger.log, EVENTS_LIST.LOGIN, { username: action.payload.username });
     } else {
-        alert('wrong username or password');
+        yield call(alert, 'wrong username or password');
     }
 }
 

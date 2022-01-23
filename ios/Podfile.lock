@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.5.0)
   - boost-for-react-native (1.63.0)
   - BVLinearGradient (2.5.6):
     - React
@@ -554,6 +555,7 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.5)
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -629,6 +631,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - boost-for-react-native
     - CocoaAsyncSocket
     - Firebase
@@ -764,6 +767,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
@@ -847,6 +851,6 @@ SPEC CHECKSUMS:
   Yoga: e6db7a0be0e80eeb70c04663605e4f6a050ab013
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 6796f6b3e73abd837dd18beefea4945f58a662cb
+PODFILE CHECKSUM: 93dcb1872986841838a4b4a63879a58b9462bcf7
 
 COCOAPODS: 1.11.2

@@ -18,7 +18,7 @@ class UploadServiceImpl implements UploadService {
             type: photo.mime,
         });
 
-        return this.coreApi.sendFile('api/v1/upload', formdata);
+        return this.coreApi.sendFile('/api/v1/upload', formdata);
     };
 }
 

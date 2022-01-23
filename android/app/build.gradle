@@ -1,3 +1,7 @@
+plugins {
+    id 'kotlin-android'
+}
+
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
@@ -203,6 +207,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
     implementation project(':watermelondb-jsi')
 

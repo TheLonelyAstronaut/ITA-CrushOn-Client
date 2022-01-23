@@ -14,7 +14,7 @@ export class ChatWebSocketImpl implements ChatWebSocket {
 
     connect = (token: string): void => {
         try {
-            this.ws = new WebSocket(`ws://${SERVER_ENDPOINT}:8080/api/v1/ws/chat?token=${token}`);
+            this.ws = new WebSocket(`ws://${SERVER_ENDPOINT}/api/v1/ws/chat?token=${token}`);
 
             this.ws.addEventListener('message', (data) => {
                 this.listeners.forEach((listener) => listener(data));

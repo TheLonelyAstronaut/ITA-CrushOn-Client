@@ -1,77 +1,77 @@
 import { Axios, AxiosResponse, HeadersDefaults } from 'axios';
-import { Platform } from 'react-native';
 
-export const SERVER_ENDPOINT = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
+import { HTTPResponse, httpUtils } from '../../util/http-utils.util';
+
+//export const SERVER_ENDPOINT = Platform.OS === 'android' ? '10.0.2.2:8080' : 'localhost:8080';
+export const SERVER_ENDPOINT = '192.168.31.233:8080'
 
 export class CoreAPIClient {
-    private axiosClient: Axios;
+    private uploader: Axios;
 
     constructor() {
-        this.axiosClient = new Axios({
-            baseURL: `http://${SERVER_ENDPOINT}:8080/`,
-            headers: {
-                Accept: '*/*',
-                'Content-Type': 'application/json',
-            },
+        this.uploader = new Axios({
+            baseURL: `http://${SERVER_ENDPOINT}`,
             timeout: 60000,
         });
     }
 
-    setToken = (token: string): void => {
-        this.axiosClient.defaults.headers = {
+    configure = async (): Promise<void> => {
+        this.uploader.defaults.headers = {
+            common: {
+                Accept: '*/*',
+                'Content-Type': 'application/json',
+            },
+        } as unknown as HeadersDefaults;
+
+        httpUtils.configure({
+            baseURL: `http://${SERVER_ENDPOINT}`,
+            headers: {
+                Accept: '*/*',
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+
+    setToken = async (token: string): Promise<void> => {
+        this.uploader.defaults.headers = {
             common: {
                 Authorization: token,
                 Accept: '*/*',
                 'Content-Type': 'application/json',
             },
         } as unknown as HeadersDefaults;
-    };
 
-    clearAuthorizationHeaders = (): void => {
-        this.axiosClient.defaults.headers = {
-            common: {
+        httpUtils.configure({
+            baseURL: `http://${SERVER_ENDPOINT}`,
+            headers: {
                 Accept: '*/*',
                 'Content-Type': 'application/json',
+                Authorization: token
             },
-        } as unknown as HeadersDefaults;
+        });
     };
 
-    post = async <T, K, C = undefined>(
-        endpoint: string,
-        data: K,
-        config?: C | undefined
-    ): Promise<AxiosResponse<T>> => {
-        const response = await this.axiosClient.post(endpoint, JSON.stringify(data), config);
+    clearAuthorizationHeaders = async (): Promise<void> => {
+       this.configure();
+    };
 
-        try {
-            return {
-                ...response,
-                data: JSON.parse(response.data),
-            };
-        } catch {
-            return response;
-        }
+    post = async <T, K extends Record<string, unknown>>(
+        endpoint: string,
+        data: K
+    ): Promise<HTTPResponse<T>> => {
+        return httpUtils.post(endpoint, data);
     };
 
     sendFile = async <T>(endpoint: string, file: FormData): Promise<AxiosResponse<T>> => {
-        return this.axiosClient.post(endpoint, file, {
+        return this.uploader.post(endpoint, file, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
     };
 
-    get = async <T, C = undefined>(endpoint: string, config: C | undefined = undefined): Promise<AxiosResponse<T>> => {
-        const response = await this.axiosClient.get(endpoint, config);
-
-        try {
-            return {
-                ...response,
-                data: JSON.parse(response.data),
-            };
-        } catch {
-            return response;
-        }
+    get = async <T>(endpoint: string): Promise<HTTPResponse<T>> => {
+        return httpUtils.get(endpoint);
     };
 }
 

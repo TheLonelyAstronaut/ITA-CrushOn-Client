@@ -6,6 +6,7 @@ import android.content.Context;
 import com.facebook.react.bridge.JSIModuleSpec;
 import com.facebook.react.bridge.JavaScriptContextHolder;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.lonelyastronaut.crushon.http.HTTPUtilsPackage;
 import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage;
 import com.facebook.react.bridge.JSIModulePackage;
 import com.facebook.react.PackageList;
@@ -32,8 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
                 protected List<ReactPackage> getPackages() {
                     @SuppressWarnings("UnnecessaryLocalVariable")
                     List<ReactPackage> packages = new PackageList(this).getPackages();
-                    // Packages that cannot be autolinked yet can be added manually here, for example:
-                    // packages.add(new MyReactNativePackage());
+                    packages.add(new HTTPUtilsPackage());
+
                     return packages;
                 }
 

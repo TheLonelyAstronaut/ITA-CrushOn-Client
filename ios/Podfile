@@ -21,6 +21,8 @@ target 'CrushOn' do
   # NOTE: This is required as of v0.23
   pod 'simdjson', path: '../node_modules/@nozbe/simdjson'
 
+  pod 'Alamofire', '~> 5.5'
+
 
   target 'CrushOnTests' do
     inherit! :complete

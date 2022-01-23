@@ -12,8 +12,12 @@ import { loginService } from '../../features/login/data/api/impl/login-service-i
 import { profileService } from '../../features/profile/data/api/impl/profile-service-impl.api';
 
 export function* initializationSaga(): SagaIterator {
+    yield call(coreAPIClient.configure);
+
     const citiesResponse = yield call(cardsService.getCities);
     const passionsResponse = yield call(cardsService.getPassions);
+
+    console.log('OK')
 
     if (citiesResponse.status === 200 && passionsResponse.status === 200) {
         yield put(GET_CITIES_DATA.COMPLETED(citiesResponse.data));

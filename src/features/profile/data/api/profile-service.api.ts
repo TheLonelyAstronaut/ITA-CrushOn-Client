@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 import { UpdateSettingsData } from '../../../../core/model/profile.model';
 import { User } from '../../../../core/model/user.model';
 import { HTTPResponse } from '../../../../core/util/http-utils.util';

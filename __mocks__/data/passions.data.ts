@@ -1,4 +1,4 @@
-import { Passion } from '../core/model/user.model';
+import { Passion } from "../../src/core/model/user.model";
 
 export const PassionsData: Passion[] = [
     {

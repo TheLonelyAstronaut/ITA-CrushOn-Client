@@ -1,4 +1,4 @@
-import { User } from '../core/model/user.model';
+import { User } from "../../src/core/model/user.model";
 
 export const CardsData: User[] = [
     {

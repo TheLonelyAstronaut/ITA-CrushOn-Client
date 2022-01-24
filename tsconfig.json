@@ -23,7 +23,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "types"
-  ],
+, "__mocks__/data/reactions.data.ts", "__tests__/setup-tests.ts"  ],
   "exclude": [
     "**/*.spec.ts",
     "**/*.spec.tsx",

@@ -13,7 +13,7 @@ import { profileService } from '../../profile/data/api/impl/profile-service-impl
 import { loginService } from '../data/api/impl/login-service-impl.api';
 import { LOGIN } from '../data/store/login.actions';
 
-function* loginSaga(action: ReturnType<typeof LOGIN.TRIGGER>): SagaIterator {
+export function* loginSaga(action: ReturnType<typeof LOGIN.TRIGGER>): SagaIterator {
     yield call(coreAPIClient.clearAuthorizationHeaders);
 
     const response: AxiosResponse<AuthTokens> = yield call(

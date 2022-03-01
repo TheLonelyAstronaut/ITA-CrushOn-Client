@@ -68,12 +68,13 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
                 </Center>
             </LogoView>
 
-            <AuthInputContainer behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+            <AuthInputContainer testID='authInput' behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
                 <Header>
                     <HeaderText>{t('auth.login')}</HeaderText>
                 </Header>
                 <Colored>
                     <TextInput
+                        testID='loginInput'
                         value={email}
                         onChangeText={setEmail}
                         autoCorrect={false}
@@ -92,6 +93,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
                 </Header>
                 <Colored>
                     <TextInput
+                        testID='passwordInput'
                         value={password}
                         onChangeText={setpassword}
                         autoCompleteType={'password'}
@@ -108,7 +110,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = (props: LoginScreenProps)
             <Buttons insets={insets}>
                 <ActiveButton onPress={login} active={email && password ? true : false} label={t('auth.signIn')} />
 
-                <Button onPress={signUp}>
+                <Button testID='signUpButton' onPress={signUp}>
                     <Label>{t('auth.signUp')}</Label>
                 </Button>
             </Buttons>

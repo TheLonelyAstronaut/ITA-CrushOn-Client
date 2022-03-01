@@ -3,7 +3,8 @@ import { Axios, AxiosResponse, HeadersDefaults } from 'axios';
 import { HTTPResponse, httpUtils } from '../../util/http-utils.util';
 
 //export const SERVER_ENDPOINT = Platform.OS === 'android' ? '10.0.2.2:8080' : 'localhost:8080';
-export const SERVER_ENDPOINT = '192.168.31.233:8080'
+//export const SERVER_ENDPOINT = '192.168.31.233:8080'
+export const SERVER_ENDPOINT = 'crushon-webflux-api.herokuapp.com'
 
 export class CoreAPIClient {
     private uploader: Axios;
@@ -24,7 +25,7 @@ export class CoreAPIClient {
         } as unknown as HeadersDefaults;
 
         httpUtils.configure({
-            baseURL: `http://${SERVER_ENDPOINT}`,
+            baseURL: `https://${SERVER_ENDPOINT}`,
             headers: {
                 Accept: '*/*',
                 'Content-Type': 'application/json',
@@ -42,7 +43,7 @@ export class CoreAPIClient {
         } as unknown as HeadersDefaults;
 
         httpUtils.configure({
-            baseURL: `http://${SERVER_ENDPOINT}`,
+            baseURL: `https://${SERVER_ENDPOINT}`,
             headers: {
                 Accept: '*/*',
                 'Content-Type': 'application/json',

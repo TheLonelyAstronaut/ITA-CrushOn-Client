@@ -54,6 +54,7 @@ export const UsernameScreen: React.FC<EmailScreenProps> = (props: EmailScreenPro
                 </Header>
                 <Colored>
                     <TextInput
+                        testID='usernameInput'
                         value={username}
                         onChangeText={setUsername}
                         autoCompleteType={'email'}

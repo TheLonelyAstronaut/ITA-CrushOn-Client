@@ -11,7 +11,7 @@ export type ActiveButtonProps = {
 
 export const ActiveButton: React.FC<ActiveButtonProps> = (props: ActiveButtonProps) => {
     return (
-        <Outline onPress={props.onPress} active={props.active} disabled={props.active ? false : true}>
+        <Outline testID='signInButton' onPress={props.onPress} active={props.active} disabled={props.active ? false : true}>
             <Label active={props.active}>{props.label}</Label>
         </Outline>
     );

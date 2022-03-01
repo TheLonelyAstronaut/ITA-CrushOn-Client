@@ -12,12 +12,14 @@ import { loginService } from '../../features/login/data/api/impl/login-service-i
 import { profileService } from '../../features/profile/data/api/impl/profile-service-impl.api';
 
 export function* initializationSaga(): SagaIterator {
+    console.log('-----------init Saga started----------');
     yield call(coreAPIClient.configure);
+    console.log('----------configured----------');
 
     const citiesResponse = yield call(cardsService.getCities);
     const passionsResponse = yield call(cardsService.getPassions);
 
-    console.log('OK')
+    console.log('----------got cities and passions----------');
 
     if (citiesResponse.status === 200 && passionsResponse.status === 200) {
         yield put(GET_CITIES_DATA.COMPLETED(citiesResponse.data));
@@ -29,26 +31,33 @@ export function* initializationSaga(): SagaIterator {
     if (token) {
         yield call(coreAPIClient.setToken, token);
         const response = yield call(profileService.getUserInfo);
-
+        console.log('----------set token and ask user----------');
         if (response.status == 200) {
             yield call(chatWebSocket.connect, token);
+            console.log('----------got user----------');
 
             yield put(GET_USER_INFO(response.data));
             yield put(AUTHENTICATE.LOGIN());
         } else {
             yield call(coreAPIClient.clearAuthorizationHeaders);
+            console.log('----------error got user (bad auth token?)----------');
+
             const refreshToken = yield call(tokenRepository.getRefreshTokenFromStorage);
 
             const response = yield call(loginService.refreshTokens, refreshToken);
+            console.log('----------sent refreshtoken----------');
 
             if (response.status == 200) {
+                console.log('----------got new tokens!----------');
                 yield call(tokenRepository.saveAuthTokenToStorage, response.data.authorizationToken);
                 yield call(tokenRepository.saveRefreshTokenToStorage, response.data.refreshToken);
                 yield call(coreAPIClient.setToken, response.data.authorizationToken);
 
                 const userResponse = yield call(profileService.getUserInfo);
+                console.log('----------ask for user info again----------');
 
                 if (userResponse.status == 200) {
+                    console.log('----------got user info----------');
                     yield call(chatWebSocket.connect, token);
 
                     yield put(GET_USER_INFO(userResponse.data));

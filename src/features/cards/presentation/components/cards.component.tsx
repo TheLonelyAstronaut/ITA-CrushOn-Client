@@ -46,7 +46,7 @@ export const CardsScreen: React.FC<CardsScreenProps> = () => {
     return (
         <SafeArea>
             <StatusBar barStyle={theme.colors.statusBar as StatusBarStyle} backgroundColor={theme.colors.background} />
-            <CardsView zIndex={1} insets={insets}>
+            <CardsView testID='cardsView' zIndex={1} insets={insets}>
                 {isLoading ? (
                     <CustomShimmerPlaceholder
                         style={{
